@@ -97,6 +97,19 @@
 </nav>	
 
 <div>
+<script language="Javascript" type="text/javascript">
+  function my_search_google()
+  {
+    var query = document.getElementById("my-google-search").value;
+    window.open("http://google.com/search?q=" + query
+	+ "%20site:" + "http://brunowcs.github.io");
+  }
+</script>
+<p> Buscar </p>
+<form onsubmit="my_search_google()" >
+  <input type="text" id="my-google-search">
+</form>
+
 <!-- <p><img class="center" src="images/rhcsa.png" title="Certificados"></p><br> -->
 
 </div>
