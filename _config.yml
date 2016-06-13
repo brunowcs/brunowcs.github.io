@@ -3,11 +3,12 @@
 # ----------------------- #
 
 url: http://brunowcs.github.io
-title: brunowcs
+title: Prazer Bruno Carvalho
 subtitle: tecnologia e cotidiano 
 author: Bruno Carvalho
 simple_search: https://www.google.com/search
 description: tecnologia, cotidiano e mais algumas coisas...
+simple_search: 
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
