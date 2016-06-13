@@ -8,7 +8,7 @@ subtitle: tecnologia e cotidiano
 author: Bruno Carvalho
 simple_search: https://www.google.com/search
 description: tecnologia, cotidiano e mais algumas coisas...
-simple_search: 
+
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -20,7 +20,7 @@ date_format: "%d/%m/%Y"
 subscribe_rss: /atom.xml
 subscribe_email: 
 # RSS feeds can list your email address if you like
-email:
+email: 
 
 # ----------------------- #
 #    Jekyll & Plugins     #
