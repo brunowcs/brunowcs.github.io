@@ -3,7 +3,7 @@
 # ----------------------- #
 
 url: http://brunowcs.github.io
-title: Prazer Bruno Carvalho
+title: brunocarvalho.net
 subtitle: tecnologia e cotidiano 
 author: Bruno Carvalho
 simple_search: https://www.google.com/search
@@ -14,7 +14,10 @@ description: tecnologia, cotidiano e mais algumas coisas...
 # You can customize the format as defined in
 # http://www.ruby-doc.org/core-1.9.2/Time.html#method-i-strftime
 # Additionally, %o will give you the ordinal representation of the day
-date_format: "%d/%m/%Y"
+#date_format: "%d/%m/%Y"
+
+date_format: "%Y-%m-%d"  # e.g. 2014-07-03
+time_format: "%H:%M"     # 24 hour time
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
 subscribe_rss: /atom.xml
