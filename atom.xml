@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[brunocarvalho.net]]></title>
-  <link href="http://www.brunocarvalho.net/atom.xml" rel="self"/>
-  <link href="http://www.brunocarvalho.net/"/>
-  <updated>2016-06-14T14:07:47-03:00</updated>
-  <id>http://www.brunocarvalho.net/</id>
+  <link href="http://brunowcs.github.io/atom.xml" rel="self"/>
+  <link href="http://brunowcs.github.io/"/>
+  <updated>2016-06-14T17:34:03-03:00</updated>
+  <id>http://brunowcs.github.io/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
     <email><![CDATA[brunowcs@gmail.com]]></email>
@@ -15,18 +15,22 @@
   
   <entry>
     <title type="html"><![CDATA[Prazer Bruno Carvalho!]]></title>
-    <link href="http://www.brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho/"/>
+    <link href="http://brunowcs.github.io/blog/2016/06/13/prazer-bruno-carvalho/"/>
     <updated>2016-06-13T15:34:46-03:00</updated>
-    <id>http://www.brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho</id>
+    <id>http://brunowcs.github.io/blog/2016/06/13/prazer-bruno-carvalho</id>
     <content type="html"><![CDATA[<p>Olá pessoal,</p>
 
 <p>Nesse meu primeiro post, vou falar um pouco sobre o  intuito desse blog.</p>
 
-<p>Bem&hellip; para começar, não sou professor de português e as escritas por aqui serão bem informal e técnicas, então prenda-se apenas a ideia em geral. Quem sou eu? <a href="http://www.brunocarvalho.net/about/index.html">Sobre</a>. Qualquer coisa comente que eu vou corrigindo, o importante é a troca de experiências e conhecimentos.</p>
+<p>Bem&hellip; para começar, não sou professor de português e as escritas por aqui serão bem informal e técnicas, então prenda-se apenas o proposito.</p>
 
 <p>Essa ideia já é velha, mas venho adiando por muitos longos anos, porem recentemente tive a necessidade de relembrar alguns procedimentos executados há um bom tempo atrás, e fiquei tanto tempo pesquisando nas minhas mídias externas e na internet que agora tomei a iniciativa de documentar tudo em um só lugar, assim quando quiser compartilhar algo e relembrar algo pesquiso aqui!  :)</p>
 
 <p>Concluindo&hellip; esse será meu disco virtual, onde vou compartilhar com todos meus estudos, ideias, implementações e procedimentos do meu dia a dia&hellip;</p>
+
+<p>Qualquer coisa comente, critique, ajude a enrique os posts o importante é a troca de experiências e conhecimentos.</p>
+
+<p>Quem sou eu? <a href="http://brunowcs.github.io/about/index.html">Sobre</a>.</p>
 ]]></content>
   </entry>
   

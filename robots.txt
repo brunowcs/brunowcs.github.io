@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://www.brunocarvalho.net/sitemap.xml
+Sitemap: http://brunowcs.github.io/sitemap.xml
