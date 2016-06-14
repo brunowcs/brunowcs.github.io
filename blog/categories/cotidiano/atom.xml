@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: cotidiano | Prazer Bruno Carvalho]]></title>
-  <link href="http://brunowcs.github.io/blog/categories/cotidiano/atom.xml" rel="self"/>
-  <link href="http://brunowcs.github.io/"/>
-  <updated>2016-06-14T09:09:03-03:00</updated>
-  <id>http://brunowcs.github.io/</id>
+  <title><![CDATA[Category: cotidiano | brunocarvalho.net]]></title>
+  <link href="http://www.brunocarvalho.net/blog/categories/cotidiano/atom.xml" rel="self"/>
+  <link href="http://www.brunocarvalho.net/"/>
+  <updated>2016-06-14T09:33:01-03:00</updated>
+  <id>http://www.brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
     <email><![CDATA[brunowcs@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Prazer Bruno Carvalho!]]></title>
-    <link href="http://brunowcs.github.io/blog/2016/06/13/prazer-bruno-carvalho/"/>
+    <link href="http://www.brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho/"/>
     <updated>2016-06-13T15:34:46-03:00</updated>
-    <id>http://brunowcs.github.io/blog/2016/06/13/prazer-bruno-carvalho</id>
+    <id>http://www.brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho</id>
     <content type="html"><![CDATA[<p>Olá pessoal,</p>
 
 <p>Nesse meu primeiro post, vou falar um pouco sobre o  intuito desse blog.</p>
