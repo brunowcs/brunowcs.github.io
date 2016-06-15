@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: cotidiano | brunowcs]]></title>
-  <link href="http://brunowcs.github.io/blog/categories/cotidiano/atom.xml" rel="self"/>
-  <link href="http://brunowcs.github.io/"/>
-  <updated>2016-06-13T15:47:37-03:00</updated>
-  <id>http://brunowcs.github.io/</id>
+  <title><![CDATA[Category: cotidiano | brunocarvalho.net]]></title>
+  <link href="http://brunocarvalho.net/blog/categories/cotidiano/atom.xml" rel="self"/>
+  <link href="http://brunocarvalho.net/"/>
+  <updated>2016-06-14T23:08:14-03:00</updated>
+  <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
     <email><![CDATA[brunowcs@gmail.com]]></email>
@@ -15,18 +15,22 @@
   
   <entry>
     <title type="html"><![CDATA[Prazer Bruno Carvalho!]]></title>
-    <link href="http://brunowcs.github.io/blog/2016/06/13/prazer-bruno-carvalho/"/>
+    <link href="http://brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho/"/>
     <updated>2016-06-13T15:34:46-03:00</updated>
-    <id>http://brunowcs.github.io/blog/2016/06/13/prazer-bruno-carvalho</id>
+    <id>http://brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho</id>
     <content type="html"><![CDATA[<p>Olá pessoal,</p>
 
 <p>Nesse meu primeiro post, vou falar um pouco sobre o  intuito desse blog.</p>
 
-<p>Bem&hellip; para começar, não sou o melhor dos melhores em português, então prendar-se apenas a ideia em geral, qualquer coisa comentem que eu vou corrigindo, o importante e a troca de experiências e conhecimentos.</p>
+<p>Bem&hellip; para começar, não sou professor de português e as escritas por aqui serão bem informal e técnicas, então prenda-se apenas o proposito.</p>
 
-<p>Essa ideia já é velha, mas venho adiando por muitos longos anos, porem recentemente tive a necessidade de relembrar alguns procedimentos executados a um bom tempo atrás, e fiquei tanto tempo pesquisando nas minhas mídias externas e na internet que agora tomei a iniciativa de documentar tudo em um só lugar, assim quando quiser compartilhar algo e relembrar algo pesquiso aqui!  :)</p>
+<p>Essa ideia já é velha, mas venho adiando por muitos longos anos, porem recentemente tive a necessidade de relembrar alguns procedimentos executados há um bom tempo atrás, e fiquei tanto tempo pesquisando nas minhas mídias externas e na internet que agora tomei a iniciativa de documentar tudo em um só lugar, assim quando quiser compartilhar algo e relembrar algo pesquiso aqui!  :)</p>
 
-<p>Concluindo&hellip; esse será meu Disco Virtual, onde vou compartilhar com todos meus estudos, ideias, implementações e procedimentos do meu dia a dia&hellip;</p>
+<p>Concluindo&hellip; esse será meu disco virtual, onde vou compartilhar com todos meus estudos, ideias, implementações e procedimentos do meu dia a dia&hellip;</p>
+
+<p>Qualquer coisa comente, critique, ajude a enrique os posts o importante é a troca de experiências e conhecimentos.</p>
+
+<p>Quem sou eu? <a href="/about/index.html">Sobre</a>.</p>
 ]]></content>
   </entry>
   
