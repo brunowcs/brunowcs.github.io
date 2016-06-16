@@ -9,7 +9,7 @@
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="13/06/2016 cotidiano Prazer Bruno Carvalho! Olá pessoal, Nesse meu primeiro post, vou falar um pouco sobre o intuito desse blog. Bem&hellip; para &hellip;">
+	<meta name="description" content="16/06/2016 centos, linux, rhel, weblogic, zabbix Monitorando Weblogic Em DomainRuntime Com Zabbix Sempre monitorei Jboss com zabbix, mas &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -124,6 +124,250 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2016-06-16T00:00:00-03:00" data-updated="true" itemprop="datePublished">16/06/2016</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/centos/'>centos</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/rhel/'>rhel</a>, <a class='category' href='/blog/categories/weblogic/'>weblogic</a>, <a class='category' href='/blog/categories/zabbix/'>zabbix</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix/" itemprop="url">Monitorando Weblogic Em DomainRuntime Com Zabbix</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Sempre monitorei Jboss com zabbix, mas recentemente recebi uma demanda e encontrei algumas dificuldades que gostaria de compartilhar com a comunidade.
+Esse cenário foi feito no RHEL6, Weblogic 11g com jrockit 1.6, zabbix 2.4, porem entendendo o cenário, pode ser customizado para outras versões.</p>
+
+<p>A Oracle tem um servidor Mbean chamado DomainRuntime, que está disponível no AdminServer. Conectando-se nesse servidor é possível coletar todas informações das JVM e do domínio. Assim não será necessário exporta RMI de cada JVM.
+ Com essa solução ganha-se tempo de configuração, segurança, melhor administração de itens e gráficos agregados, além de não haver necessidade de abrir porta JMX em nenhuma JVM.
+Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com a URL do console admin pegar todos Mbeans desse domínio.</p>
+
+<h3>Servidores MBean em Weblogic</h3>
+
+<p>O Middleware Weblogic  é composto por três MBeanServers próprios que são exportados via RMI/IIOP como JSR-160. Estes podem ser consultados por meio de nome JNDI como mostra a lista abaixo. Além disso, existe o PlatformMBeanServer que pode ser exportado juntamente MbeanServer do weblogic.</p>
+
+<ul>
+<li><strong>Domain Runtime MBean Server</strong></li>
+<li><strong>Runtime MBean Server</strong></li>
+<li><strong>Edit MBean Server</strong></li>
+</ul>
+
+
+<p>O MbeanServer que vamos utilizar para buscar toda árvore do domínio weblogic será a Domínio Runtime MBean Servidor (weblogic.management.mbeanservers.domainruntime). Esse Mbean só está disponível na JVM do AdminServer.</p>
+
+<h5>Ative os seguintes itens abaixo no admin console do Weblogic:</h5>
+
+<pre><code>Domínio-&gt;Geral-&gt;Avançado 
+
+- Servidor MBean de Compatibilidade Ativado
+- Servidor MBean da Plataforma Ativado
+- Servidor MBean da Plataforma Usado
+</code></pre>
+
+<p><img src="/images/zabbix/img1.png" alt="img1" /></p>
+
+<p>Entre em cada JVM e adicione a seguinte linha no argumento que se encontra na aba Inicialização dos servidores</p>
+
+<pre><code>Domínio-&gt;Ambientes-&gt;Servidores-&gt;”NAME JVM”-&gt;Inicialização do Servidor
+
+-Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder
+</code></pre>
+
+<p><img src="http://brunocarvalho.net/images/zabbix/img2.png" alt="img2" /></p>
+
+<blockquote><p><strong><em>Será necessário reiniciar o AdminServer e as JVM do domínio.</em></strong></p></blockquote>
+
+<h5>Exportando RMI/IIOP AdminServer</h5>
+
+<p>Para facilitar a configuração, vamos utilizar a leitura dos Mbeans como anonymous, mas também poderíamos utilizar autenticação fixada no  JNDI.
+Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação no AdminServer.</p>
+
+<pre><code>Domínio-&gt;Segurança-&gt;Geral  - Ative o ‘Acesso Anônimo Ativado”
+</code></pre>
+
+<p><img src="/images/zabbix/img3.png" alt="img3" /></p>
+
+<h5>Habilitar o IIOP no manager AdminServer</h5>
+
+<pre><code>Dominio-&gt;Ambientes-&gt;Servidores-&gt;AdminServer-&gt;Protocolos-&gt;IIOP 
+</code></pre>
+
+<p><img src="/images/zabbix/img4.png" alt="img4" /></p>
+
+<blockquote><p><strong><em>Será necessário reiniciar o AdminServer.</em></strong></p></blockquote>
+
+<p>Agora abra o jconsole com os seguintes parâmetros:</p>
+
+<pre><code>jconsole -J- Djava.class.path=$JAVA_HOME/lib/jconsole.jar:$JAVA_HOME/lib/tools.jar$WL_HOME/server/lib/wljmxclient.jar -J-Djmx.remote.protocol.provider.pkgs=weblogic.management.remote
+</code></pre>
+
+<p>Use a URL de serviço JMX via IIOP DomainRuntime:</p>
+
+<pre><code>service:jmx:rmi:///jndi/iiop://IPADMINSERVER:7001/weblogic.management.mbeanservers.domainruntime
+</code></pre>
+
+<p>Primeiro tente se conectar utilizando o login e a senha do AdminServer e veja se consegue ler a arvore com.bea/DomainRuntimeService. Depois tente sem autenticação e veja se consegue ler via anonymous.</p>
+
+<p><img src="/images/zabbix/img5.png" alt="img5" /></p>
+
+<p>Caso não consiga ler como anonymous vamos alterar a permissão do JNDI.</p>
+
+<pre><code>1. Entre no AdminConsole(http://IP:7001/), click no AdminServer -&gt; Exibir Árvore JNDI
+2. Vá para o weblogic-&gt;management 
+3. Click no mbeanservers 
+4. Click em Segurança-&gt;Politicas 
+5. Escolha o Methods= lookup e adicione a politica "Allow access to everyone" 
+6. Restart AdminServer
+7. Abra o jconsole com os parâmetros informados 
+8. Conecte novamente URL : service:jmx:rmi:///jndi/iiop://IPADMINCSERVER:7001/weblogic.management.mbeanservers.domainruntime
+</code></pre>
+
+<p><img src="/images/zabbix/img6.png" alt="img6" /></p>
+
+<h5>Modificação do external script jmx_discovery para DomainRuntime</h5>
+
+<p>Após Conseguir ler a arvore DomainRuntime do AdminServer com jconsole, vamos alterar o external script para realizar as coletas.</p>
+
+<p>External Script original: <a href="https://github.com/RiotGamesMinions/zabbix_jmxdiscovery" title="zabbix_jmxdiscovery">https://github.com/RiotGamesMinions/zabbix_jmxdiscovery</a></p>
+
+<p>Modificações que foram feita na class JMXDiscovery.java libs adicionadas:</p>
+
+<pre><code>import java.io.PrintStream;
+import javax.naming.*;
+</code></pre>
+
+<p>Alteração na linha 46:</p>
+
+<pre><code>this.jmxServerUrl = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://" + hostname + ":" + port + "/jmxrmi");
+</code></pre>
+
+<p>Para:</p>
+
+<pre><code>this.jmxServerUrl = new JMXServiceURL("service:jmx:rmi:///jndi/iiop://" + hostname + ":" + port + "/weblogic.management.mbeanservers.domainruntime");
+</code></pre>
+
+<p>Como o DomainRuntime se conecta com IIOP e utiliza algumas libs especificar, foi necessário adicionar o pacote wlfullclient.jar(Pacote encontrado no servidor weblogic)</p>
+
+<p>Coloque o  wlfullclient.jar na pasta lib do pacote zabbix_jmxdiscovery.  Após esses ajustes recompile o pacote utilizando ant. Ao executado o comando será possível acesso a árvore DomainRuntime</p>
+
+<blockquote><p><strong><em>Não irei aborta a utilização do <a href="http://ant.apache.org" title="ant">ant</a>, pois não e proposito desse post. Futuramente posso está criando um especifico.</em></strong></p></blockquote>
+
+<p><strong><em>Obs: O /etc/hosts precisa estar resolvendo o nome da própria máquina local</em></strong></p>
+
+<p>Vá para diretório do binário compilado que foi realizado as modificações do jmx_discovery e execute o comando abaixo:</p>
+
+<pre><code>[brunocarvalho@zabbix zabbix_jmxdiscovery]# ./jmx_discovery com.bea:Name=DomainRuntimeService,Type=* 192.168.10.1:7001
+{"data":[{"{#PROPTYPE}":"weblogic.management.mbeanservers.domainruntime.DomainRuntimeServiceMBean","{#JMXOBJ}":"com.bea:Name=DomainRuntimeService,Type=weblogic.management.mbeanservers.domainruntime.DomainRuntimeServiceMBean","{#JMXDESC}":"&lt;p&gt;Provides a common access point for navigating to all runtime and configuration MBeans in the…
+</code></pre>
+
+<p>Se a saída for parecida com a de cima seu external script está funcional.</p>
+
+<h5>Modificação do Zabbix Java Gateway para DomainRuntime</h5>
+
+<p>Para que o zabbix-java-gateway comece a coletar utilizando o DomainRuntime, será  necessário recompilar o jar do zabbix, alterando a url do jmx na class JMXItemChecker.java.</p>
+
+<p>Vamos precisar colocar a lib wlfullclient.jar na pasta src para compilar o zabbix-java-gateway</p>
+
+<blockquote><p><strong><em>Não irei aborta a compilação do <a href="https://www.zabbix.com/documentation/2.4/manual/installation/install" title="Zabbix">Zabbix</a>, pois não e proposito desse post. Futuramente posso está criando um especifico.</em></strong></p>
+
+<p><a href="https://www.zabbix.com/documentation/2.4/manual/installation/install">https://www.zabbix.com/documentation/2.4/manual/installation/install</a></p></blockquote>
+
+<p>Fiz alterações simples para atender minha demanda, mas pode ser melhorada.
+De uma olhada no seguinte link: <a href="https://support.zabbix.com/browse/ZBXNEXT-1274">https://support.zabbix.com/browse/ZBXNEXT-1274</a></p>
+
+<p><strong>Class alterada:</strong>
+<em>/opt/install/zabbix-2.4.1/src/zabbix_java/src/com/zabbix/gateway/JMXItemChecker.java</em></p>
+
+<pre><code>public JMXItemChecker(JSONObject request) throws ZabbixException
+    {
+         super(request);
+            try
+            {
+                    String conn = request.getString(JSON_TAG_CONN);
+                    int port = request.getInt(JSON_TAG_PORT);
+
+                    Integer remoting = new Integer("7777");
+                    Integer weblogic = new Integer("7001");
+
+                    int retvaljboss = remoting.compareTo(port);
+                    int retvalweblogic = weblogic.compareTo(port);
+                if (retvaljboss == 0)
+            {
+   //suporta jboss7 na porta jmx 7777        
+                url = new JMXServiceURL("service:jmx:remoting-jmx://" + conn + ":" + port);
+            }
+                if (retvalweblogic == 0)
+            {
+                 url = new JMXServiceURL("service:jmx:rmi:///jndi/iiop://" + conn + ":" + port + "/weblogic.management.mbeanservers.domainruntime");
+            }
+              else
+            {url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://" + conn + ":" + port + "/jmxrmi");
+            }
+</code></pre>
+
+<p>Agora sua imaginação não tem limites! Basta configurar seu zabbix para fazer LLD no server Domainruntime do weblogic utilizando o jmx_discovery igualmente como é feito no jmxrmi.</p>
+
+<pre><code>1. Adicione o host na interface jmx com o ip do AdminConole na porta 7001
+2. Adicione o template weblogic anexo no host
+3. Adicione macro para o host
+
+{$ADMINSERVER} - ipadminserver:7001 
+{$DOMINIO}  - nomedoseudominio
+</code></pre>
+
+<p>Segue anexo arquivos utilizados:</p>
+
+<p><a href="https://github.com/brunowcs/zabbix_weblogic/" title="jmx_domainruntime_zabbix.zip">https://github.com/brunowcs/zabbix_weblogic</a></p>
+
+<p>O .RAR ficou um pouco grande por conta dos binários java, então tive que dividir em 3 para o github aceitar o upload.</p>
+
+<ul>
+<li><p>Template Weblogic.xml LLD com 42 itens, 4 triggers, 16 gráficos criado para weblogic DomainRuntime (Não esqueça de configurar as macros)</p></li>
+<li><p>JMXDiscovery.jar com alteração da class JMXDiscovery.java do zabbix_jmxdiscovery, recopilação alterações para connect IIOP com inclusão da lib própria do weblogic para comunicação do server Domainruntime</p></li>
+<li><p>Bash do jmx_discovery para se colocar junto com o JMX na pasta do externalscripts do zabbix</p></li>
+<li><p>zabbix-java-gateway-2.4.1.jar alteração da class  JMXItemChecker.java do zabbix-java-gateway, compilação alterações para connect IIOP com inclusão da lib própria do weblogic comunicação do server  Domainruntime</p></li>
+<li><p>wlfullclient.jar (lib utilizada na compilação)</p></li>
+<li><p>org-json-2010-12-28.jar (lib utilizada na compilação)</p></li>
+</ul>
+
+
+<blockquote><p>Recomendo realizar testes no seu em ambiente de teste antes de entrar em produção</p></blockquote>
+
+<p>Resultado:</p>
+
+<p><img src="/images/zabbix/resultadofinal.png" alt="resultadofinal" /></p>
+
+		
+		
+	</div>
+
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">

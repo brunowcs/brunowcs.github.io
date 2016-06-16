@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[brunocarvalho.net]]></title>
-  <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
+  <title><![CDATA[Category: linux | brunocarvalho.net]]></title>
+  <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
   <updated>2016-06-16T16:05:36-03:00</updated>
   <id>http://brunocarvalho.net/</id>
@@ -47,7 +47,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 - Servidor MBean da Plataforma Usado
 </code></pre>
 
-<p><img src="http://brunocarvalho.net/images/zabbix/img1.png" alt="img1" /></p>
+<p><img src="/images/zabbix/img1.png" alt="img1" /></p>
 
 <p>Entre em cada JVM e adicione a seguinte linha no argumento que se encontra na aba Inicialização dos servidores</p>
 
@@ -56,7 +56,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 -Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder
 </code></pre>
 
-<p><img src="http://brunocarvalho.net/images/zabbix/img2.png" alt="img2" /></p>
+<p><img src="/images/zabbix/img2.png" alt="img2" /></p>
 
 <blockquote><p><strong><em>Será necessário reiniciar o AdminServer e as JVM do domínio.</em></strong></p></blockquote>
 
@@ -68,14 +68,14 @@ Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação 
 <pre><code>Domínio-&gt;Segurança-&gt;Geral  - Ative o ‘Acesso Anônimo Ativado”
 </code></pre>
 
-<p><img src="http://brunocarvalho.net/images/zabbix/img3.png" alt="img3" /></p>
+<p><img src="/images/zabbix/img3.png" alt="img3" /></p>
 
 <h5>Habilitar o IIOP no manager AdminServer</h5>
 
 <pre><code>Dominio-&gt;Ambientes-&gt;Servidores-&gt;AdminServer-&gt;Protocolos-&gt;IIOP 
 </code></pre>
 
-<p><img src="http://brunocarvalho.net/images/zabbix/img4.png" alt="img4" /></p>
+<p><img src="/images/zabbix/img4.png" alt="img4" /></p>
 
 <blockquote><p><strong><em>Será necessário reiniciar o AdminServer.</em></strong></p></blockquote>
 
@@ -91,7 +91,7 @@ Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação 
 
 <p>Primeiro tente se conectar utilizando o login e a senha do AdminServer e veja se consegue ler a arvore com.bea/DomainRuntimeService. Depois tente sem autenticação e veja se consegue ler via anonymous.</p>
 
-<p><img src="http://brunocarvalho.net/images/zabbix/img5.png" alt="img5" /></p>
+<p><img src="/images/zabbix/img5.png" alt="img5" /></p>
 
 <p>Caso não consiga ler como anonymous vamos alterar a permissão do JNDI.</p>
 
@@ -105,7 +105,7 @@ Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação 
 8. Conecte novamente URL : service:jmx:rmi:///jndi/iiop://IPADMINCSERVER:7001/weblogic.management.mbeanservers.domainruntime
 </code></pre>
 
-<p><img src="http://brunocarvalho.net/images/zabbix/img6.png" alt="img6" /></p>
+<p><img src="/images/zabbix/img6.png" alt="img6" /></p>
 
 <h5>Modificação do external script jmx_discovery para DomainRuntime</h5>
 
@@ -218,28 +218,7 @@ De uma olhada no seguinte link: <a href="https://support.zabbix.com/browse/ZBXNE
 
 <p>Resultado:</p>
 
-<p><img src="http://brunocarvalho.net/images/zabbix/resultadofinal.png" alt="resultadofinal" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Prazer Bruno Carvalho!]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho/"/>
-    <updated>2016-06-13T15:34:46-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho</id>
-    <content type="html"><![CDATA[<p>Olá pessoal,</p>
-
-<p>Nesse meu primeiro post, vou falar um pouco sobre o  intuito desse blog.</p>
-
-<p>Bem&hellip; para começar, não sou professor de português e as escritas por aqui serão bem informal e técnicas, então prenda-se apenas o proposito.</p>
-
-<p>Essa ideia já é velha, mas venho adiando por muitos longos anos, porem recentemente tive a necessidade de relembrar alguns procedimentos executados há um bom tempo atrás, e fiquei tanto tempo pesquisando nas minhas mídias externas e na internet que agora tomei a iniciativa de documentar tudo em um só lugar, assim quando quiser compartilhar algo e relembrar algo pesquiso aqui!  :)</p>
-
-<p>Concluindo&hellip; esse será meu disco virtual, onde vou compartilhar com todos meus estudos, ideias, implementações e procedimentos do meu dia a dia&hellip;</p>
-
-<p>Qualquer coisa comente, critique, ajude a enrique os posts o importante é a troca de experiências e conhecimentos.</p>
-
-<p>Quem sou eu? <a href="http://brunocarvalho.net/about/index.html">Sobre</a>.</p>
+<p><img src="/images/zabbix/resultadofinal.png" alt="resultadofinal" /></p>
 ]]></content>
   </entry>
   
