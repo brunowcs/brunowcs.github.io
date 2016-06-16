@@ -217,7 +217,7 @@ Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação 
 
 <p>Após Conseguir ler a arvore DomainRuntime do AdminServer com jconsole, vamos alterar o external script para realizar as coletas.</p>
 
-<p>External Script original: <a href="https://github.com/RiotGamesMinions/zabbix_jmxdiscovery" title="zabbix_jmxdiscovery">https://github.com/RiotGamesMinions/zabbix_jmxdiscovery</a></p>
+<p>External Script original: <a href="https://github.com/RiotGamesMinions/zabbix_jmxdiscovery" target="_blank">github.com/RiotGamesMinions/zabbix_jmxdiscovery</a></p>
 
 <p>Modificações que foram feita na class JMXDiscovery.java libs adicionadas:</p>
 
@@ -257,12 +257,9 @@ import javax.naming.*;
 
 <p>Vamos precisar colocar a lib wlfullclient.jar na pasta src para compilar o zabbix-java-gateway</p>
 
-<blockquote><p><strong><em>Não irei aborta a compilação do <a href="https://www.zabbix.com/documentation/2.4/manual/installation/install" title="Zabbix">Zabbix</a>, pois não e proposito desse post. Futuramente posso está criando um especifico.</em></strong></p>
+<blockquote><p><strong><em>Não irei aborta a compilação do <a href="https://www.zabbix.com/documentation/2.4/manual/installation/install" target="_blank">Zabbix</a>, pois não é proposito deste post. Futuramente posso está criando um especifico.</em></strong></p></blockquote>
 
-<p><a href="https://www.zabbix.com/documentation/2.4/manual/installation/install">https://www.zabbix.com/documentation/2.4/manual/installation/install</a></p></blockquote>
-
-<p>Fiz alterações simples para atender minha demanda, mas pode ser melhorada.
-De uma olhada no seguinte link: <a href="https://support.zabbix.com/browse/ZBXNEXT-1274">https://support.zabbix.com/browse/ZBXNEXT-1274</a></p>
+<p>Fiz alterações simples para atender minha demanda, mas pode ser melhorada, de uma olhada no seguinte link: <a href="https://support.zabbix.com/browse/ZBXNEXT-1274" target="_blank">support.zabbix.com/browse/ZBXNEXT-1274</a></p>
 
 <p><strong>Class alterada:</strong>
 <em>/opt/install/zabbix-2.4.1/src/zabbix_java/src/com/zabbix/gateway/JMXItemChecker.java</em></p>
@@ -306,9 +303,9 @@ De uma olhada no seguinte link: <a href="https://support.zabbix.com/browse/ZBXNE
 
 <p>Segue anexo arquivos utilizados:</p>
 
-<p><a href="https://github.com/brunowcs/zabbix_weblogic/" title="jmx_domainruntime_zabbix.zip">https://github.com/brunowcs/zabbix_weblogic</a></p>
+<p><a href="https://github.com/brunowcs/zabbix_weblogic/" target="_blank">github.com/brunowcs/zabbix_weblogic/</a></p>
 
-<p>O .RAR ficou um pouco grande por conta dos binários java, então tive que dividir em 3 para o github aceitar o upload.</p>
+<p>O .RAR ficou um pouco grande por conta dos binários java, então tive que dividir em 3 partes para o github aceitar o upload.</p>
 
 <ul>
 <li><p>Template Weblogic.xml LLD com 42 itens, 4 triggers, 16 gráficos criado para weblogic DomainRuntime (Não esqueça de configurar as macros)</p></li>
