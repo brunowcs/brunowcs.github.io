@@ -9,22 +9,22 @@ categories: linux centos rhel zabbix weblogic
 Sempre monitorei Jboss com zabbix, mas recentemente recebi uma demanda e encontrei algumas dificuldades que gostaria de compartilhar com a comunidade.
 Esse cenário foi feito no RHEL6, Weblogic 11g com jrockit 1.6, zabbix 2.4, porem entendendo o cenário, pode ser customizado para outras versões.
 
-A Oracle tem um servidor Mbean chamado DomainRuntime, que está disponível no AdminServer. Conectando-se nesse servidor é possível coletar todas informações das JVM e do domínio. Assim não será necessário exporta RMI de cada JVM.
+A Oracle tem um servidor Mbean chamado DomainRuntime, que está disponível no AdminServer. Conectando-se nesse servidor é possível coletar todas informações das JVM e do domínio. Assim não será necessário exportar JMX de cada JVM.
  Com essa solução ganha-se tempo de configuração, segurança, melhor administração de itens e gráficos agregados, além de não haver necessidade de abrir porta JMX em nenhuma JVM.
 Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com a URL do console admin pegar todos Mbeans desse domínio.
 
 
 ### Servidores MBean em Weblogic ###
 
-O Middleware Weblogic  é composto por três MBeanServers próprios que são exportados via RMI/IIOP como JSR-160. Estes podem ser consultados por meio de nome JNDI como mostra a lista abaixo. Além disso, existe o PlatformMBeanServer que pode ser exportado juntamente MbeanServer do weblogic. 
+O Middleware Weblogic  é composto por três MBeanServers próprios que são exportados via RMI/IIOP como JSR-160. Estes podem ser consultados por meio de nome JNDI como mostra a lista abaixo. Além disso, existe a PlatformMBeanServer que pode ser exportado juntamente com o MbeanServer do weblogic. 
 
 - **Domain Runtime MBean Server** 
 - **Runtime MBean Server**
 - **Edit MBean Server**
 
-O MbeanServer que vamos utilizar para buscar toda árvore do domínio weblogic será a Domínio Runtime MBean Servidor (weblogic.management.mbeanservers.domainruntime). Esse Mbean só está disponível na JVM do AdminServer.
+O MbeanServer que vamos utilizar para buscar toda árvore do domínio weblogic será o Domínio Runtime MBean Servidor (weblogic.management.mbeanservers.domainruntime). Esse Mbean só está disponível na JVM do AdminServer.
 
-##### Ative os seguintes itens abaixo no admin console do Weblogic: #####
+##### Ative os seguintes itens abaixo no AdminServer do Weblogic: #####
 
     Domínio->Geral->Avançado 
     
@@ -49,10 +49,11 @@ Entre em cada JVM e adicione a seguinte linha no argumento que se encontra na ab
 ##### Exportando RMI/IIOP AdminServer #####
 
 Para facilitar a configuração, vamos utilizar a leitura dos Mbeans como anonymous, mas também poderíamos utilizar autenticação fixada no  JNDI.
+
 Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação no AdminServer.
 
  
-    Domínio->Segurança->Geral  - Ative o ‘Acesso Anônimo Ativado”
+    Domínio->Segurança->Geral  - Marque o "Acesso Anônimo Ativado”
 
 ![img3](/images/zabbix/img3.png)
 
@@ -113,9 +114,9 @@ Para:
 
 Como o DomainRuntime se conecta com IIOP e utiliza algumas libs especificar, foi necessário adicionar o pacote wlfullclient.jar(Pacote encontrado no servidor weblogic)
 
-Coloque o  wlfullclient.jar na pasta lib do pacote zabbix_jmxdiscovery.  Após esses ajustes recompile o pacote utilizando ant. Ao executado o comando será possível acesso a árvore DomainRuntime
+Coloque o  wlfullclient.jar na pasta lib do pacote zabbix_jmxdiscovery.  Após esses ajustes recompile o pacote utilizando ant. 
 
-> ***Não irei aborta a utilização do [ant](http://ant.apache.org "ant"), pois não e proposito desse post. Futuramente posso está criando um especifico.***
+> ***Não irei aborta a utilização do [ant](http://ant.apache.org "ant"), pois não e proposito deste post. Futuramente posso está criando um post especifico.***
 
 ***Obs: O /etc/hosts precisa estar resolvendo o nome da própria máquina local***
 
@@ -132,7 +133,7 @@ Para que o zabbix-java-gateway comece a coletar utilizando o DomainRuntime, ser�
 
 Vamos precisar colocar a lib wlfullclient.jar na pasta src para compilar o zabbix-java-gateway
 
-> ***Não irei aborta a compilação do <a href="https://www.zabbix.com/documentation/2.4/manual/installation/install" target="_blank">Zabbix</a>, pois não é proposito deste post. Futuramente posso está criando um especifico.***
+> ***Não irei aborta a compilação do <a href="https://www.zabbix.com/documentation/2.4/manual/installation/install" target="_blank">Zabbix</a>, pois não é proposito deste post. Futuramente posso está criando um post especifico.***
 
 
 
@@ -198,10 +199,16 @@ O .RAR ficou um pouco grande por conta dos binários java, então tive que divid
 
 - org-json-2010-12-28.jar (lib utilizada na compilação)
 
-> Recomendo realizar testes no seu em ambiente de teste antes de entrar em produção 
+> Recomendo realizar testes no seu em ambiente de homologação antes de entrar em produção 
 
 Resultado:
 
 ![resultadofinal](/images/zabbix/resultadofinal.png)
 
+### Referências ###
 
+- https://docs.oracle.com/cd/E21764_01/web.1111/e13728/accesswls.htm#JMXCU144
+- https://blogs.oracle.com/theshortenspot/entry/accessing_jmx_for_oracle_weblo
+- https://github.com/RiotGamesMinions/zabbix_jmxdiscovery
+- https://www.zabbix.com/documentation/2.4/manual/installation/install
+- https://support.zabbix.com/browse/ZBXNEXT-1274
