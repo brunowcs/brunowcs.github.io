@@ -94,7 +94,7 @@ Caso não consiga ler como anonymous vamos alterar a permissão do JNDI.
 
 Após Conseguir ler a arvore DomainRuntime do AdminServer com jconsole, vamos alterar o external script para realizar as coletas.
 
-External Script original: [https://github.com/RiotGamesMinions/zabbix_jmxdiscovery](https://github.com/RiotGamesMinions/zabbix_jmxdiscovery "zabbix_jmxdiscovery")
+External Script original: <a href="https://github.com/RiotGamesMinions/zabbix_jmxdiscovery" target="_blank">github.com/RiotGamesMinions/zabbix_jmxdiscovery</a> 
 
         
 Modificações que foram feita na class JMXDiscovery.java libs adicionadas:
@@ -132,13 +132,13 @@ Para que o zabbix-java-gateway comece a coletar utilizando o DomainRuntime, ser�
 
 Vamos precisar colocar a lib wlfullclient.jar na pasta src para compilar o zabbix-java-gateway
 
-> ***Não irei aborta a compilação do [Zabbix](https://www.zabbix.com/documentation/2.4/manual/installation/install "Zabbix"), pois não e proposito desse post. Futuramente posso está criando um especifico.***
-> 
-> https://www.zabbix.com/documentation/2.4/manual/installation/install
+> ***Não irei aborta a compilação do <a href="https://www.zabbix.com/documentation/2.4/manual/installation/install" target="_blank">Zabbix</a>, pois não é proposito deste post. Futuramente posso está criando um especifico.***
 
 
-Fiz alterações simples para atender minha demanda, mas pode ser melhorada. 
-De uma olhada no seguinte link: [https://support.zabbix.com/browse/ZBXNEXT-1274](https://support.zabbix.com/browse/ZBXNEXT-1274)
+
+Fiz alterações simples para atender minha demanda, mas pode ser melhorada, de uma olhada no seguinte link: <a href="https://support.zabbix.com/browse/ZBXNEXT-1274" target="_blank">support.zabbix.com/browse/ZBXNEXT-1274</a>
+
+
 
 **Class alterada:**
 */opt/install/zabbix-2.4.1/src/zabbix_java/src/com/zabbix/gateway/JMXItemChecker.java*
@@ -181,9 +181,10 @@ Agora sua imaginação não tem limites! Basta configurar seu zabbix para fazer 
 
 Segue anexo arquivos utilizados: 
 
-[https://github.com/brunowcs/zabbix_weblogic](https://github.com/brunowcs/zabbix_weblogic/ "jmx_domainruntime_zabbix.zip")
 
-O .RAR ficou um pouco grande por conta dos binários java, então tive que dividir em 3 para o github aceitar o upload.
+<a href="https://github.com/brunowcs/zabbix_weblogic/" target="_blank">github.com/brunowcs/zabbix_weblogic/</a>
+
+O .RAR ficou um pouco grande por conta dos binários java, então tive que dividir em 3 partes para o github aceitar o upload.
 
 - Template Weblogic.xml LLD com 42 itens, 4 triggers, 16 gráficos criado para weblogic DomainRuntime (Não esqueça de configurar as macros)
 
