@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rhel | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/rhel/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-06-16T16:43:16-03:00</updated>
+  <updated>2016-06-16T17:17:40-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -27,7 +27,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 
 <h3>Servidores MBean em Weblogic</h3>
 
-<p>O Middleware Weblogic  é composto por três MBeanServers próprios que são exportados via RMI/IIOP como JSR-160. Estes podem ser consultados por meio de nome JNDI como mostra a lista abaixo. Além disso, existe o PlatformMBeanServer que pode ser exportado juntamente MbeanServer do weblogic.</p>
+<p>O Middleware Weblogic  é composto por três MBeanServers próprios que são exportados via RMI/IIOP como JSR-160. Estes podem ser consultados por meio de nome JNDI como mostra a lista abaixo. Além disso, existe a PlatformMBeanServer que pode ser exportado juntamente com o MbeanServer do weblogic.</p>
 
 <ul>
 <li><strong>Domain Runtime MBean Server</strong></li>
@@ -36,9 +36,9 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 </ul>
 
 
-<p>O MbeanServer que vamos utilizar para buscar toda árvore do domínio weblogic será a Domínio Runtime MBean Servidor (weblogic.management.mbeanservers.domainruntime). Esse Mbean só está disponível na JVM do AdminServer.</p>
+<p>O MbeanServer que vamos utilizar para buscar toda árvore do domínio weblogic será o Domínio Runtime MBean Servidor (weblogic.management.mbeanservers.domainruntime). Esse Mbean só está disponível na JVM do AdminServer.</p>
 
-<h5>Ative os seguintes itens abaixo no admin console do Weblogic:</h5>
+<h5>Ative os seguintes itens abaixo no AdminServer do Weblogic:</h5>
 
 <pre><code>Domínio-&gt;Geral-&gt;Avançado 
 
@@ -62,10 +62,11 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 
 <h5>Exportando RMI/IIOP AdminServer</h5>
 
-<p>Para facilitar a configuração, vamos utilizar a leitura dos Mbeans como anonymous, mas também poderíamos utilizar autenticação fixada no  JNDI.
-Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação no AdminServer.</p>
+<p>Para facilitar a configuração, vamos utilizar a leitura dos Mbeans como anonymous, mas também poderíamos utilizar autenticação fixada no  JNDI.</p>
 
-<pre><code>Domínio-&gt;Segurança-&gt;Geral  - Ative o ‘Acesso Anônimo Ativado”
+<p>Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação no AdminServer.</p>
+
+<pre><code>Domínio-&gt;Segurança-&gt;Geral  - Marque o "Acesso Anônimo Ativado”
 </code></pre>
 
 <p><img src="/images/zabbix/img3.png" alt="img3" /></p>
@@ -131,9 +132,9 @@ import javax.naming.*;
 
 <p>Como o DomainRuntime se conecta com IIOP e utiliza algumas libs especificar, foi necessário adicionar o pacote wlfullclient.jar(Pacote encontrado no servidor weblogic)</p>
 
-<p>Coloque o  wlfullclient.jar na pasta lib do pacote zabbix_jmxdiscovery.  Após esses ajustes recompile o pacote utilizando ant. Ao executado o comando será possível acesso a árvore DomainRuntime</p>
+<p>Coloque o  wlfullclient.jar na pasta lib do pacote zabbix_jmxdiscovery.  Após esses ajustes recompile o pacote utilizando ant.</p>
 
-<blockquote><p><strong><em>Não irei aborta a utilização do <a href="http://ant.apache.org" title="ant">ant</a>, pois não e proposito desse post. Futuramente posso está criando um especifico.</em></strong></p></blockquote>
+<blockquote><p><strong><em>Não irei aborta a utilização do <a href="http://ant.apache.org" title="ant">ant</a>, pois não e proposito deste post. Futuramente posso está criando um post especifico.</em></strong></p></blockquote>
 
 <p><strong><em>Obs: O /etc/hosts precisa estar resolvendo o nome da própria máquina local</em></strong></p>
 
@@ -151,7 +152,7 @@ import javax.naming.*;
 
 <p>Vamos precisar colocar a lib wlfullclient.jar na pasta src para compilar o zabbix-java-gateway</p>
 
-<blockquote><p><strong><em>Não irei aborta a compilação do <a href="https://www.zabbix.com/documentation/2.4/manual/installation/install" target="_blank">Zabbix</a>, pois não é proposito deste post. Futuramente posso está criando um especifico.</em></strong></p></blockquote>
+<blockquote><p><strong><em>Não irei aborta a compilação do <a href="https://www.zabbix.com/documentation/2.4/manual/installation/install" target="_blank">Zabbix</a>, pois não é proposito deste post. Futuramente posso está criando um post especifico.</em></strong></p></blockquote>
 
 <p>Fiz alterações simples para atender minha demanda, mas pode ser melhorada, de uma olhada no seguinte link: <a href="https://support.zabbix.com/browse/ZBXNEXT-1274" target="_blank">support.zabbix.com/browse/ZBXNEXT-1274</a></p>
 
@@ -211,11 +212,22 @@ import javax.naming.*;
 </ul>
 
 
-<blockquote><p>Recomendo realizar testes no seu em ambiente de teste antes de entrar em produção</p></blockquote>
+<blockquote><p>Recomendo realizar testes no seu em ambiente de homologação antes de entrar em produção</p></blockquote>
 
 <p>Resultado:</p>
 
 <p><img src="/images/zabbix/resultadofinal.png" alt="resultadofinal" /></p>
+
+<h3>Referências</h3>
+
+<ul>
+<li><a href="https://docs.oracle.com/cd/E21764_01/web.1111/e13728/accesswls.htm#JMXCU144">https://docs.oracle.com/cd/E21764_01/web.1111/e13728/accesswls.htm#JMXCU144</a></li>
+<li><a href="https://blogs.oracle.com/theshortenspot/entry/accessing_jmx_for_oracle_weblo">https://blogs.oracle.com/theshortenspot/entry/accessing_jmx_for_oracle_weblo</a></li>
+<li><a href="https://github.com/RiotGamesMinions/zabbix_jmxdiscovery">https://github.com/RiotGamesMinions/zabbix_jmxdiscovery</a></li>
+<li><a href="https://www.zabbix.com/documentation/2.4/manual/installation/install">https://www.zabbix.com/documentation/2.4/manual/installation/install</a></li>
+<li><a href="https://support.zabbix.com/browse/ZBXNEXT-1274">https://support.zabbix.com/browse/ZBXNEXT-1274</a></li>
+</ul>
+
 ]]></content>
   </entry>
   
