@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-06-16T16:33:50-03:00</updated>
+  <updated>2016-06-16T16:42:32-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>Sempre monitorei Jboss com zabbix, mas recentemente recebi uma demanda e encontrei algumas dificuldades que gostaria de compartilhar com a comunidade.
 Esse cenário foi feito no RHEL6, Weblogic 11g com jrockit 1.6, zabbix 2.4, porem entendendo o cenário, pode ser customizado para outras versões.</p>
 
-<p>A Oracle tem um servidor Mbean chamado DomainRuntime, que está disponível no AdminServer. Conectando-se nesse servidor é possível coletar todas informações das JVM e do domínio. Assim não será necessário exporta RMI de cada JVM.
+<p>A Oracle tem um servidor Mbean chamado DomainRuntime, que está disponível no AdminServer. Conectando-se nesse servidor é possível coletar todas informações das JVM e do domínio. Assim não será necessário exportar JMX de cada JVM.
  Com essa solução ganha-se tempo de configuração, segurança, melhor administração de itens e gráficos agregados, além de não haver necessidade de abrir porta JMX em nenhuma JVM.
 Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com a URL do console admin pegar todos Mbeans desse domínio.</p>
 
