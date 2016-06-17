@@ -46,7 +46,7 @@ Entre em cada JVM e adicione a seguinte linha no argumento que se encontra na ab
  
 > ***Será necessário reiniciar o AdminServer e as JVM do domínio.***
 
-##### Exportando RMI/IIOP AdminServer #####
+###  Exportando RMI/IIOP AdminServer ###
 
 Para facilitar a configuração, vamos utilizar a leitura dos Mbeans como anonymous, mas também poderíamos utilizar autenticação fixada no  JNDI.
 
@@ -57,7 +57,7 @@ Permitir anonymous acesso de  leitura, caso deseja monitorar sem autenticação 
 
 ![img3](/images/zabbix/img3.png)
 
-##### Habilitar o IIOP no manager AdminServer #####
+###  Habilitar o IIOP no manager AdminServer ###
 
     Dominio->Ambientes->Servidores->AdminServer->Protocolos->IIOP 
 
@@ -91,7 +91,7 @@ Caso não consiga ler como anonymous vamos alterar a permissão do JNDI.
 ![img6](/images/zabbix/img6.png)
 
 
-##### Modificação do external script jmx_discovery para DomainRuntime #####
+###  Modificação do external script jmx_discovery para DomainRuntime ###
 
 Após Conseguir ler a arvore DomainRuntime do AdminServer com jconsole, vamos alterar o external script para realizar as coletas.
 
@@ -127,7 +127,7 @@ Vá para diretório do binário compilado que foi realizado as modificações do
 
 Se a saída for parecida com a de cima seu external script está funcional.
 
-##### Modificação do Zabbix Java Gateway para DomainRuntime #####
+### Modificação do Zabbix Java Gateway para DomainRuntime ###
 
 Para que o zabbix-java-gateway comece a coletar utilizando o DomainRuntime, será  necessário recompilar o jar do zabbix, alterando a url do jmx na class JMXItemChecker.java.  
 
@@ -212,3 +212,4 @@ Resultado:
 - https://github.com/RiotGamesMinions/zabbix_jmxdiscovery
 - https://www.zabbix.com/documentation/2.4/manual/installation/install
 - https://support.zabbix.com/browse/ZBXNEXT-1274
+
