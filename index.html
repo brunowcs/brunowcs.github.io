@@ -9,7 +9,7 @@
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="16/06/2016 centos, linux, rhel, weblogic, zabbix Monitorando Weblogic Em DomainRuntime Com Zabbix Sempre monitorei Jboss com zabbix, mas &hellip;">
+	<meta name="description" content="22/06/2016 centos, linux, lvm, rhel, vmware Redimensionar Disco No VMware Com LVM Utilizando RHEL/CentOS - on the Fly Uma das demandas que executo &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -136,6 +136,171 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2016-06-22T00:00:00-03:00" data-updated="true" itemprop="datePublished">22/06/2016</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/centos/'>centos</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/lvm/'>lvm</a>, <a class='category' href='/blog/categories/rhel/'>rhel</a>, <a class='category' href='/blog/categories/vmware/'>vmware</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly/" itemprop="url">Redimensionar Disco No VMware Com LVM Utilizando RHEL/CentOS - on the Fly</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Uma das demandas que executo diariamente está relacionado a expansão de disco em máquinas virtuais. Muitas vezes a máquina não pode ser reiniciada e todo procedimento precisa ser executado em produção.</p>
+
+<blockquote><p>Sempre execute um snapshot da VM antes de executar os procedimentos abaixo.</p></blockquote>
+
+<p>Primeiro passo temos que aumentando nosso disco, no Vmware.</p>
+
+<p>Selecione a VM no seu vSphere depois, vá em “Edit Settings”, selecione o “Virtual Disk” que deseje aumentar. No meu caso aumentarei 20G.</p>
+
+<p>Verificando as partições do sistema:</p>
+
+<pre><code># df -h
+
+FilesystemSize  Used Avail Use% Mounted on
+/dev/mapper/vg_web01-lv_root 45G  1.5G   42G   4% /
+tmpfs 1.9G 0  1.9G   0% /dev/shm
+/dev/sda1 477M   78M  374M  18% /boot
+</code></pre>
+
+<p>Partição que sera expandida (<strong>/dev/mapper/vg_web01-lv_root</strong>)</p>
+
+<p>Todo procedimento será realizado com a VM ligada e a partição montada.</p>
+
+<p>Vamos agora realizar um procedimento para que o seu Linux reconheça o novo espaço adicionado sem precisar do reboot.</p>
+
+<pre><code># ls /sys/class/scsi_device/
+0:0:0:0    2:0:0:0 
+# echo 1 &gt; /sys/class/scsi_device/0\:0\:0\:0/device/rescan
+</code></pre>
+
+<p>No meu caso tenho duas controladoras e meu disco se encontra na primeira. Pronto agora quando for executar o cfdisk ou fdisk você já consegue visualizar o espaço adicionado no Vmware, no meu caso foi criado o /dev/sda3.</p>
+
+<blockquote><p>Caso seja um novo Virutal Disk, execute os comando abaixo para identificar o novo device no seu ambiente sem precisar realizar o reboot.</p>
+
+<pre><code>Buscando host bus number
+# grep mpt /sys/class/scsi_host/host?/proc_name
+/sys/class/scsi_host/host0/proc_name:mptspi
+
+Execute o comando abaixo no host encontrado
+# echo "- - -" &gt; /sys/class/scsi_host/host0/scan
+</code></pre></blockquote>
+
+<p>Vamos utilizar o cfdisk para criar uma nova partição com o espaço disponível do tipo LVM(8e)</p>
+
+<pre><code># cfdisk /dev/sda3 (a utilização do cfdisk não será abordada passo-a-passo)
+</code></pre>
+
+<p><img src="images/cfdisk.JPG" alt="" /></p>
+
+<p>Após a criação da nova partição, execute o comando abaixo</p>
+
+<pre><code># partprobe /dev/sda (RHEL7)
+# partx -a /dev/sda (RHEL6)
+</code></pre>
+
+<p>Podemos visualizar com o comando abaixo a nova partição reconhecida pelo sistema chamada <strong>sda3</strong></p>
+
+<pre><code> # cat /proc/partitions
+
+major minor  #blocks  name
+
+   80   73400320 sda
+   81     512000 sda1
+   82   51915776 sda2
+   83   20971520 sda3
+ 2530   47849472 dm-0
+ 25314063232 dm-1
+</code></pre>
+
+<p>Após a nova partição ser reconhecida vamos adiciona ao LVM.</p>
+
+<pre><code># pvcreate /dev/sda3    
+
+Physical volume "/dev/sda3" successfully created 
+</code></pre>
+
+<p>Expandindo grupo vg_web01</p>
+
+<pre><code># vgextend vg_web01 /dev/sda3
+
+Volume group "vg_web01" successfully extended
+</code></pre>
+
+<p>Expandindo Partição vg_web01-lv_root</p>
+
+<pre><code># lvextend -L+20GB /dev/mapper/vg_web01-lv_root
+
+  Size of logical volume vg_web01/lv_root changed from 45.63 GiB (11682 extents) to 65.63 GiB (16546 extents).
+  Logical volume lv_root successfully resized.
+</code></pre>
+
+<p>Redimensionar sistema de arquivo ext4</p>
+
+<pre><code># resize2fs /dev/vg_web01/lv_root
+
+resize2fs 1.41.12 (17-May-2010)
+Filesystem at /dev/vg_web01/lv_root is mounted on /; on-line resizing required
+old desc_blocks = 3, new_desc_blocks = 5
+Performing an on-line resize of /dev/vg_web01/lv_root to 16943104 (4k) blocks.
+The filesystem on /dev/vg_web01/lv_root is now 16943104 blocks long.
+</code></pre>
+
+<p>Podemos agora verificar que a partição foi redimensionada para 65G sem precisar reiniciar ou muito menos desmontar.</p>
+
+<pre><code># df -h
+FilesystemSize  Used Avail Use% Mounted on
+/dev/mapper/vg_web01-lv_root 65G  1.5G   59G   3% /
+tmpfs 1.9G 0  1.9G   0% /dev/shm
+/dev/sda1 477M   78M  374M  18% /boot
+</code></pre>
+
+<p>Caso sua partição seja xfs basta executar o seguinte comando</p>
+
+<pre><code># xfs_growfs /dev/vg_web01/lv_root
+</code></pre>
+
+<h5>Referências:</h5>
+
+<ul>
+<li><p><a href="http://tldp.org/HOWTO/LVM-HOWTO/index.html">http://tldp.org/HOWTO/LVM-HOWTO/index.html</a></p></li>
+<li><p><a href="https://blogs.it.ox.ac.uk/oxcloud/2013/03/25/rescanning-your-scsi-bus-to-see-new-storage/">https://blogs.it.ox.ac.uk/oxcloud/2013/03/25/rescanning-your-scsi-bus-to-see-new-storage/</a></p></li>
+</ul>
+
+
+		
+		
+	</div>
+
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
