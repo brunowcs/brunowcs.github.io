@@ -4,7 +4,7 @@
   <title><![CDATA[Category: centos | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/centos/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-08-23T12:40:51-03:00</updated>
+  <updated>2016-08-23T12:55:51-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -45,7 +45,7 @@ Desabilite todos repositórios, deixe apenas os seguintes habilitado:</p>
 
 <blockquote><p>Caso atualize o kernel será necessário reiniciar o sistema</p></blockquote>
 
-<p>Após o update executar o seguinte comando:</p>
+<p>Após o update do S.O e dos novos pacotes, o satellite já estará com a versão 6.1.9, execute o seguinte comando para finalizar:</p>
 
 <pre><code># katello-installer --upgrade
 
@@ -69,7 +69,7 @@ Upgrade Step: update_repository_metadata (this may take a while) ...
 Katello upgrade completed!
 </code></pre>
 
-<p>Vamos realizar um check antes de realizar a migração para o 6.2</p>
+<p>Vamos realizar um check antes de realizar a migração para o 6.2.</p>
 
 <pre><code># foreman-rake katello:upgrade_check
 
@@ -94,7 +94,7 @@ You may want to manually resolve some of the conflicts and duplicate Content Hos
 Upon upgrade those found for deletion will be removed permanently.
 </code></pre>
 
-<p>Como podemos ver minha migração apresentará falha <strong>&ldquo; [FAIL] - There are 35 active tasks.&rdquo;</strong> Resolvendo active tasks provável lock, podemos ir manualmente na Web gui Monitor->Task e filtrar pelas task que estão em lock, assim executando manualmente os skip, também podemos identificar pelo hammer. Como eu tinha 35 task mais outras linhas de históricos em stopped, resolvi além de limpar os tasks em pausa, também limpar os que estão em stop, alguns já executados com sucesso outros com erro.</p>
+<p>Como podemos ver minha migração apresentará falha <strong>&ldquo; [FAIL] - There are 35 active tasks.&rdquo;</strong> Resolvendo active tasks provável lock, podemos ir manualmente na Web gui Monitor->Tasks e filtrar pelas tasks que estão em lock, assim executando manualmente os skip, também podemos identificar pelo hammer.</p>
 
 <p>Apresenta um resumo das tasks em pausa</p>
 
@@ -106,7 +106,7 @@ Upon upgrade those found for deletion will be removed permanently.
 <pre><code># hammer task list --search "state=paused"
 </code></pre>
 
-<p>Removendo task em lock pelo foreman-rake</p>
+<p>Removendo tasks em lock pelo foreman-rake</p>
 
 <pre><code># service foreman-tasks stop  
 # foreman-rake console
@@ -163,7 +163,7 @@ Upon upgrade those found for deletion will be removed permanently.
 <pre><code># subscription-manager repos --disable rhel-7-server-satellite-6.1-rpms
 </code></pre>
 
-<p>Habilitando repositórios necessários</p>
+<p>Habilitando repositórios necessário</p>
 
 <pre><code># subscription-manager repos --enable rhel-7-server-satellite-6.2-rpms
 
@@ -190,7 +190,7 @@ Upon upgrade those found for deletion will be removed permanently.
 <pre><code># satellite-installer --scenario satellite --upgrade
 </code></pre>
 
-<p>Nessa etapa acima encontrei um erro de migração que estava relacionado a ambiente puppet orfão, caso ocorro erro abaixo parecido, tente remove o ambiente puppet informado na msg e execute o comando novamente.</p>
+<p>Nessa etapa acima encontrei um erro de migração que estava relacionado a ambiente puppet orfão, caso ocorra um erro parecido, tente remove o ambiente puppet informado na msg e execute o comando novamente.</p>
 
 <blockquote><p>foreman-rake katello:upgrades:3.0:update_puppet_repository_distributors
 Updating Puppet Repository Distributors
@@ -206,9 +206,21 @@ ForemanTasks::TaskError: Task 541787f6-ad56-449a-be6f-1b2001fc3538: Katello::Err
 <p>Verificando serviço</p>
 
 <pre><code># hammer ping
+candlepin:
+Estado:          ok
+Server Response: Duration: 19ms
+candlepin_auth:
+Estado:          ok
+Server Response: Duration: 23ms
+pulp:
+Estado:          ok
+Server Response: Duration: 66ms
+foreman_tasks:
+Estado:          ok
+Server Response: Duration: 882ms
 </code></pre>
 
-<p>Veja se todos os serviços estão oks</p>
+<p>Verique também na interface web se todos os serviços estão ok, na aba Administer->About</p>
 
 <p>Caso ao logar na interface Web, apresente um erro de &ldquo;undefined method `label' for nil:NilClass&rdquo; atualize o pacote tfm-rubygem-katello e reinicie o serviço. (<a href="https://bugzilla.redhat.com/show_bug.cgi?id=1361793">https://bugzilla.redhat.com/show_bug.cgi?id=1361793</a>)</p>
 
