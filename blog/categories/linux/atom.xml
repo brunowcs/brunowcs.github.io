@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-08-23T12:57:47-03:00</updated>
+  <updated>2016-08-23T12:59:58-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -224,13 +224,13 @@ Server Response: Duration: 882ms
 
 <p>Caso ao logar na interface Web, apresente um erro de &ldquo;undefined method `label' for nil:NilClass&rdquo; atualize o pacote tfm-rubygem-katello e reinicie o serviço. (<a href="https://bugzilla.redhat.com/show_bug.cgi?id=1361793">https://bugzilla.redhat.com/show_bug.cgi?id=1361793</a>)</p>
 
-<p><img src="/images/satellite/img2.jpg" alt="img2" /></p>
+<p><img src="/images/satellite/img2.JPG" alt="img2" /></p>
 
 <pre><code># rpm -Uvh tfm-rubygem-katello-3.0.0.73-1.el7sat.noarch.rpm
 # katello-service restart
 </code></pre>
 
-<p><img src="/images/satellite/img3.jpg" alt="img3" /></p>
+<p><img src="/images/satellite/img3.JPG" alt="img3" /></p>
 
 <h1>Upgrade Client Satellite 6.2</h1>
 
