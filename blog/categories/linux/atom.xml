@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-08-23T13:02:43-03:00</updated>
+  <updated>2016-09-01T15:42:59-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -22,7 +22,7 @@
 
 <p><img src="/images/satellite/img1.jpg" alt="img1" /></p>
 
-<p>O Satellite se tornou um produto essencial para gerenciamento de ciclo de vida de sistemas da Red Hat em ambientes de nuvem físicas, virtuais, privadas e públicas. A ferramenta apresenta implementação remota e estende a capacidade de gestão de pacotes, configurações, máquinas virtuais, containers, segurança entre grandes outras funcionalidades.</p>
+<p>O Satellite se tornou um produto essencial para gerenciamento de ciclo de vida de sistemas da Red Hat em ambientes físicos, virtuais, nuvens privadas e públicas. A ferramenta apresenta implementação remota e estende a capacidade de gestão de pacotes, configurações, máquinas virtuais, containers, segurança entre grandes outras funcionalidades.</p>
 
 <p>Uma das funcionalidades mais interessante dessa nova versão e o Remote Execute e Job Scheduling utilizando ssh. Agora será possível agenda execuções remotas em todos hosts. O OpenSCAP utilizado para auditoria de segurança, agora já vem instalado junto com o Satellite 6.2, antes precisava ser instalado manualmente. Melhorias no console web ficou notório, também percebi que a interface web está mais rápida.</p>
 
