@@ -4,7 +4,7 @@
   <title><![CDATA[Category: satellite | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/satellite/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-09-23T15:14:02-03:00</updated>
+  <updated>2016-09-23T15:19:47-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -18,7 +18,7 @@
     <link href="http://brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x/"/>
     <updated>2016-09-23T15:05:16-03:00</updated>
     <id>http://brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x</id>
-    <content type="html"><![CDATA[<p>Atualmente tive problema com interface invalida ao atualizar provisionamento do host no satellite 6.2</p>
+    <content type="html"><![CDATA[<p>Atualmente tive problema com interface invalida ao atualizar provisionamento do host utulizando o dashboard no satellite 6.2.</p>
 
 <p>Este problema ocorre por alguma mudança na interface que foi atualizado pelo factor do satellite e no momento a interface não existe mais e/ou está inconsistente com os dados fornecidos.</p>
 
@@ -34,7 +34,7 @@ irb(main):003:0&gt; i = host.interfaces[1]
 irb(main):004:0&gt; i.destroy
 </code></pre>
 
-<p>Trocando o array &ldquo;host.interfaces[0,1,2]&rdquo; você pode navegar em todas interfaces, veja quais estão apresentado problema e remova.</p>
+<p>Trocando o array &ldquo;host.interfaces[0,1,2]&rdquo; você pode navegar em todas interfaces, veja no dashboard ao editar e atualizar o host, quais estão apresentado problemas e remova pelo foreman-rake.</p>
 
 <p>Caso queira editar algum atributo da interface pelo foreman-rake utilize da seguinte forma.</p>
 
