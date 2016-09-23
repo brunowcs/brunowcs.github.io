@@ -9,7 +9,7 @@
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="19/08/2016 centos, linux, rhel, satellite Iniciando Jornada Com Satellite 6.2 Recentemente a Red hat lançou o Satellite 6.2 GA, um produto que &hellip;">
+	<meta name="description" content="23/09/2016 centos, linux, rhel, satellite Alterando Host Pelo Foreman-rake No Red Hat Satellite 6.x Atualmente tive problema com interface invalida &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -136,6 +136,82 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2016-09-23T00:00:00-03:00" data-updated="true" itemprop="datePublished">23/09/2016</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/centos/'>centos</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/rhel/'>rhel</a>, <a class='category' href='/blog/categories/satellite/'>satellite</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x/" itemprop="url">Alterando Host Pelo Foreman-rake No Red Hat Satellite 6.x</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Atualmente tive problema com interface invalida ao atualizar provisionamento do host no satellite 6.2</p>
+
+<p>Este problema ocorre por alguma mudança na interface que foi atualizado pelo factor do satellite e no momento a interface não existe mais e/ou está inconsistente com os dados fornecidos.</p>
+
+<p>Abaixo executo comandos para contorna esse problema, removendo uma interface invalida no host.</p>
+
+<pre><code># foreman-rake console
+Loading production environment (Rails 4.1.5)
+
+irb(main):001:0&gt; host = Host.find_by_name('HOSTNAME')
+
+irb(main):003:0&gt; i = host.interfaces[1]
+
+irb(main):004:0&gt; i.destroy
+</code></pre>
+
+<p>Trocando o array &ldquo;host.interfaces[0,1,2]&rdquo; você pode navegar em todas interfaces, veja quais estão apresentado problema e remova.</p>
+
+<p>Caso queira editar algum atributo da interface pelo foreman-rake utilize da seguinte forma.</p>
+
+<pre><code># foreman-rake console
+Loading production environment (Rails 4.1.5)
+
+irb(main):001:0&gt; host = Host.find_by_name('HOSTNAME')
+
+irb(main):002:0&gt; i = host.interfaces[0]
+
+irb(main):003:0&gt; i.name = "hostname"
+
+irb(main):004:0&gt; i.save!
+</code></pre>
+
+<p>Adpatando os comandos acima pode ser alterar varios atributos do provisionamento pelo foreman-rake.</p>
+
+		
+		
+	</div>
+
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
