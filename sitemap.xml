@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem/</loc>
+<lastmod>2016-10-04T12:10:36-03:00</lastmod>
+</url>
+<url>
 <loc>http://brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x/</loc>
 <lastmod>2016-09-23T15:05:16-03:00</lastmod>
 </url>
@@ -58,6 +62,9 @@
 </url>
 <url>
 <loc>http://brunocarvalho.net/blog/categories/satellite/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/realidade/</loc>
 </url>
 <url>
 <loc>http://brunocarvalho.net/google60f3e9080d9a5555.html</loc>
