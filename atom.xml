@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[brunocarvalho.net]]></title>
-  <link href="brunocarvalho.net/atom.xml" rel="self"/>
-  <link href="brunocarvalho.net/"/>
-  <updated>2016-11-01T14:14:10-02:00</updated>
-  <id>brunocarvalho.net/</id>
+  <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
+  <link href="http://brunocarvalho.net/"/>
+  <updated>2016-11-01T15:14:26-02:00</updated>
+  <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
     <email><![CDATA[brunowcs@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Empregos morrem e empregos nascem]]></title>
-    <link href="brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem/"/>
+    <link href="http://brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem/"/>
     <updated>2016-10-04T12:10:36-03:00</updated>
-    <id>brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem</id>
+    <id>http://brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem</id>
     <content type="html"><![CDATA[<p><img src="images/digitau.jpg" alt="" /></p>
 
 <p>No Brasil funciona assim:</p>
@@ -36,9 +36,9 @@
   
   <entry>
     <title type="html"><![CDATA[Alterando Host pelo foreman-rake no Red hat Satellite 6.x]]></title>
-    <link href="brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x/"/>
+    <link href="http://brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x/"/>
     <updated>2016-09-23T15:05:16-03:00</updated>
-    <id>brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x</id>
+    <id>http://brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x</id>
     <content type="html"><![CDATA[<p>Atualmente tive problema com interface invalida ao atualizar provisionamento do host utulizando o dashboard no satellite 6.2.</p>
 
 <p>Este problema ocorre por alguma mudança na interface que foi atualizado pelo factor do satellite e no momento a interface não existe mais e/ou está inconsistente com os dados fornecidos.</p>
@@ -77,12 +77,12 @@ irb(main):004:0&gt; i.save!
   
   <entry>
     <title type="html"><![CDATA[Iniciando jornada com Satellite 6.2]]></title>
-    <link href="brunocarvalho.net/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2/"/>
+    <link href="http://brunocarvalho.net/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2/"/>
     <updated>2016-08-19T14:48:46-03:00</updated>
-    <id>brunocarvalho.net/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2</id>
+    <id>http://brunocarvalho.net/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2</id>
     <content type="html"><![CDATA[<p>Recentemente a Red hat lançou o Satellite 6.2 GA, um produto que ganhou grandes melhorias e novas funcionalidades.</p>
 
-<p><img src="brunocarvalho.net/images/satellite/img1.jpg" alt="img1" /></p>
+<p><img src="http://brunocarvalho.net/images/satellite/img1.jpg" alt="img1" /></p>
 
 <p>O Satellite se tornou um produto essencial para gerenciamento de ciclo de vida de sistemas da Red Hat em ambientes físicos, virtuais, nuvens privadas e públicas. A ferramenta apresenta implementação remota e estende a capacidade de gestão de pacotes, configurações, máquinas virtuais, containers, segurança entre grandes outras funcionalidades.</p>
 
@@ -286,13 +286,13 @@ Server Response: Duration: 882ms
 
 <p>Caso ao logar na interface Web, apresente um erro de &ldquo;undefined method `label' for nil:NilClass&rdquo; atualize o pacote tfm-rubygem-katello e reinicie o serviço. (<a href="https://bugzilla.redhat.com/show_bug.cgi?id=1361793">https://bugzilla.redhat.com/show_bug.cgi?id=1361793</a>)</p>
 
-<p><img src="brunocarvalho.net/images/satellite/img2.jpg" alt="img2" /></p>
+<p><img src="http://brunocarvalho.net/images/satellite/img2.jpg" alt="img2" /></p>
 
 <pre><code># rpm -Uvh tfm-rubygem-katello-3.0.0.73-1.el7sat.noarch.rpm
 # katello-service restart
 </code></pre>
 
-<p><img src="brunocarvalho.net/images/satellite/img3.jpg" alt="img3" /></p>
+<p><img src="http://brunocarvalho.net/images/satellite/img3.jpg" alt="img3" /></p>
 
 <h1>Upgrade Client Satellite 6.2</h1>
 
@@ -323,9 +323,9 @@ Server Response: Duration: 882ms
   
   <entry>
     <title type="html"><![CDATA[Redimensionar disco no VMware com LVM utilizando RHEL/CentOS - On the Fly]]></title>
-    <link href="brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly/"/>
+    <link href="http://brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly/"/>
     <updated>2016-06-22T09:30:26-03:00</updated>
-    <id>brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly</id>
+    <id>http://brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly</id>
     <content type="html"><![CDATA[<p>Uma das demandas que executo diariamente está relacionado a expansão de disco em máquinas virtuais. Muitas vezes a máquina não pode ser reiniciada e todo procedimento precisa ser executado em produção.</p>
 
 <blockquote><p>Sempre execute um snapshot da VM antes de executar os procedimentos abaixo.</p></blockquote>
@@ -372,7 +372,7 @@ Execute o comando abaixo no host encontrado
 <pre><code># cfdisk /dev/sda3 (a utilização do cfdisk não será abordada passo-a-passo)
 </code></pre>
 
-<p><img src="brunocarvalho.net/images/cfdisk.JPG" alt="cfdisk" /></p>
+<p><img src="http://brunocarvalho.net/images/cfdisk.JPG" alt="cfdisk" /></p>
 
 <p>Após a criação da nova partição, execute o comando abaixo</p>
 
@@ -453,9 +453,9 @@ tmpfs 1.9G 0  1.9G   0% /dev/shm
   
   <entry>
     <title type="html"><![CDATA[Monitorando Weblogic em DomainRuntime com Zabbix]]></title>
-    <link href="brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix/"/>
+    <link href="http://brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix/"/>
     <updated>2016-06-16T13:51:28-03:00</updated>
-    <id>brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix</id>
+    <id>http://brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix</id>
     <content type="html"><![CDATA[<p>Sempre monitorei Jboss com zabbix, mas recentemente recebi uma demanda e encontrei algumas dificuldades que gostaria de compartilhar com a comunidade.
 Esse cenário foi feito no RHEL6, Weblogic 11g com jrockit 1.6, zabbix 2.4, porem entendendo o cenário, pode ser customizado para outras versões.</p>
 
@@ -485,7 +485,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 - Servidor MBean da Plataforma Usado
 </code></pre>
 
-<p><img src="brunocarvalho.net/images/zabbix/img1.png" alt="img1" /></p>
+<p><img src="http://brunocarvalho.net/images/zabbix/img1.png" alt="img1" /></p>
 
 <p>Entre em cada JVM e adicione a seguinte linha no argumento que se encontra na aba Inicialização dos servidores</p>
 
@@ -494,7 +494,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 -Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder
 </code></pre>
 
-<p><img src="brunocarvalho.net/images/zabbix/img2.png" alt="img2" /></p>
+<p><img src="http://brunocarvalho.net/images/zabbix/img2.png" alt="img2" /></p>
 
 <blockquote><p><strong><em>Será necessário reiniciar o AdminServer e as JVM do domínio.</em></strong></p></blockquote>
 
@@ -507,14 +507,14 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 <pre><code>Domínio-&gt;Segurança-&gt;Geral  - Marque o "Acesso Anônimo Ativado”
 </code></pre>
 
-<p><img src="brunocarvalho.net/images/zabbix/img3.png" alt="img3" /></p>
+<p><img src="http://brunocarvalho.net/images/zabbix/img3.png" alt="img3" /></p>
 
 <h3>Habilitar o IIOP no manager AdminServer</h3>
 
 <pre><code>Dominio-&gt;Ambientes-&gt;Servidores-&gt;AdminServer-&gt;Protocolos-&gt;IIOP 
 </code></pre>
 
-<p><img src="brunocarvalho.net/images/zabbix/img4.png" alt="img4" /></p>
+<p><img src="http://brunocarvalho.net/images/zabbix/img4.png" alt="img4" /></p>
 
 <blockquote><p><strong><em>Será necessário reiniciar o AdminServer.</em></strong></p></blockquote>
 
@@ -530,7 +530,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 
 <p>Primeiro tente se conectar utilizando o login e a senha do AdminServer e veja se consegue ler a arvore com.bea/DomainRuntimeService. Depois tente sem autenticação e veja se consegue ler via anonymous.</p>
 
-<p><img src="brunocarvalho.net/images/zabbix/img5.png" alt="img5" /></p>
+<p><img src="http://brunocarvalho.net/images/zabbix/img5.png" alt="img5" /></p>
 
 <p>Caso não consiga ler como anonymous vamos alterar a permissão do JNDI.</p>
 
@@ -544,7 +544,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 8. Conecte novamente URL : service:jmx:rmi:///jndi/iiop://IPADMINCSERVER:7001/weblogic.management.mbeanservers.domainruntime
 </code></pre>
 
-<p><img src="brunocarvalho.net/images/zabbix/img6.png" alt="img6" /></p>
+<p><img src="http://brunocarvalho.net/images/zabbix/img6.png" alt="img6" /></p>
 
 <h3>Modificação do external script jmx_discovery para DomainRuntime</h3>
 
@@ -654,7 +654,7 @@ import javax.naming.*;
 
 <p>Resultado:</p>
 
-<p><img src="brunocarvalho.net/images/zabbix/resultadofinal.png" alt="resultadofinal" /></p>
+<p><img src="http://brunocarvalho.net/images/zabbix/resultadofinal.png" alt="resultadofinal" /></p>
 
 <h3>Referências</h3>
 
@@ -671,9 +671,9 @@ import javax.naming.*;
   
   <entry>
     <title type="html"><![CDATA[Prazer Bruno Carvalho!]]></title>
-    <link href="brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho/"/>
+    <link href="http://brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho/"/>
     <updated>2016-06-13T15:34:46-03:00</updated>
-    <id>brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho</id>
+    <id>http://brunocarvalho.net/blog/2016/06/13/prazer-bruno-carvalho</id>
     <content type="html"><![CDATA[<p>Olá pessoal,</p>
 
 <p>Nesse meu primeiro post, vou falar um pouco sobre o  intuito desse blog.</p>
@@ -686,7 +686,7 @@ import javax.naming.*;
 
 <p>Qualquer coisa comente, critique, ajude a enrique os posts o importante é a troca de experiências e conhecimentos.</p>
 
-<p>Quem sou eu? <a href="brunocarvalho.net/about/index.html">Sobre</a>.</p>
+<p>Quem sou eu? <a href="http://brunocarvalho.net/about/index.html">Sobre</a>.</p>
 ]]></content>
   </entry>
   
