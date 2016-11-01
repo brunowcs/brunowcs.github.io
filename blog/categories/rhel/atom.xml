@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: rhel | brunocarvalho.net]]></title>
-  <link href="http://brunocarvalho.net/blog/categories/rhel/atom.xml" rel="self"/>
-  <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-01T10:46:20-02:00</updated>
-  <id>http://brunocarvalho.net/</id>
+  <link href="brunocarvalho.net/blog/categories/rhel/atom.xml" rel="self"/>
+  <link href="brunocarvalho.net/"/>
+  <updated>2016-11-01T10:52:49-02:00</updated>
+  <id>brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
     <email><![CDATA[brunowcs@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Alterando Host pelo foreman-rake no Red hat Satellite 6.x]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x/"/>
+    <link href="brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x/"/>
     <updated>2016-09-23T15:05:16-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x</id>
+    <id>brunocarvalho.net/blog/2016/09/23/alterando-host-pelo-foreman-rake-no-red-hat-satellite-6-dot-x</id>
     <content type="html"><![CDATA[<p>Atualmente tive problema com interface invalida ao atualizar provisionamento do host utulizando o dashboard no satellite 6.2.</p>
 
 <p>Este problema ocorre por alguma mudança na interface que foi atualizado pelo factor do satellite e no momento a interface não existe mais e/ou está inconsistente com os dados fornecidos.</p>
@@ -56,9 +56,9 @@ irb(main):004:0&gt; i.save!
   
   <entry>
     <title type="html"><![CDATA[Iniciando jornada com Satellite 6.2]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2/"/>
+    <link href="brunocarvalho.net/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2/"/>
     <updated>2016-08-19T14:48:46-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2</id>
+    <id>brunocarvalho.net/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2</id>
     <content type="html"><![CDATA[<p>Recentemente a Red hat lançou o Satellite 6.2 GA, um produto que ganhou grandes melhorias e novas funcionalidades.</p>
 
 <p><img src="/images/satellite/img1.jpg" alt="img1" /></p>
@@ -302,9 +302,9 @@ Server Response: Duration: 882ms
   
   <entry>
     <title type="html"><![CDATA[Redimensionar disco no VMware com LVM utilizando RHEL/CentOS - On the Fly]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly/"/>
+    <link href="brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly/"/>
     <updated>2016-06-22T09:30:26-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly</id>
+    <id>brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly</id>
     <content type="html"><![CDATA[<p>Uma das demandas que executo diariamente está relacionado a expansão de disco em máquinas virtuais. Muitas vezes a máquina não pode ser reiniciada e todo procedimento precisa ser executado em produção.</p>
 
 <blockquote><p>Sempre execute um snapshot da VM antes de executar os procedimentos abaixo.</p></blockquote>
@@ -432,9 +432,9 @@ tmpfs 1.9G 0  1.9G   0% /dev/shm
   
   <entry>
     <title type="html"><![CDATA[Monitorando Weblogic em DomainRuntime com Zabbix]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix/"/>
+    <link href="brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix/"/>
     <updated>2016-06-16T13:51:28-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix</id>
+    <id>brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix</id>
     <content type="html"><![CDATA[<p>Sempre monitorei Jboss com zabbix, mas recentemente recebi uma demanda e encontrei algumas dificuldades que gostaria de compartilhar com a comunidade.
 Esse cenário foi feito no RHEL6, Weblogic 11g com jrockit 1.6, zabbix 2.4, porem entendendo o cenário, pode ser customizado para outras versões.</p>
 

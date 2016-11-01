@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: realidade | brunocarvalho.net]]></title>
-  <link href="http://brunocarvalho.net/blog/categories/realidade/atom.xml" rel="self"/>
-  <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-01T10:46:20-02:00</updated>
-  <id>http://brunocarvalho.net/</id>
+  <link href="brunocarvalho.net/blog/categories/realidade/atom.xml" rel="self"/>
+  <link href="brunocarvalho.net/"/>
+  <updated>2016-11-01T10:52:49-02:00</updated>
+  <id>brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
     <email><![CDATA[brunowcs@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Empregos morrem e empregos nascem]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem/"/>
+    <link href="brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem/"/>
     <updated>2016-10-04T12:10:36-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem</id>
+    <id>brunocarvalho.net/blog/2016/10/04/empregos-morrem-e-empregos-nascem</id>
     <content type="html"><![CDATA[<p><img src="images/digitau.jpg" alt="" /></p>
 
 <p>No Brasil funciona assim:</p>

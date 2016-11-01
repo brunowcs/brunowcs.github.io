@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vmware | brunocarvalho.net]]></title>
-  <link href="http://brunocarvalho.net/blog/categories/vmware/atom.xml" rel="self"/>
-  <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-01T10:46:20-02:00</updated>
-  <id>http://brunocarvalho.net/</id>
+  <link href="brunocarvalho.net/blog/categories/vmware/atom.xml" rel="self"/>
+  <link href="brunocarvalho.net/"/>
+  <updated>2016-11-01T10:52:49-02:00</updated>
+  <id>brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
     <email><![CDATA[brunowcs@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Redimensionar disco no VMware com LVM utilizando RHEL/CentOS - On the Fly]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly/"/>
+    <link href="brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly/"/>
     <updated>2016-06-22T09:30:26-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly</id>
+    <id>brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly</id>
     <content type="html"><![CDATA[<p>Uma das demandas que executo diariamente está relacionado a expansão de disco em máquinas virtuais. Muitas vezes a máquina não pode ser reiniciada e todo procedimento precisa ser executado em produção.</p>
 
 <blockquote><p>Sempre execute um snapshot da VM antes de executar os procedimentos abaixo.</p></blockquote>

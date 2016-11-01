@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: zabbix | brunocarvalho.net]]></title>
-  <link href="http://brunocarvalho.net/blog/categories/zabbix/atom.xml" rel="self"/>
-  <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-01T10:46:20-02:00</updated>
-  <id>http://brunocarvalho.net/</id>
+  <link href="brunocarvalho.net/blog/categories/zabbix/atom.xml" rel="self"/>
+  <link href="brunocarvalho.net/"/>
+  <updated>2016-11-01T10:52:49-02:00</updated>
+  <id>brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
     <email><![CDATA[brunowcs@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Monitorando Weblogic em DomainRuntime com Zabbix]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix/"/>
+    <link href="brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix/"/>
     <updated>2016-06-16T13:51:28-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix</id>
+    <id>brunocarvalho.net/blog/2016/06/16/monitorando-weblogic-em-domainruntime-com-zabbix</id>
     <content type="html"><![CDATA[<p>Sempre monitorei Jboss com zabbix, mas recentemente recebi uma demanda e encontrei algumas dificuldades que gostaria de compartilhar com a comunidade.
 Esse cenário foi feito no RHEL6, Weblogic 11g com jrockit 1.6, zabbix 2.4, porem entendendo o cenário, pode ser customizado para outras versões.</p>
 
