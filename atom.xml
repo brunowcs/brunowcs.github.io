@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-01T15:14:26-02:00</updated>
+  <updated>2016-11-17T13:40:13-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Continuando transferência com RSYNC no caso de interrupção]]></title>
+    <link href="http://brunocarvalho.net/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/"/>
+    <updated>2016-11-17T13:38:43-02:00</updated>
+    <id>http://brunocarvalho.net/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao</id>
+    <content type="html"><![CDATA[<p>Precisei realizar uma transferência de uma VM do XenServer com 300G de um ponto de montagem NFS para um outro local remoto e para evitar problemas de interrupção, utilizei o comando abaixo que me permiti continuar a transferência em caso de problemas.</p>
+
+<pre><code># rsync -vrlPtz --append /mnt/web.xva /storage/export/
+    sending incremental file list
+    web.xva     4641783808   1%   6.89MB/s    9:57:11
+</code></pre>
+
+<p>O Comando acima irá comprimir, continuar e salvar parcialmente apresentando a saída em detalhes.</p>
+
+<p>Caso queira usar com ssh:</p>
+
+<pre><code># rsync -vrlPtz --append -e ssh login@host:/tmp/web.xva /tmp/web.xva
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Empregos morrem e empregos nascem]]></title>
