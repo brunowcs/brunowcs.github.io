@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-17T13:40:13-02:00</updated>
+  <updated>2016-11-17T13:48:50-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -18,7 +18,9 @@
     <link href="http://brunocarvalho.net/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/"/>
     <updated>2016-11-17T13:38:43-02:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao</id>
-    <content type="html"><![CDATA[<p>Precisei realizar uma transferência de uma VM do XenServer com 300G de um ponto de montagem NFS para um outro local remoto e para evitar problemas de interrupção, utilizei o comando abaixo que me permiti continuar a transferência em caso de problemas.</p>
+    <content type="html"><![CDATA[<p><img src="images/rsync.jpg" alt="rysnc" /></p>
+
+<p>Olá turmadaaa, precisei realizar uma transferência de uma VM do XenServer com 300G que estava em um ponto de montagem NFS para um outro local remoto e para evitar problemas de interrupção, utilizei o comando abaixo que me permiti continuar a transferência em casos de problemas, como perda de conexão etc&hellip;</p>
 
 <pre><code># rsync -vrlPtz --append /mnt/web.xva /storage/export/
     sending incremental file list

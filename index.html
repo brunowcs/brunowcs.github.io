@@ -9,7 +9,7 @@
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="17/11/2016 linux, rsync Comments Continuando Transferência Com RSYNC No Caso De Interrupção Precisei realizar uma transferência de uma VM do &hellip;">
+	<meta name="description" content="17/11/2016 linux, rsync Comments Continuando Transferência Com RSYNC No Caso De Interrupção Olá turmadaaa, precisei realizar uma transferência de &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -176,7 +176,9 @@
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/" itemprop="url">Continuando Transferência Com RSYNC No Caso De Interrupção</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<p>Precisei realizar uma transferência de uma VM do XenServer com 300G de um ponto de montagem NFS para um outro local remoto e para evitar problemas de interrupção, utilizei o comando abaixo que me permiti continuar a transferência em caso de problemas.</p>
+		<p><img src="images/rsync.jpg" alt="rysnc" /></p>
+
+<p>Olá turmadaaa, precisei realizar uma transferência de uma VM do XenServer com 300G que estava em um ponto de montagem NFS para um outro local remoto e para evitar problemas de interrupção, utilizei o comando abaixo que me permiti continuar a transferência em casos de problemas, como perda de conexão etc&hellip;</p>
 
 <pre><code># rsync -vrlPtz --append /mnt/web.xva /storage/export/
     sending incremental file list
