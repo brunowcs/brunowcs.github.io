@@ -145,12 +145,18 @@
     web.xva     4641783808   1%   6.89MB/s    9:57:11
 </code></pre>
 
-<p>O Comando acima irá comprimir, continuar e salvar parcialmente apresentando a saída em detalhes.</p>
+<p>O Comando acima basicamente irá comprimir, continuar e salvar parcialmente apresentando a saída em detalhes. Pode ser utilizado com apenas um arquivo ou com diretórios.</p>
 
 <p>Caso queira usar com ssh:</p>
 
 <pre><code># rsync -vrlPtz --append -e ssh login@host:/tmp/web.xva /tmp/web.xva
 </code></pre>
+
+<hr />
+
+<p><strong>Referência:</strong></p>
+
+<p><a href="http://linuxcommand.org/man_pages/rsync1.html">http://linuxcommand.org/man_pages/rsync1.html</a></p>
 </div>
 
 
