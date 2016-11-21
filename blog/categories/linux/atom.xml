@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-21T14:49:17-02:00</updated>
+  <updated>2016-11-21T14:51:20-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -527,11 +527,13 @@ INFO: CentOS-7-x86_64-Minimal-1511.iso uploaded successfully
 
 <p>Sistema -> Data Centers -> Default -> Cluster -> Default - > MVS -> Novo MV”:</p>
 
-<p>Após digitar o nome da VM,  vamos criar o disco da VM em &ldquo;Imagens de Instâncias&rdquo; click em Criar
-<img src="/images/ovirt/novavm.jpg" alt="" /></p>
+<p>Após digitar o nome da VM,  vamos criar o disco da VM em &ldquo;Imagens de Instâncias&rdquo; click em Criar</p>
 
-<p>Digite o Tamanho, verifique se o storage domain está correto e click em OK
-<img src="/images/ovirt/createdisk.jpg" alt="" /></p>
+<p><img src="/images/ovirt/novavm.jpg" alt="" /></p>
+
+<p>Digite o Tamanho, verifique se o storage domain está correto e click em OK</p>
+
+<p><img src="/images/ovirt/createdisk.jpg" alt="" /></p>
 
 <p>Selecione a rede que foi configurada por padrão na instalação.(bridge ovirtmgmt)</p>
 
