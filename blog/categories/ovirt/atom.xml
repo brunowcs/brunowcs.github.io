@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ovirt | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/ovirt/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-21T14:13:48-02:00</updated>
+  <updated>2016-11-21T14:32:40-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -18,7 +18,7 @@
     <link href="http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs/"/>
     <updated>2016-11-21T12:07:53-02:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs</id>
-    <content type="html"><![CDATA[<p><img src="images/ovirt/ovirt.png" alt="" /></p>
+    <content type="html"><![CDATA[<p><img src="/images/ovirt/ovirt.png" alt="" /></p>
 
 <p><strong>Objetivo</strong></p>
 
@@ -489,23 +489,23 @@ stopped=False
 
 <p>senha: que você configurou na instalação</p>
 
-<p><img src="images/ovirt/ovirtlogin.jpg" alt="" /></p>
+<p><img src="/images/ovirt/ovirtlogin.jpg" alt="" /></p>
 
 <p><strong>Adicionando Storage Data</strong></p>
 
 <p>Sistema -> Data Centers -> Default -> Storage -> Novo Dominio”:</p>
 
-<p><img src="images/ovirt/addstorage.jpg" alt="" /></p>
+<p><img src="/images/ovirt/addstorage.jpg" alt="" /></p>
 
 <p><strong>Adicionando Storage ISO</strong></p>
 
-<p><img src="images/ovirt/addstorageiso.jpg" alt="" /></p>
+<p><img src="/images/ovirt/addstorageiso.jpg" alt="" /></p>
 
-<p><img src="images/ovirt/storageisoaguardando.jpg" alt="" /></p>
+<p><img src="/images/ovirt/storageisoaguardando.jpg" alt="" /></p>
 
 <p>Agora basta aguarda o storage ficar ativo.</p>
 
-<p><img src="images/ovirt/storageisook.jpg" alt="" /></p>
+<p><img src="/images/ovirt/storageisook.jpg" alt="" /></p>
 
 <p><strong>Adicionando imagem ISO no Dominio criado</strong></p>
 
@@ -528,34 +528,34 @@ INFO: CentOS-7-x86_64-Minimal-1511.iso uploaded successfully
 <p>Sistema -> Data Centers -> Default -> Cluster -> Default - > MVS -> Novo MV”:</p>
 
 <p>Após digitar o nome da VM,  vamos criar o disco da VM em &ldquo;Imagens de Instâncias&rdquo; click em Criar
-<img src="images/ovirt/novavm.jpg" alt="" /></p>
+<img src="/images/ovirt/novavm.jpg" alt="" /></p>
 
 <p>Digite o Tamanho, verifique se o storage domain está correto e click em OK
-<img src="images/ovirt/createdisk.jpg" alt="" /></p>
+<img src="/images/ovirt/createdisk.jpg" alt="" /></p>
 
 <p>Selecione a rede que foi configurada por padrão na instalação.(bridge ovirtmgmt)</p>
 
-<p><img src="images/ovirt/confrede.jpg" alt="" /></p>
+<p><img src="/images/ovirt/confrede.jpg" alt="" /></p>
 
 <p>Configure a memória e o CPU e click em OK.</p>
 
-<p><img src="images/ovirt/vmmemoria.jpg" alt="" /></p>
+<p><img src="/images/ovirt/vmmemoria.jpg" alt="" /></p>
 
 <p>Agora vamos iniciar a VM  clicando em &ldquo;Executar uma vez&rdquo; para iniciar o sistema com boot da nossa ISO CentOS</p>
 
-<p><img src="images/ovirt/iniciarvm.jpg" alt="" /></p>
+<p><img src="/images/ovirt/iniciarvm.jpg" alt="" /></p>
 
 <p>Selecione nossa ISO e marque a opção &ldquo;Colocar CD&rdquo;</p>
 
-<p><img src="images/ovirt/iniciariso.jpg" alt="" /></p>
+<p><img src="/images/ovirt/iniciariso.jpg" alt="" /></p>
 
 <p>Agora vamos Abrir o Console da VM para iniciar a Instalação.</p>
 
-<p><img src="images/ovirt/abrirconsole.jpg" alt="" /></p>
+<p><img src="/images/ovirt/abrirconsole.jpg" alt="" /></p>
 
 <p>Para o Remote Viewer abrir será nescessario baixar O Virt Manager (<a href="https://virt-manager.org/download/">https://virt-manager.org/download/</a>)</p>
 
-<p><img src="images/ovirt/centosinstall.jpg" alt="" /></p>
+<p><img src="/images/ovirt/centosinstall.jpg" alt="" /></p>
 
 <p><strong>Troubleshooting:</strong></p>
 
@@ -569,9 +569,11 @@ exitMessage = Failed to acquire lock: No space left on device
 ..........
 
 [root@node1 ~]# sanlock direct init -s hosted-engine:0:/rhev/data-center/mnt/&lt;INTERNAL HE SD&gt;/&lt;SDUUID&gt;/ha_agent/hosted-engine.lockspace:0
-</code></pre>
+[root@node1 ~]# systemctl restart ovirt-ha-agent &amp;&amp; systemctl restart ovirt-ha-broker &amp;&amp; systemctl restart vdsmd
+[root@node1 ~]# hosted-engine --vm-start
 
-<p><strong>Referência:</strong></p>
+**Referência:**
+</code></pre>
 
 <p><a href="http://www.ovirt.org/documentation/">http://www.ovirt.org/documentation/</a></p>
 ]]></content>
