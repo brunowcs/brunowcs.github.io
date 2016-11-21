@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs/</loc>
+<lastmod>2016-11-21T12:07:53-02:00</lastmod>
+</url>
+<url>
 <loc>http://brunocarvalho.net/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/</loc>
 <lastmod>2016-11-17T13:38:43-02:00</lastmod>
 </url>
@@ -72,6 +76,15 @@
 </url>
 <url>
 <loc>http://brunocarvalho.net/blog/categories/rsync/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/ovirt/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/nfs/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/virtualizacao/</loc>
 </url>
 <url>
 <loc>http://brunocarvalho.net/google60f3e9080d9a5555.html</loc>
