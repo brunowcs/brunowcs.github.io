@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nfs | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/nfs/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-21T14:43:18-02:00</updated>
+  <updated>2016-11-21T14:45:16-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -18,7 +18,7 @@
     <link href="http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs/"/>
     <updated>2016-11-21T12:07:53-02:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs</id>
-    <content type="html"><![CDATA[<p><img src="/images/ovirt/ovirt.png" alt="" /></p>
+    <content type="html"><![CDATA[<p><img src="/images/ovirt/ovirt4.png" alt="" /></p>
 
 <p><strong>Objetivo</strong></p>
 
