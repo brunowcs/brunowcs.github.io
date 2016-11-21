@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-21T13:44:34-02:00</updated>
+  <updated>2016-11-21T14:05:41-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -26,11 +26,13 @@
 
 <p>No meu ambiente instalei tudo em um único node, o ovirt engine como VM no meu primeiro node, juntamente com NFS, mas para ambiente maiores recomendo a separação dos componentes para obter uma melhor performance e HA.</p>
 
-<p><strong>Pré-requisitos</strong></p>
+<p><strong>Ambiente Utilizado</strong></p>
 
 <ul>
-<li>Server: CentoOS 7 core - Quad core, 16 GB RAM e 50 GB para NFS storage</li>
-<li>Desabilitar SELINUX</li>
+<li>NODE1 FÍSICO: Intel Xeon 24 Core(Hyper-Threading) - 32G - CentoOS 7-x86_64-minimal</li>
+<li>NFS STORAGE - 500GB</li>
+<li>VM OVIRT MANAGER - Quad core, 16 GB RAM e 50 GB</li>
+<li>SELINUX Desabilitado</li>
 <li>NTP configurado</li>
 </ul>
 
@@ -299,9 +301,8 @@ Please enter the IP address to be used for the engine VM [192.168.10.2]: <strong
 
 <p>Após acessar via vnc a maquina virtual, execute o seguinte comando</p>
 
-<p>[root@ovirtengine ~]# engine-setup</p>
-
-<pre><code>[ INFO  ] Stage: Initializing
+<pre><code>[root@ovirtengine ~]# engine-setup
+[ INFO  ] Stage: Initializing
 [ INFO  ] Stage: Environment setup
   Configuration files: ['/etc/ovirt-engine-setup.conf.d/10-packaging-jboss.conf', '/etc/ovirt-engine-setup.conf.d/10-packaging.conf']
   Log file: /var/log/ovirt-engine/setup/ovirt-engine-setup-20161118191609-oxmvpo.log
@@ -454,8 +455,8 @@ Checking for oVirt-Engine status at ovirtengine.supcom...
 <p>Caso a vm ovirtengine não inicie, restart os serviços</p>
 
 <pre><code>[root@node1 ~]# systemctl restart ovirt-ha-agent &amp;&amp; systemctl restart ovirt-ha-broker &amp;&amp; systemctl restart vdsmd
+[root@node1 ~]# hosted-engine --vm-start
 [root@node1 ~]# hosted-engine --vm-status
-
 
 --== Host 1 status ==--
 
