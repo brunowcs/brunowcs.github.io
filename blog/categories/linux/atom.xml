@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-22T18:39:02-02:00</updated>
+  <updated>2016-11-22T19:17:25-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -571,7 +571,7 @@ exitMessage = Failed to acquire lock: No space left on device
 ..........
 [root@node1 ~]# hosted-engine --vm-poweroff
 [root@node1 ~]# sanlock direct init -s hosted-engine:0:/rhev/data-center/mnt/&lt;INTERNAL HE SD&gt;/&lt;SDUUID&gt;/ha_agent/hosted-engine.lockspace:0
-[root@node1 ~]# systemctl restart ovirt-ha-agent &amp;&amp; systemctl restart ovirt-ha-broker &amp;&amp; systemctl restart vdsmd
+[root@node1 ~]# systemctl restart ovirt-ha-agent &amp;&amp; systemctl restart ovirt-ha-broker &amp;&amp; systemctl restart vdsmd &amp;&amp; systemctl restart supervdsmd 
 [root@node1 ~]# hosted-engine --vm-start
 </code></pre>
 

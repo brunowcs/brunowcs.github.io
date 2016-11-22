@@ -689,7 +689,7 @@ exitMessage = Failed to acquire lock: No space left on device
 ..........
 [root@node1 ~]# hosted-engine --vm-poweroff
 [root@node1 ~]# sanlock direct init -s hosted-engine:0:/rhev/data-center/mnt/&lt;INTERNAL HE SD&gt;/&lt;SDUUID&gt;/ha_agent/hosted-engine.lockspace:0
-[root@node1 ~]# systemctl restart ovirt-ha-agent &amp;&amp; systemctl restart ovirt-ha-broker &amp;&amp; systemctl restart vdsmd
+[root@node1 ~]# systemctl restart ovirt-ha-agent &amp;&amp; systemctl restart ovirt-ha-broker &amp;&amp; systemctl restart vdsmd &amp;&amp; systemctl restart supervdsmd 
 [root@node1 ~]# hosted-engine --vm-start
 </code></pre>
 
