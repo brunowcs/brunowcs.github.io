@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-21T15:50:32-02:00</updated>
+  <updated>2016-11-22T18:39:02-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -569,7 +569,7 @@ INFO: CentOS-7-x86_64-Minimal-1511.iso uploaded successfully
 exitMessage = Failed to acquire lock: No space left on device
 ..........
 ..........
-
+[root@node1 ~]# hosted-engine --vm-poweroff
 [root@node1 ~]# sanlock direct init -s hosted-engine:0:/rhev/data-center/mnt/&lt;INTERNAL HE SD&gt;/&lt;SDUUID&gt;/ha_agent/hosted-engine.lockspace:0
 [root@node1 ~]# systemctl restart ovirt-ha-agent &amp;&amp; systemctl restart ovirt-ha-broker &amp;&amp; systemctl restart vdsmd
 [root@node1 ~]# hosted-engine --vm-start
@@ -601,6 +601,8 @@ exitMessage = Failed to acquire lock: No space left on device
 
 <pre><code># rsync -vrlPtz --append -e 'ssh -p 2222' login@host:/tmp/web.xva /tmp/web.xva
 </code></pre>
+
+<p>Dica SSH Com Tunnel: ssh -L 2222:hostlocal:2222 root@hostremoto</p>
 
 <hr />
 

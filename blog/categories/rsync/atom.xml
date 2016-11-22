@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rsync | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/rsync/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-21T15:50:32-02:00</updated>
+  <updated>2016-11-22T18:39:02-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -33,6 +33,8 @@
 
 <pre><code># rsync -vrlPtz --append -e 'ssh -p 2222' login@host:/tmp/web.xva /tmp/web.xva
 </code></pre>
+
+<p>Dica SSH Com Tunnel: ssh -L 2222:hostlocal:2222 root@hostremoto</p>
 
 <hr />
 
