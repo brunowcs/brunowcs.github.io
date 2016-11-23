@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://brunocarvalho.net/blog/2016/11/23/ebook-sobre-computacao-em-nuvem/</loc>
+<lastmod>2016-11-23T13:42:11-02:00</lastmod>
+</url>
+<url>
 <loc>http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs/</loc>
 <lastmod>2016-11-21T12:07:53-02:00</lastmod>
 </url>
@@ -85,6 +89,15 @@
 </url>
 <url>
 <loc>http://brunocarvalho.net/blog/categories/virtualizacao/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/nuvem/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/cloud/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/ebook/</loc>
 </url>
 <url>
 <loc>http://brunocarvalho.net/google60f3e9080d9a5555.html</loc>

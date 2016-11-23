@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nuvem | brunocarvalho.net]]></title>
+  <link href="http://brunocarvalho.net/blog/categories/nuvem/atom.xml" rel="self"/>
+  <link href="http://brunocarvalho.net/"/>
+  <updated>2016-11-23T13:52:20-02:00</updated>
+  <id>http://brunocarvalho.net/</id>
+  <author>
+    <name><![CDATA[Bruno Carvalho]]></name>
+    <email><![CDATA[brunowcs@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ebook sobre Computação em Nuvem]]></title>
+    <link href="http://brunocarvalho.net/blog/2016/11/23/ebook-sobre-computacao-em-nuvem/"/>
+    <updated>2016-11-23T13:42:11-02:00</updated>
+    <id>http://brunocarvalho.net/blog/2016/11/23/ebook-sobre-computacao-em-nuvem</id>
+    <content type="html"><![CDATA[<p>Olá pessoal, estou distribuindo esse Ebook gratuito produzido pela Opus sobre Computação em Nuvem que achei muito bacana, espero que ajudem a entender um pouco mais sobre o universo Cloud Computing.</p>
+
+<p>Abs</p>
+
+<p><img src="/images/ebook/ebookcloud.png" alt="" /></p>
+
+<p><a href="http://blog.opus-software.com.br/ebook/#/ebook-download?umsde5r=3211FAF9085532094869D82F0C9B72B8">Link para Download&hellip;</a></p>
+]]></content>
+  </entry>
+  
+</feed>
