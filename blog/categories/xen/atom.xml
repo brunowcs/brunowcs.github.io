@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xen | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/xen/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-25T11:42:37-02:00</updated>
+  <updated>2016-11-25T11:43:46-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -118,10 +118,13 @@ Successful convert
 
 <p><strong>Referências:</strong></p>
 
-<p><a href="https://gfnork.de/blog/how-to-import-qcow2-images-to-ovirt/">https://gfnork.de/blog/how-to-import-qcow2-images-to-ovirt/</a>
-<a href="https://rwmj.wordpress.com/2015/09/18/importing-kvm-guests-to-ovirt-or-rhev/">https://rwmj.wordpress.com/2015/09/18/importing-kvm-guests-to-ovirt-or-rhev/</a>
-<a href="http://blog.zwiegnet.com/linux-server/export-vm-command-line-xenserver-6/">http://blog.zwiegnet.com/linux-server/export-vm-command-line-xenserver-6/</a>
-<a href="https://wiki.debian.org/HowToMigrateBackAndForthBetweenXenAndKvm">https://wiki.debian.org/HowToMigrateBackAndForthBetweenXenAndKvm</a></p>
+<p><a href="https://gfnork.de/blog/how-to-import-qcow2-images-to-ovirt/">https://gfnork.de/blog/how-to-import-qcow2-images-to-ovirt/</a></p>
+
+<p><a href="https://rwmj.wordpress.com/2015/09/18/importing-kvm-guests-to-ovirt-or-rhev/">https://rwmj.wordpress.com/2015/09/18/importing-kvm-guests-to-ovirt-or-rhev/</a></p>
+
+<p><a href="http://blog.zwiegnet.com/linux-server/export-vm-command-line-xenserver-6/">http://blog.zwiegnet.com/linux-server/export-vm-command-line-xenserver-6/</a></p>
+
+<p><a href="https://wiki.debian.org/HowToMigrateBackAndForthBetweenXenAndKvm">https://wiki.debian.org/HowToMigrateBackAndForthBetweenXenAndKvm</a></p>
 ]]></content>
   </entry>
   
