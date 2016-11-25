@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-25T11:54:49-02:00</updated>
+  <updated>2016-11-25T11:56:33-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -66,7 +66,7 @@ Successful convert
 
 <p>Crie um novo Dominio &ldquo;Export&rdquo; conforme a imgaem abaixo.</p>
 
-<p><img src="http://brunocarvalho.net/images/ovirt/exportstorage.jpg" alt="" /></p>
+<p><img src="http://brunocarvalho.net/images/ovirt/exportstorage.JPG" alt="" /></p>
 
 <p>Agora vamos importa a vm.img para o Domain Export que criamos.</p>
 
@@ -86,11 +86,11 @@ Successful convert
 
 <p>Sistema -> Data Centers -> Default -> Cluster -> Default - > MVS -> Importar”:</p>
 
-<p><img src="http://brunocarvalho.net/images/ovirt/ovirtimport.jpg" alt="" /></p>
+<p><img src="http://brunocarvalho.net/images/ovirt/ovirtimport.JPG" alt="" /></p>
 
 <p>Selecione o Export Domain criado, click em Carregar, Seleciona a VM, click na seta central, depois Próximo.</p>
 
-<p><img src="http://brunocarvalho.net/images/ovirt/ovirtimport2.jpg" alt="" /></p>
+<p><img src="http://brunocarvalho.net/images/ovirt/ovirtimport2.JPG" alt="" /></p>
 
 <p>Click OK e aguarde a VM ser importada.</p>
 
