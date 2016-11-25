@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-25T11:43:46-02:00</updated>
+  <updated>2016-11-25T11:49:16-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -18,7 +18,7 @@
     <link href="http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm/"/>
     <updated>2016-11-25T11:24:55-02:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm</id>
-    <content type="html"><![CDATA[<p><img src="images/ovirt/migracao.png" alt="" /></p>
+    <content type="html"><![CDATA[<p><img src="http://brunocarvalho.net/images/ovirt/migracao.png" alt="" /></p>
 
 <p>Depois de 4 anos utilizando XenServer, chegou a hora de dá um até breve. Atualmente estou migrando alguns ambientes XenServer para Ovirt/KVM pela sua constante evolução e integração com o projeto Openstack que vem crescendo muito no cenário opensource.</p>
 
@@ -27,7 +27,7 @@
 <pre><code># xe vm-export vm=&lt;Name of VM&gt; filename=&lt;Name of file ending in ".xva"&gt;
 </code></pre>
 
-<p>Será gerando uma imagem com extensão .xva, jogue sua imagem exportada para seu node ovirt.</p>
+<p>Será gerado uma imagem com extensão .xva, jogue sua imagem exportada para seu node ovirt.</p>
 
 <p>Desempacotando VM.</p>
 
@@ -64,9 +64,9 @@ Successful convert
 
 <p><strong>Sistema -> Data Centers -> Default -> Storage -> Novo Domain</strong></p>
 
-<p>Crie um novo Dominio &ldquo;Export&rdquo; conforme a iamgem abaixo.</p>
+<p>Crie um novo Dominio &ldquo;Export&rdquo; conforme a imgaem abaixo.</p>
 
-<p><img src="images/ovirt/exportstorage.jpg" alt="" /></p>
+<p><img src="http://brunocarvalho.net/images/ovirt/exportstorage.jpg" alt="" /></p>
 
 <p>Agora vamos importa a vm.img para o Domain Export que criamos.</p>
 
@@ -86,7 +86,7 @@ Successful convert
 
 <p>Sistema -> Data Centers -> Default -> Cluster -> Default - > MVS -> Importar”:</p>
 
-<p><img src="images/ovirt/ovirtimport.jpg" alt="" /></p>
+<p><img src="http://brunocarvalho.net/images/ovirt/ovirtimport.jpg" alt="" /></p>
 
 <p>Selecione o Export Domain criado, click em Carregar, Seleciona a VM, click na seta central, depois Próximo.</p>
 
