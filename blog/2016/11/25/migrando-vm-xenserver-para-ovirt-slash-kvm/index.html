@@ -140,7 +140,7 @@
 
 <p>Depois de 4 anos utilizando XenServer, chegou a hora de dá um até breve. Atualmente estou migrando alguns ambientes XenServer para Ovirt/KVM pela sua constante evolução e integração com o projeto Openstack que vem crescendo muito no cenário opensource.</p>
 
-<p>Primeiro passo será exporta sua VM pelo XenCenter ou pelo seu node console comforme o comando abaixo.</p>
+<p>Primeiro passo será exporta sua VM pelo XenCenter ou pelo seu node console conforme o comando abaixo.</p>
 
 <pre><code># xe vm-export vm=&lt;Name of VM&gt; filename=&lt;Name of file ending in ".xva"&gt;
 </code></pre>
@@ -182,9 +182,11 @@ Successful convert
 
 <p><strong>Sistema -> Data Centers -> Default -> Storage -> Novo Domain</strong></p>
 
-<p>Crie um novo Dominio &ldquo;Export&rdquo; conforme a imgaem abaixo.</p>
+<p>Crie um novo Dominio &ldquo;Export&rdquo; conforme a imagem abaixo.</p>
 
 <p><img src="/images/ovirt/exportstorage.JPG" alt="" /></p>
+
+<p>Baixe a ultima versão do projeto &ldquo;import-to-ovirt.pl&rdquo; no seguinte link <a href="http://git.annexia.org/?p=import-to-ovirt.git">http://git.annexia.org/?p=import-to-ovirt.git</a></p>
 
 <p>Agora vamos importa a vm.img para o Domain Export que criamos.</p>
 
