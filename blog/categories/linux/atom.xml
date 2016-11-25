@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-25T11:49:16-02:00</updated>
+  <updated>2016-11-25T11:51:56-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -90,7 +90,7 @@ Successful convert
 
 <p>Selecione o Export Domain criado, click em Carregar, Seleciona a VM, click na seta central, depois Próximo.</p>
 
-<p><img src="images/ovirt/ovirtimport2.jpg" alt="" /></p>
+<p><img src="/images/ovirt/ovirtimport2.jpg" alt="" /></p>
 
 <p>Click OK e aguarde a VM ser importada.</p>
 
