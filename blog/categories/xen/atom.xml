@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: xen | brunocarvalho.net]]></title>
+  <link href="http://brunocarvalho.net/blog/categories/xen/atom.xml" rel="self"/>
+  <link href="http://brunocarvalho.net/"/>
+  <updated>2016-11-25T11:26:27-02:00</updated>
+  <id>http://brunocarvalho.net/</id>
+  <author>
+    <name><![CDATA[Bruno Carvalho]]></name>
+    <email><![CDATA[brunowcs@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Migrando VM XenServer para Ovirt/KVM]]></title>
+    <link href="http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm/"/>
+    <updated>2016-11-25T11:24:55-02:00</updated>
+    <id>http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm</id>
+    <content type="html"><![CDATA[<p><img src="images/ovirt/migracao.png" alt="" /></p>
+
+<p>Depois de 4 anos utilizando XenServer, chegou a hora de dá um até breve. Atualmente estou migrando todo meu ambiente para Ovirt/KVM pela sua constante evolução e integração com o projeto Openstack que vem crescendo muito no cenário opensource.</p>
+
+<p>Primeiro passo será exporta sua VM pelo XenCenter ou pelo seu node console comforme o comando abaixo.</p>
+
+<pre><code># xe vm-export vm=&lt;Name of VM&gt; filename=&lt;Name of file ending in ".xva"&gt;
+</code></pre>
+
+<p>Será gerando uma imagem com extensão .xva, jogue sua imagem exportada para seu node ovirt.</p>
+
+<p>Desempacotando VM.</p>
+
+<pre><code># tar -xvf vm.xva
+</code></pre>
+
+<p>No meu ambiente foi criado um diretório chamado Ref:10/</p>
+
+<p>Baixe o script de migração (<a href="https://github.com/hswayne77/xenserverz_to_xen">https://github.com/hswayne77/xenserverz_to_xen</a>)</p>
+
+<pre><code># wget wget https://raw.githubusercontent.com/hswayne77/xenserver_to_xen/master/xenmigrate_new.py
+</code></pre>
+
+<p>Execute os comandos para iniciar a migração da imagem.</p>
+
+<pre><code># python xenmigrate.py -c Ref\:10/ vm.img
+
+enmigrate 0.7.4 — 2011.09.13
+(c)2011 Jolokia Networks and Mark Pace — jolokianetworks.com
+
+convert ref dir : ./Ref:10/
+to raw file : vm.img
+last file : 20484
+disk image size : 20 GB
+
+RW notification every: 1.0GB
+Converting: 1.0GBrw 2.0GBrw 3.0GBrw 4.0GBrw 5.0GBrw 6.0GBrw 7.0GBrw 8.0GBrw 9.0GBrw 10.0GBrw 11.0GBrw 12.0GBrw 13.0GBrw 14.0GBrw 15.0GBrw 16.0GBrw 17.0GBrw 18.0GBrw 19.0GBrw 20.0GBrw
+Successful convert
+</code></pre>
+
+<p>Criando Domain Storage Export no Ovirt</p>
+
+<p>Acesse no browse seu Ovirt Engine vá para:</p>
+
+<p><strong>Sistema -> Data Centers -> Default -> Storage -> Novo Domain</strong></p>
+
+<p>Crie um novo Dominio &ldquo;Export&rdquo; conforme a iamgem abaixo.</p>
+
+<p><img src="images/ovirt/exportstorage.jpg" alt="" /></p>
+
+<p>Agora vamos importa a vm.img para o Domain Export que criamos.</p>
+
+<pre><code># yum install perl-XML-Writer perl-Sys-Guestfs
+# export LIBGUESTFS_BACKEND=direct
+# ./import-to-ovirt.pl vm.img node1.supcom:/storage/export
+</code></pre>
+
+<blockquote><p>Pode ser utilizado com imagem .qcow2</p></blockquote>
+
+<p>Verifique se tudo ocorreu bem com a criação do OVF</p>
+
+<pre><code>[root@node1 storage]# ls /storage/export/ad5e39a2-24d4-4a51-ac74-cfdf843c5f94/master/vms/88397ea1-196e-4aeb-8a57-29cff914caab/88397ea1-196e-4aeb-8a57-29cff914caab.ovf
+</code></pre>
+
+<p>Disponbilizando a VM no Ovirt Engine</p>
+
+<p>Sistema -> Data Centers -> Default -> Cluster -> Default - > MVS -> Importar”:</p>
+
+<p><img src="images/ovirt/ovirtimport.jpg" alt="" /></p>
+
+<p>Selecione o Export Domain criado, click em Carregar, Seleciona a VM, click na seta central, depois Próximo.</p>
+
+<p><img src="images/ovirt/ovirtimport2.jpg" alt="" /></p>
+
+<p>Click OK e aguarde a VM ser importada.</p>
+
+<p><strong>Após a importação será necessário realizar algumas alterações no momento da inicialização da VM:</strong></p>
+
+<ul>
+<li>Pressione &ldquo;e&rdquo; na inicialização do grub remova o &ldquo;console=hvc0&rdquo; e digite CTRL + X</li>
+</ul>
+
+
+<p><strong>Após a inicialização</strong></p>
+
+<ul>
+<li><p>Remova o &ldquo;console=hvc0&rdquo; /etc/default/grub e execute:</p>
+
+<pre><code>  # update-grub
+</code></pre></li>
+<li><p>Verifique se seu fstab está correto e não tenha entradas xvda</p></li>
+<li><p>Verifique sua network os uuid e MAC serão diferentes.</p></li>
+<li><p>Edite o /etc/inittab comente a linha “co:2345:respawn:/sbin/getty &hellip; ”:</p></li>
+</ul>
+
+
+<blockquote><p>A vm migrada estava com Debian 7 e a migração foi executada com sucesso seguindo os procedimentos acima</p></blockquote>
+
+<p><strong>Referências:</strong></p>
+
+<p><a href="https://gfnork.de/blog/how-to-import-qcow2-images-to-ovirt/">https://gfnork.de/blog/how-to-import-qcow2-images-to-ovirt/</a>
+<a href="https://rwmj.wordpress.com/2015/09/18/importing-kvm-guests-to-ovirt-or-rhev/">https://rwmj.wordpress.com/2015/09/18/importing-kvm-guests-to-ovirt-or-rhev/</a>
+<a href="http://blog.zwiegnet.com/linux-server/export-vm-command-line-xenserver-6/">http://blog.zwiegnet.com/linux-server/export-vm-command-line-xenserver-6/</a>
+<a href="https://wiki.debian.org/HowToMigrateBackAndForthBetweenXenAndKvm">https://wiki.debian.org/HowToMigrateBackAndForthBetweenXenAndKvm</a></p>
+]]></content>
+  </entry>
+  
+</feed>

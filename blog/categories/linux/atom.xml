@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-24T13:48:52-02:00</updated>
+  <updated>2016-11-25T11:26:27-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -12,6 +12,118 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Migrando VM XenServer para Ovirt/KVM]]></title>
+    <link href="http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm/"/>
+    <updated>2016-11-25T11:24:55-02:00</updated>
+    <id>http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm</id>
+    <content type="html"><![CDATA[<p><img src="images/ovirt/migracao.png" alt="" /></p>
+
+<p>Depois de 4 anos utilizando XenServer, chegou a hora de dá um até breve. Atualmente estou migrando todo meu ambiente para Ovirt/KVM pela sua constante evolução e integração com o projeto Openstack que vem crescendo muito no cenário opensource.</p>
+
+<p>Primeiro passo será exporta sua VM pelo XenCenter ou pelo seu node console comforme o comando abaixo.</p>
+
+<pre><code># xe vm-export vm=&lt;Name of VM&gt; filename=&lt;Name of file ending in ".xva"&gt;
+</code></pre>
+
+<p>Será gerando uma imagem com extensão .xva, jogue sua imagem exportada para seu node ovirt.</p>
+
+<p>Desempacotando VM.</p>
+
+<pre><code># tar -xvf vm.xva
+</code></pre>
+
+<p>No meu ambiente foi criado um diretório chamado Ref:10/</p>
+
+<p>Baixe o script de migração (<a href="https://github.com/hswayne77/xenserverz_to_xen">https://github.com/hswayne77/xenserverz_to_xen</a>)</p>
+
+<pre><code># wget wget https://raw.githubusercontent.com/hswayne77/xenserver_to_xen/master/xenmigrate_new.py
+</code></pre>
+
+<p>Execute os comandos para iniciar a migração da imagem.</p>
+
+<pre><code># python xenmigrate.py -c Ref\:10/ vm.img
+
+enmigrate 0.7.4 — 2011.09.13
+(c)2011 Jolokia Networks and Mark Pace — jolokianetworks.com
+
+convert ref dir : ./Ref:10/
+to raw file : vm.img
+last file : 20484
+disk image size : 20 GB
+
+RW notification every: 1.0GB
+Converting: 1.0GBrw 2.0GBrw 3.0GBrw 4.0GBrw 5.0GBrw 6.0GBrw 7.0GBrw 8.0GBrw 9.0GBrw 10.0GBrw 11.0GBrw 12.0GBrw 13.0GBrw 14.0GBrw 15.0GBrw 16.0GBrw 17.0GBrw 18.0GBrw 19.0GBrw 20.0GBrw
+Successful convert
+</code></pre>
+
+<p>Criando Domain Storage Export no Ovirt</p>
+
+<p>Acesse no browse seu Ovirt Engine vá para:</p>
+
+<p><strong>Sistema -> Data Centers -> Default -> Storage -> Novo Domain</strong></p>
+
+<p>Crie um novo Dominio &ldquo;Export&rdquo; conforme a iamgem abaixo.</p>
+
+<p><img src="images/ovirt/exportstorage.jpg" alt="" /></p>
+
+<p>Agora vamos importa a vm.img para o Domain Export que criamos.</p>
+
+<pre><code># yum install perl-XML-Writer perl-Sys-Guestfs
+# export LIBGUESTFS_BACKEND=direct
+# ./import-to-ovirt.pl vm.img node1.supcom:/storage/export
+</code></pre>
+
+<blockquote><p>Pode ser utilizado com imagem .qcow2</p></blockquote>
+
+<p>Verifique se tudo ocorreu bem com a criação do OVF</p>
+
+<pre><code>[root@node1 storage]# ls /storage/export/ad5e39a2-24d4-4a51-ac74-cfdf843c5f94/master/vms/88397ea1-196e-4aeb-8a57-29cff914caab/88397ea1-196e-4aeb-8a57-29cff914caab.ovf
+</code></pre>
+
+<p>Disponbilizando a VM no Ovirt Engine</p>
+
+<p>Sistema -> Data Centers -> Default -> Cluster -> Default - > MVS -> Importar”:</p>
+
+<p><img src="images/ovirt/ovirtimport.jpg" alt="" /></p>
+
+<p>Selecione o Export Domain criado, click em Carregar, Seleciona a VM, click na seta central, depois Próximo.</p>
+
+<p><img src="images/ovirt/ovirtimport2.jpg" alt="" /></p>
+
+<p>Click OK e aguarde a VM ser importada.</p>
+
+<p><strong>Após a importação será necessário realizar algumas alterações no momento da inicialização da VM:</strong></p>
+
+<ul>
+<li>Pressione &ldquo;e&rdquo; na inicialização do grub remova o &ldquo;console=hvc0&rdquo; e digite CTRL + X</li>
+</ul>
+
+
+<p><strong>Após a inicialização</strong></p>
+
+<ul>
+<li><p>Remova o &ldquo;console=hvc0&rdquo; /etc/default/grub e execute:</p>
+
+<pre><code>  # update-grub
+</code></pre></li>
+<li><p>Verifique se seu fstab está correto e não tenha entradas xvda</p></li>
+<li><p>Verifique sua network os uuid e MAC serão diferentes.</p></li>
+<li><p>Edite o /etc/inittab comente a linha “co:2345:respawn:/sbin/getty &hellip; ”:</p></li>
+</ul>
+
+
+<blockquote><p>A vm migrada estava com Debian 7 e a migração foi executada com sucesso seguindo os procedimentos acima</p></blockquote>
+
+<p><strong>Referências:</strong></p>
+
+<p><a href="https://gfnork.de/blog/how-to-import-qcow2-images-to-ovirt/">https://gfnork.de/blog/how-to-import-qcow2-images-to-ovirt/</a>
+<a href="https://rwmj.wordpress.com/2015/09/18/importing-kvm-guests-to-ovirt-or-rhev/">https://rwmj.wordpress.com/2015/09/18/importing-kvm-guests-to-ovirt-or-rhev/</a>
+<a href="http://blog.zwiegnet.com/linux-server/export-vm-command-line-xenserver-6/">http://blog.zwiegnet.com/linux-server/export-vm-command-line-xenserver-6/</a>
+<a href="https://wiki.debian.org/HowToMigrateBackAndForthBetweenXenAndKvm">https://wiki.debian.org/HowToMigrateBackAndForthBetweenXenAndKvm</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Instalando Ovirt 4.0 Hosted Engine utilizando NFS]]></title>
@@ -894,136 +1006,6 @@ Server Response: Duration: 882ms
 <ul>
 <li><p><a href="https://access.redhat.com/blogs/1169563/posts/2464761">https://access.redhat.com/blogs/1169563/posts/2464761</a></p></li>
 <li><p><a href="https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/installation-guide">https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/installation-guide</a></p></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Redimensionar disco no VMware com LVM utilizando RHEL/CentOS - On the Fly]]></title>
-    <link href="http://brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly/"/>
-    <updated>2016-06-22T09:30:26-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2016/06/22/redimensionar-disco-no-vmware-com-lvm-utilizando-rhel-slash-centos-on-the-fly</id>
-    <content type="html"><![CDATA[<p>Uma das demandas que executo diariamente está relacionado a expansão de disco em máquinas virtuais. Muitas vezes a máquina não pode ser reiniciada e todo procedimento precisa ser executado em produção.</p>
-
-<blockquote><p>Sempre execute um snapshot da VM antes de executar os procedimentos abaixo.</p></blockquote>
-
-<p>Primeiro passo temos que aumentando nosso disco, no Vmware.</p>
-
-<p>Selecione a VM no seu vSphere depois, vá em “Edit Settings”, selecione o “Virtual Disk” que deseje aumentar. No meu caso aumentarei 20G.</p>
-
-<p>Verificando as partições do sistema:</p>
-
-<pre><code># df -h
-
-FilesystemSize  Used Avail Use% Mounted on
-/dev/mapper/vg_web01-lv_root 45G  1.5G   42G   4% /
-tmpfs 1.9G 0  1.9G   0% /dev/shm
-/dev/sda1 477M   78M  374M  18% /boot
-</code></pre>
-
-<p>Partição que sera expandida (<strong>/dev/mapper/vg_web01-lv_root</strong>)</p>
-
-<p>Todo procedimento será realizado com a VM ligada e a partição montada.</p>
-
-<p>Vamos agora realizar um procedimento para que o seu Linux reconheça o novo espaço adicionado sem precisar do reboot.</p>
-
-<pre><code># ls /sys/class/scsi_device/
-0:0:0:0    2:0:0:0 
-# echo 1 &gt; /sys/class/scsi_device/0\:0\:0\:0/device/rescan
-</code></pre>
-
-<p>No meu caso tenho duas controladoras e meu disco se encontra na primeira. Pronto agora quando for executar o cfdisk ou fdisk você já consegue visualizar o espaço adicionado no Vmware, no meu caso foi criado o /dev/sda3.</p>
-
-<blockquote><p>Caso seja um novo Virutal Disk, execute os comando abaixo para identificar o novo device no seu ambiente sem precisar realizar o reboot.</p>
-
-<pre><code>Buscando host bus number
-# grep mpt /sys/class/scsi_host/host?/proc_name
-/sys/class/scsi_host/host0/proc_name:mptspi
-
-Execute o comando abaixo no host encontrado
-# echo "- - -" &gt; /sys/class/scsi_host/host0/scan
-</code></pre></blockquote>
-
-<p>Vamos utilizar o cfdisk para criar uma nova partição com o espaço disponível do tipo LVM(8e)</p>
-
-<pre><code># cfdisk /dev/sda3 (a utilização do cfdisk não será abordada passo-a-passo)
-</code></pre>
-
-<p><img src="/images/cfdisk.JPG" alt="cfdisk" /></p>
-
-<p>Após a criação da nova partição, execute o comando abaixo</p>
-
-<pre><code># partprobe /dev/sda (RHEL7)
-# partx -a /dev/sda (RHEL6)
-</code></pre>
-
-<p>Podemos visualizar com o comando abaixo a nova partição reconhecida pelo sistema chamada <strong>sda3</strong></p>
-
-<pre><code> # cat /proc/partitions
-
-major minor  #blocks  name
-
-   80   73400320 sda
-   81     512000 sda1
-   82   51915776 sda2
-   83   20971520 sda3
- 2530   47849472 dm-0
- 25314063232 dm-1
-</code></pre>
-
-<p>Após a nova partição ser reconhecida vamos adiciona ao LVM.</p>
-
-<pre><code># pvcreate /dev/sda3    
-
-Physical volume "/dev/sda3" successfully created 
-</code></pre>
-
-<p>Expandindo grupo vg_web01</p>
-
-<pre><code># vgextend vg_web01 /dev/sda3
-
-Volume group "vg_web01" successfully extended
-</code></pre>
-
-<p>Expandindo Partição vg_web01-lv_root</p>
-
-<pre><code># lvextend -L+20GB /dev/mapper/vg_web01-lv_root
-
-  Size of logical volume vg_web01/lv_root changed from 45.63 GiB (11682 extents) to 65.63 GiB (16546 extents).
-  Logical volume lv_root successfully resized.
-</code></pre>
-
-<p>Redimensionar sistema de arquivo ext4</p>
-
-<pre><code># resize2fs /dev/vg_web01/lv_root
-
-resize2fs 1.41.12 (17-May-2010)
-Filesystem at /dev/vg_web01/lv_root is mounted on /; on-line resizing required
-old desc_blocks = 3, new_desc_blocks = 5
-Performing an on-line resize of /dev/vg_web01/lv_root to 16943104 (4k) blocks.
-The filesystem on /dev/vg_web01/lv_root is now 16943104 blocks long.
-</code></pre>
-
-<p>Podemos agora verificar que a partição foi redimensionada para 65G sem precisar reiniciar ou muito menos desmontar.</p>
-
-<pre><code># df -h
-FilesystemSize  Used Avail Use% Mounted on
-/dev/mapper/vg_web01-lv_root 65G  1.5G   59G   3% /
-tmpfs 1.9G 0  1.9G   0% /dev/shm
-/dev/sda1 477M   78M  374M  18% /boot
-</code></pre>
-
-<p>Caso sua partição seja xfs basta executar o seguinte comando</p>
-
-<pre><code># xfs_growfs /dev/vg_web01/lv_root
-</code></pre>
-
-<h5>Referências:</h5>
-
-<ul>
-<li><p><a href="http://tldp.org/HOWTO/LVM-HOWTO/index.html">http://tldp.org/HOWTO/LVM-HOWTO/index.html</a></p></li>
-<li><p><a href="https://blogs.it.ox.ac.uk/oxcloud/2013/03/25/rescanning-your-scsi-bus-to-see-new-storage/">https://blogs.it.ox.ac.uk/oxcloud/2013/03/25/rescanning-your-scsi-bus-to-see-new-storage/</a></p></li>
 </ul>
 
 ]]></content>
