@@ -5,11 +5,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Migrando VM XenServer para Ovirt/KVM - brunocarvalho.net</title>
+	<title>Migrando VM XenServer para Ovirt/RHEV/KVM - brunocarvalho.net</title>
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="Migrando VM XenServer Para Ovirt/KVM Depois de 4 anos utilizando XenServer, chegou a hora de dá um até breve. Atualmente estou migrando alguns &hellip;">
+	<meta name="description" content="Migrando VM XenServer Para Ovirt/RHEV/KVM Depois de 4 anos utilizando XenServer, chegou a hora de dá um até breve. Atualmente estou migrando alguns &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -135,7 +135,7 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Migrando VM XenServer Para Ovirt/KVM</h1>
+	<h1 class="title" itemprop="name">Migrando VM XenServer Para Ovirt/RHEV/KVM</h1>
 	<div class="entry-content" itemprop="articleBody"><p><img src="/images/ovirt/migracao.png" alt="" /></p>
 
 <p>Depois de 4 anos utilizando XenServer, chegou a hora de dá um até breve. Atualmente estou migrando alguns ambientes XenServer para Ovirt/KVM pela sua constante evolução e integração com o projeto Openstack que vem crescendo muito no cenário opensource.</p>
@@ -186,12 +186,16 @@ Successful convert
 
 <p><img src="/images/ovirt/exportstorage.JPG" alt="" /></p>
 
-<p>Baixe a ultima versão do projeto &ldquo;import-to-ovirt.pl&rdquo; no seguinte link <a href="http://git.annexia.org/?p=import-to-ovirt.git">http://git.annexia.org/?p=import-to-ovirt.git</a></p>
+<p>Baixe a última versão do projeto &ldquo;import-to-ovirt.pl&rdquo; no seguinte link <a href="http://git.annexia.org/?p=import-to-ovirt.git">http://git.annexia.org/?p=import-to-ovirt.git</a></p>
+
+<p>Instale as dependências</p>
+
+<pre><code># yum install perl-XML-Writer perl-Sys-Guestfs
+</code></pre>
 
 <p>Agora vamos importa a vm.img para o Domain Export que criamos.</p>
 
-<pre><code># yum install perl-XML-Writer perl-Sys-Guestfs
-# export LIBGUESTFS_BACKEND=direct
+<pre><code># export LIBGUESTFS_BACKEND=direct
 # ./import-to-ovirt.pl vm.img node1.supcom:/storage/export
 </code></pre>
 

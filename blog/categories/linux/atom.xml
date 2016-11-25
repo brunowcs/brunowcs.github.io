@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2016-11-25T12:05:02-02:00</updated>
+  <updated>2016-11-25T12:10:03-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Migrando VM XenServer para Ovirt/KVM]]></title>
+    <title type="html"><![CDATA[Migrando VM XenServer para Ovirt/RHEV/KVM]]></title>
     <link href="http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm/"/>
     <updated>2016-11-25T11:24:55-02:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm</id>
@@ -68,12 +68,16 @@ Successful convert
 
 <p><img src="/images/ovirt/exportstorage.JPG" alt="" /></p>
 
-<p>Baixe a ultima versão do projeto &ldquo;import-to-ovirt.pl&rdquo; no seguinte link <a href="http://git.annexia.org/?p=import-to-ovirt.git">http://git.annexia.org/?p=import-to-ovirt.git</a></p>
+<p>Baixe a última versão do projeto &ldquo;import-to-ovirt.pl&rdquo; no seguinte link <a href="http://git.annexia.org/?p=import-to-ovirt.git">http://git.annexia.org/?p=import-to-ovirt.git</a></p>
+
+<p>Instale as dependências</p>
+
+<pre><code># yum install perl-XML-Writer perl-Sys-Guestfs
+</code></pre>
 
 <p>Agora vamos importa a vm.img para o Domain Export que criamos.</p>
 
-<pre><code># yum install perl-XML-Writer perl-Sys-Guestfs
-# export LIBGUESTFS_BACKEND=direct
+<pre><code># export LIBGUESTFS_BACKEND=direct
 # ./import-to-ovirt.pl vm.img node1.supcom:/storage/export
 </code></pre>
 
