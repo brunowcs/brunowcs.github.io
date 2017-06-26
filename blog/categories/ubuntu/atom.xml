@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-06-26T18:40:02-03:00</updated>
+  <updated>2017-06-26T18:56:47-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -48,7 +48,7 @@
 
 <p><img src="/images/juju/juju2.png" alt="" /></p>
 
-<h3>Veja como e fácil instalar o JUJU</h3>
+<h3>Veja como e fácil instalar o Juju no Ubuntu Xenial</h3>
 
 <p>Para fins de teste vamos instalar o juju com o LXD, que no caso poderia ser uma nuvem ou um bare-metal</p>
 
@@ -67,7 +67,7 @@
 
 <p>LXD agora está basicamente configurado para funcionar com Juju.</p>
 
-<p>Instalando JUJU no Ubuntu:</p>
+<h3>Instalando JUJU:</h3>
 
 <pre><code>$ sudo add-apt-repository --update ppa:juju/stable
 $ sudo apt install juju
@@ -78,7 +78,7 @@ $ sudo apt install juju
 <pre><code># juju bootstrap localhost lxd-test 
 </code></pre>
 
-<p><strong>Isso pode demorar alguns minutos, pois o LXD deve baixar uma imagem do linux.</strong></p>
+<p>Isso pode demorar alguns minutos, pois o LXD deve baixar uma imagem do linux.</p>
 
 <p>Uma vez concluído o processo, veja se o controlador lxd-test foi criado com o comando abaixo:</p>
 
