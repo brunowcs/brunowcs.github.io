@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: juju, | brunocarvalho.net]]></title>
+  <link href="http://brunocarvalho.net/blog/categories/juju/atom.xml" rel="self"/>
+  <link href="http://brunocarvalho.net/"/>
+  <updated>2017-06-26T18:40:02-03:00</updated>
+  <id>http://brunocarvalho.net/</id>
+  <author>
+    <name><![CDATA[Bruno Carvalho]]></name>
+    <email><![CDATA[brunowcs@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Orquestração com Juju da Canonical]]></title>
+    <link href="http://brunocarvalho.net/blog/2017/06/26/orquestracao-com-juju-da-canonical/"/>
+    <updated>2017-06-26T18:14:34-03:00</updated>
+    <id>http://brunocarvalho.net/blog/2017/06/26/orquestracao-com-juju-da-canonical</id>
+    <content type="html"><![CDATA[<p><img src="/images/juju/juju1.png" alt="" /></p>
+
+<h3>O que é o JUJU?</h3>
+
+<p>Juju é uma ferramenta open source de modelagem de aplicações desenvolvida em Go pela Canonical a mesma empresa que desenvolve o Linux Ubuntu.</p>
+
+<p>Com Juju é possível  implementar, configurar, gerenciar, manter e dimensionar aplicações em nuvens públicas e privadas de uma forma rápida e eficiente bem como servidores físicos,  OpenStack e contêineres. O Juju pode ser usado tanto em linha de comando ou através de uma interface GUI</p>
+
+<h3>Como é feito a “Mágica”:</h3>
+
+<p>A partir dos charme é possível realizar a criação de todo uma infraestrutura, desde a criação da VM, instalação e configuração das aplicações, tanto na AWS, Google, Azure, AWS, OpenStack entre outras nuvem suportadas ou diretamente no Bare-Metal.</p>
+
+<h3>Mas que desgraça é esse Charme?</h3>
+
+<p>O charme define tudo o que você conhece de forma colaborativa sobre a implantação desse aplicativo específico. Tudo o que você precisa fazer é usar qualquer charme disponível (ou escrever o seu próprio), e a aplicação correspondente será implantada em segundos, em qualquer nuvem ou servidor físico ou máquina virtual.</p>
+
+<p>O Charme nada mais é do que um receita de instalação e configuração da sua aplicação para ser instalada em nuvem ou em um bare-metal.</p>
+
+<h3>Juju então é igual ao Chef, Puppet, Ansible e cia?</h3>
+
+<p>Não! O Juju orquestra e escala aplicações em nuvens, ele está uma camada acima dos gereciadores de configurações, mas podemos usar todos juntos perfeitamente.</p>
+
+<p>O puppet, Chef e Ansible são ótimas ferramentas para escrever arquivos de configuração. Por trabalha uma camada acima, o Juju concentra-se nas operações de longo prazo necessárias para manter esse software em execução ao longo do tempo, independentemente da máquina na qual ele está sendo executado. O charme do Juju para um aplicativo inclui (entre outras coisas) toda a lógica para escrever arquivos de configuração para essas aplicações - essa lógica em si pode ser escrita em qualquer linguagem ou ferramenta que o desenvolvedor do charme preferi.</p>
+
+<p>É comum que as pessoas comecem a criar um charme juntando Puppet ou Chef ou outros scripts que eles atualmente usam para automatizar a configuração do ambiente. Se o charme vai estar escrevendo e atualizando a configuração para o aplicativo, e já existem ferramentas para abstrair esse arquivo de configuração na sua linguagem preferido, então use isso no charme!</p>
+
+<p>Como podemos ver o Juju consegue reunir varias ferramentas de  automação, deixando você livre para criar seus charme com suas receitas e ferramentas favoritas, ainda melhor, dois charmes diferentes de diferentes equipes que usam ferramentas diferentes continuarão felizmente juntos para implantar uma solução.</p>
+
+<p><img src="/images/juju/juju2.png" alt="" /></p>
+
+<h3>Veja como e fácil instalar o JUJU</h3>
+
+<p>Para fins de teste vamos instalar o juju com o LXD, que no caso poderia ser uma nuvem ou um bare-metal</p>
+
+<pre><code>$ sudo apt install lxd zfsutils-linux
+</code></pre>
+
+<p>Para usar o LXD, seu usuário deve ser um membro do grupo lxd, verifique com o comando abaixo, provavelmente já vai está.</p>
+
+<pre><code>$ groups
+</code></pre>
+
+<p>Aceite todas respostas padrão na configurações iniciais do LXD, ou mude caso achar melhor.</p>
+
+<pre><code>$ sudo lxd init 
+</code></pre>
+
+<p>LXD agora está basicamente configurado para funcionar com Juju.</p>
+
+<p>Instalando JUJU no Ubuntu:</p>
+
+<pre><code>$ sudo add-apt-repository --update ppa:juju/stable
+$ sudo apt install juju
+</code></pre>
+
+<p>Tanto para LXD, BareMetal ou nuvem  será necessários a criação de um controle para gerenciar.</p>
+
+<pre><code># juju bootstrap localhost lxd-test 
+</code></pre>
+
+<p><strong>Isso pode demorar alguns minutos, pois o LXD deve baixar uma imagem do linux.</strong></p>
+
+<p>Uma vez concluído o processo, veja se o controlador lxd-test foi criado com o comando abaixo:</p>
+
+<pre><code># juju controllers 
+</code></pre>
+
+<p>O comando a seguir mostra o controlador, o modelo e o usuário atualmente ativo:</p>
+
+<pre><code>#  juju whoami 
+</code></pre>
+
+<p>Implantando um aplicativo com Juju.</p>
+
+<p>O comando abaixo vai até o Juju store pega um charme pronto chamado  mediawiki-single e manda instalar no ambiente LXD que configuramos no inicio.</p>
+
+<pre><code># juju deploy cs:bundle/mediawiki-single 
+</code></pre>
+
+<p>Após esse comando, podemos  verificando sua implementação:</p>
+
+<pre><code># juju status
+</code></pre>
+
+<p>Comando de acesso ao ambiente criado</p>
+
+<pre><code># juju ssh id_machine
+</code></pre>
+
+<p>Acesso GUI, o comando abaixo exibirá a URL de acesso a interface web do Juju.</p>
+
+<pre><code># juju gui
+</code></pre>
+
+<p>Pegando a senha da controladora criada para logar no Juju Gui.</p>
+
+<pre><code># juju show-controller --show-password
+</code></pre>
+
+<p>Mais comandos do Juju.</p>
+
+<pre><code># juju help commands
+</code></pre>
+
+<p>Caso não queira realizar a instalação, a canonical disponibilizou um demo da sua interface GUI: <a href="https://demo.jujucharms.com/">https://demo.jujucharms.com/</a></p>
+
+<p>Nos próximos post irei apresentar:</p>
+
+<ul>
+<li>Juju com Cloud OpenStack</li>
+<li>MaaS para integração do Juju com Bare-Metal.</li>
+<li>Deployando Ceph com Juju.</li>
+</ul>
+
+
+<h3>Referências</h3>
+
+<p><a href="https://jujucharms.com/docs/stable/about-juju">https://jujucharms.com/docs/stable/about-juju</a></p>
+
+<p><a href="https://jujucharms.com/docs/stable/tut-lxd">https://jujucharms.com/docs/stable/tut-lxd</a></p>
+]]></content>
+  </entry>
+  
+</feed>
