@@ -146,39 +146,39 @@
 
 <h3>Como é feito a “Mágica”:</h3>
 
-<p>A partir dos charme é possível realizar a criação de todo uma infraestrutura no nivel de configuração da maquina virtual, instalação e configuração das aplicações, interligações de dependencias, tanto na AWS, Google, Azure, AWS, OpenStack entre outras nuvem suportadas ou diretamente no Bare-Metal utilizando o MaaS.</p>
+<p>A partir dos charmes é possível realizar a criação de toda uma infraestrutura no nivel de configuração da maquina virtual, instalação e configuração das aplicações, interligações de dependências, tanto na AWS, Google, Azure, AWS, OpenStack entre outras nuvem suportadas ou diretamente no Bare-Metal.</p>
 
 <h3>Mas que desgraça é esse Charme?</h3>
 
 <p>O charme define tudo o que você conhece de forma colaborativa sobre a implantação da aplicação. Tudo o que você precisa fazer é usar qualquer charme disponível (ou escrever o seu próprio), e a aplicação correspondente será implantada em segundos, em qualquer nuvem, servidor físico ou máquina virtual.</p>
 
-<p>O Charme nada mais é do que um receita de instalação e configuração com gereciamente de dependencias e interligações nescessaria para sua aplicação funcionar em poucos minutos em qualquer nuvem ou em um bare-metal.</p>
+<p>O Charme nada mais é do que um receita de instalação e configuração com gereciamente de dependencias e interligações nescessárias para sua aplicação funcionar em poucos minutos em qualquer nuvem ou em um bare-metal.</p>
 
 <h3>Juju então é igual ao Chef, Puppet, Ansible e cia?</h3>
 
 <p>Não! O Juju orquestra e escala aplicações em nuvens, ele está uma camada acima dos gereciadores de configurações, mas podemos usar todos juntos perfeitamente.</p>
 
-<p>O puppet, Chef e Ansible são ótimas ferramentas para escrever arquivos de configuração. Por trabalha uma camada acima, o Juju concentra-se nas operações de longo prazo necessárias para manter esse software em execução ao longo do tempo, independentemente da máquina na qual ele está sendo executado. O charme do Juju para um aplicativo inclui (entre outras coisas) toda a lógica para escrever arquivos de configuração para as aplicações, essa lógica em si pode ser escrita em qualquer linguagem ou ferramenta que o desenvolvedor do charme preferi.</p>
+<p>O puppet, Chef e Ansible são ótimas ferramentas para escrever arquivos de configuração. Por trabalhar uma camada acima, o Juju concentra-se nas operações de longo prazo necessárias para manter esse software em execução ao longo do tempo, independentemente da máquina na qual ele está sendo executado. O charme do Juju para um aplicativo inclui (entre outras coisas) toda a lógica para escrever arquivos de configuração para as aplicações, essa lógica em si pode ser escrita em qualquer linguagem ou ferramenta que o desenvolvedor do charme preferi.</p>
 
-<p>É comum que as pessoas comecem a criar um charme juntando Puppet ou Chef ou outros scripts que eles atualmente usam para automatizar a configuração do ambiente. Se o charme vai estar escrevendo e atualizando a configuração para o aplicativo, e já existem ferramentas para abstrair esse arquivo de configuração na sua linguagem preferido(Puppet,Ansible, etc&hellip;), então use isso no charme!</p>
+<p>É comum que as pessoas comecem a criar um charme juntando Puppet ou Chef ou outros scripts que eles atualmente usam para automatizar a configuração do ambiente. Se o charme vai estar escrevendo e atualizando a configuração para o aplicativo, e já existem ferramentas para abstrair esse arquivo de configuração na sua linguagem preferida (Puppet,Ansible, etc&hellip;), então use isso no charme!</p>
 
-<p>Como podemos ver o Juju consegue reunir varias ferramentas de  automação, deixando você livre para criar seus charme com suas receitas e ferramentas favoritas, ainda melhor, dois charmes diferentes de diferentes equipes que usam ferramentas diferentes trabalharão felizes juntos para implantar uma solução.</p>
+<p>Como podemos ver o Juju consegue reunir várias ferramentas de  automação, deixando você livre para criar seus charme com suas receitas e ferramentas favoritas, ainda melhor, dois charmes diferentes de diferentes equipes que usam ferramentas diferentes trabalharão felizes juntos para implantar uma solução.</p>
 
 <p><img src="/images/juju/juju2.png" alt="" /></p>
 
-<h3>Veja como e fácil instalar o Juju no Ubuntu Xenial</h3>
+<h3>Veja como é fácil instalar o Juju no Ubuntu Xenial</h3>
 
 <p>Para fins de teste vamos instalar o juju com o LXD, que no caso poderia ser uma nuvem ou um bare-metal</p>
 
 <pre><code>$ sudo apt install lxd zfsutils-linux
 </code></pre>
 
-<p>Para usar o LXD, seu usuário deve ser um membro do grupo lxd, verifique com o comando abaixo, provavelmente já vai está.</p>
+<p>Para usar o LXD, seu usuário deve ser um membro do grupo lxd, verifique com o comando abaixo provavelmente já vai estar.</p>
 
 <pre><code>$ groups
 </code></pre>
 
-<p>Ao executar o comando abaixo, aceite todas respostas padrão na configurações iniciais do LXD, ou mude caso achar melhor.</p>
+<p>Ao executar o comando abaixo, aceite todas respostas padrão nas configurações iniciais do LXD, ou mude caso achar melhor.</p>
 
 <pre><code>$ sudo lxd init 
 </code></pre>
@@ -191,7 +191,7 @@
 $ sudo apt install juju
 </code></pre>
 
-<p>Tanto para LXD, BareMetal ou nuvem será necessários a criação de um controle para gerenciar.</p>
+<p>Tanto para LXD, Bare-Metal ou nuvem será necessário a criação de um controle para gerenciar.</p>
 
 <pre><code># juju bootstrap localhost lxd-test 
 </code></pre>
@@ -203,19 +203,19 @@ $ sudo apt install juju
 <pre><code># juju controllers 
 </code></pre>
 
-<p>O comando a seguir mostra o controlador, o modelo e o usuário atualmente ativo:</p>
+<p>O comando a seguir mostra o controlador, modelo e o usuário atualmente ativo:</p>
 
 <pre><code>#  juju whoami 
 </code></pre>
 
 <p>Implantando um aplicativo com Juju.</p>
 
-<p>O comando abaixo vai até o Juju store pega um charme pronto chamado  mediawiki-single e manda instalar no ambiente LXD que configuramos no inicio.</p>
+<p>O comando abaixo vai até o Juju store pega um charme pronto chamado mediawiki-single e manda instalar no ambiente LXD que configuramos no inicio.</p>
 
 <pre><code># juju deploy cs:bundle/mediawiki-single 
 </code></pre>
 
-<p>Após esse comando, podemos  verificando sua implementação:</p>
+<p>Após este comando, podemos verificando sua implementação:</p>
 
 <pre><code># juju status
 </code></pre>
@@ -242,7 +242,7 @@ $ sudo apt install juju
 
 <p>Caso não queira realizar a instalação, a canonical disponibilizou um demo da sua interface GUI: <a href="https://demo.jujucharms.com/">https://demo.jujucharms.com/</a></p>
 
-<p>Nos próximos post irei apresentar:</p>
+<p>Nos próximos posts irei apresentar:</p>
 
 <ul>
 <li>Juju com Cloud OpenStack</li>
