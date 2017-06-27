@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-06-27T11:18:58-03:00</updated>
+  <updated>2017-06-27T14:19:44-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -28,7 +28,7 @@
 
 <h3>Como é feito a “Mágica”:</h3>
 
-<p>A partir dos charmes é possível realizar a criação de toda uma infraestrutura no nivel de configuração da maquina virtual, instalação e configuração das aplicações, interligações de dependências, tanto na AWS, Google, Azure, AWS, OpenStack entre outras nuvem suportadas ou diretamente no Bare-Metal.</p>
+<p>A partir dos charmes é possível realizar a criação de toda uma infraestrutura no nivel de configuração da maquina virtual, instalação e configuração das aplicações, interligações de dependências, tanto na AWS, Google, Azure, OpenStack entre outras nuvem suportadas ou diretamente no Bare-Metal.</p>
 
 <h3>Mas que desgraça é esse Charme?</h3>
 
