@@ -455,23 +455,23 @@ login:admin
 
 senha: que você configurou na instalação
 
-![](/images/ovirt/ovirtlogin.jpg)
+![](/images/ovirt/ovirtlogin.JPG)
 
 **Adicionando Storage Data**
 
 Sistema -> Data Centers -> Default -> Storage -> Novo Dominio”:
 
-![](/images/ovirt/addstorage.jpg)
+![](/images/ovirt/addstorage.JPG)
 
 **Adicionando Storage ISO**
 
-![](/images/ovirt/addstorageiso.jpg)
+![](/images/ovirt/addstorageiso.JPG)
 
-![](/images/ovirt/storageisoaguardando.jpg) 
+![](/images/ovirt/storageisoaguardando.JPG) 
 
 Agora basta aguarda o storage ficar ativo.
 
-![](/images/ovirt/storageisook.jpg)  
+![](/images/ovirt/storageisook.JPG)  
 
 **Adicionando imagem ISO no Dominio criado**
 
@@ -495,11 +495,11 @@ Sistema -> Data Centers -> Default -> Cluster -> Default - > MVS -> Novo MV”:
 
 Após digitar o nome da VM,  vamos criar o disco da VM em "Imagens de Instâncias" click em Criar 
 
-![](/images/ovirt/novavm.jpg)
+![](/images/ovirt/novavm.JPG)
 
 Digite o Tamanho, verifique se o storage domain está correto e click em OK
 
-![](/images/ovirt/createdisk.jpg)
+![](/images/ovirt/createdisk.JPG)
 
 Selecione a rede que foi configurada por padrão na instalação.(bridge ovirtmgmt)
 
@@ -507,23 +507,23 @@ Selecione a rede que foi configurada por padrão na instalação.(bridge ovirtmg
 
 Configure a memória e o CPU e click em OK.
 
-![](/images/ovirt/vmmemoria.jpg)
+![](/images/ovirt/vmmemoria.JPG)
 
 Agora vamos iniciar a VM  clicando em "Executar uma vez" para iniciar o sistema com boot da nossa ISO CentOS
 
-![](/images/ovirt/iniciarvm.jpg)
+![](/images/ovirt/iniciarvm.JPG)
 
 Selecione nossa ISO e marque a opção "Colocar CD"
 
-![](/images/ovirt/iniciariso.jpg)
+![](/images/ovirt/iniciariso.JPG)
 
 Agora vamos Abrir o Console da VM para iniciar a Instalação.
 
-![](/images/ovirt/abrirconsole.jpg)
+![](/images/ovirt/abrirconsole.JPG)
 
 Para o Remote Viewer abrir será nescessario baixar O Virt Manager (https://virt-manager.org/download/)
 
-![](/images/ovirt/centosinstall.jpg)
+![](/images/ovirt/centosinstall.JPG)
 
 **Troubleshooting:**
 
