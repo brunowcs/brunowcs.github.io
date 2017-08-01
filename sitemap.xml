@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017/</loc>
+<lastmod>2017-08-01T15:18:04-03:00</lastmod>
+</url>
+<url>
 <loc>http://brunocarvalho.net/blog/2017/06/26/orquestracao-com-juju-da-canonical/</loc>
 <lastmod>2017-06-26T18:14:34-03:00</lastmod>
 </url>
@@ -130,6 +134,15 @@
 </url>
 <url>
 <loc>http://brunocarvalho.net/blog/categories/ubuntu/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/openstack/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/juju/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/canonical/</loc>
 </url>
 <url>
 <loc>http://brunocarvalho.net/google60f3e9080d9a5555.html</loc>

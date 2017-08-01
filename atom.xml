@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-08-01T14:54:23-03:00</updated>
+  <updated>2017-08-01T15:23:51-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Palestra OpenStack Day SP 2017]]></title>
+    <link href="http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017/"/>
+    <updated>2017-08-01T15:18:04-03:00</updated>
+    <id>http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017</id>
+    <content type="html"><![CDATA[<p>Como prometido segue minha palestra no OpenStack Day SP 2017. Qualquer dúvida podem comentar ou enviar e-mail que terei enorme prazer em ajudar.</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/GEYv88ZwA2k8QE" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/scoker123/orquestrando-openstack-com-juju" title="Orquestrando OpenStack com Juju" target="_blank">Orquestrando OpenStack com Juju</a> </strong> de <strong><a target="_blank" href="https://www.slideshare.net/scoker123">TIVIT LATAM</a></strong> </div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Orquestração com Juju da Canonical]]></title>
