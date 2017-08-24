@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux, | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-08-24T18:38:59-03:00</updated>
+  <updated>2017-08-24T18:50:30-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -126,12 +126,11 @@ $ sudo apt install juju
 
 <p>Nos próximos posts irei apresentar:</p>
 
-<ul>
-<li>Juju com Cloud OpenStack</li>
-<li>MaaS para integração do Juju com Bare-Metal.</li>
-<li>Deployando Ceph com Juju.</li>
-</ul>
+<p><a href="http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017/"> - Juju com Cloud OpenStack </a></p>
 
+<p><a href="http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas/">- MaaS para integração do Juju com Bare-Metal </a></p>
+
+<p>-Deployando Ceph com Juju.</p>
 
 <h3>Referências</h3>
 

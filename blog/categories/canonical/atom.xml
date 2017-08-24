@@ -4,7 +4,7 @@
   <title><![CDATA[Category: canonical | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/canonical/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-08-24T18:38:59-03:00</updated>
+  <updated>2017-08-24T18:50:30-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -131,6 +131,8 @@
 <p>Cada máquina (&ldquo;nó&rdquo;) gerenciada pelo MAAS passa por um ciclo de vida desde o alistamento até o comissionamento quando o nó será inventariado e iremos poder configurar elementos específicos do hardware. No ciclo também é possível alocamos um servidor para um usuário, realizar o deployer, e finalmente liberar de volta para um pool ou deletar por completo.</p>
 
 <p><img src="/images/maas/maaslifecycle.png" alt="" /></p>
+
+<p><strong> Qualquer dúvida comentem aííí, até a proxima!!!! </strong></p>
 
 <p>Referências:</p>
 
