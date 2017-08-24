@@ -104,9 +104,11 @@ Caso não queira realizar a instalação, a canonical disponibilizou um demo da 
 
 Nos próximos posts irei apresentar: 
 
-- Juju com Cloud OpenStack
-- MaaS para integração do Juju com Bare-Metal.
-- Deployando Ceph com Juju.
+[ - Juju com Cloud OpenStack ](http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017/)
+
+[- MaaS para integração do Juju com Bare-Metal ](http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas/)
+
+-Deployando Ceph com Juju.
 
 
 ### Referências ###

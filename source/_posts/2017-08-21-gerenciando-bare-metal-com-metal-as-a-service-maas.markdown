@@ -109,6 +109,9 @@ Cada máquina ("nó") gerenciada pelo MAAS passa por um ciclo de vida desde o al
 
 ![](/images/maas/maaslifecycle.png)
 
+
+** Qualquer dúvida comentem aííí, até a proxima!!!! **
+
 Referências: 
 
 https://maas.io/
