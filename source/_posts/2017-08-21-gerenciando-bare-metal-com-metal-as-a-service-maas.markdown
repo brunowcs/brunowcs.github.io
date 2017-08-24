@@ -79,7 +79,7 @@ Entre com login e senha criado no passo anterior
 
 No primeiro login será apresentado uma tela de configuração, altere o nome da sua região se achar necessário e neste primeiro momento deixe como padrão os outros valores
 
-Obs: para o MaaS conseguir Ligar e Desligar os servidores via IMPI será necessário um interface que chegue na rede da  IDRAC e/ou ILO
+Obs: para o MaaS conseguir Ligar e Desligar os servidores via IPMI será necessário um interface que chegue na rede da  IDRAC e/ou ILO
 
 ![](/images/maas/maasfist.png)
 
