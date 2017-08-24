@@ -4,7 +4,7 @@
   <title><![CDATA[Category: canonical | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/canonical/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-08-24T18:50:30-03:00</updated>
+  <updated>2017-08-24T19:05:54-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -97,7 +97,7 @@
 
 <p>No primeiro login será apresentado uma tela de configuração, altere o nome da sua região se achar necessário e neste primeiro momento deixe como padrão os outros valores</p>
 
-<p>Obs: para o MaaS conseguir Ligar e Desligar os servidores via IMPI será necessário um interface que chegue na rede da  IDRAC e/ou ILO</p>
+<p>Obs: para o MaaS conseguir Ligar e Desligar os servidores via IPMI será necessário um interface que chegue na rede da  IDRAC e/ou ILO</p>
 
 <p><img src="/images/maas/maasfist.png" alt="" /></p>
 
