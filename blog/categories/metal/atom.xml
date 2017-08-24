@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: canonical | brunocarvalho.net]]></title>
-  <link href="http://brunocarvalho.net/blog/categories/canonical/atom.xml" rel="self"/>
+  <title><![CDATA[Category: metal | brunocarvalho.net]]></title>
+  <link href="http://brunocarvalho.net/blog/categories/metal/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
   <updated>2017-08-24T18:38:59-03:00</updated>
   <id>http://brunocarvalho.net/</id>
@@ -137,25 +137,6 @@
 <p><a href="https://maas.io/">https://maas.io/</a></p>
 
 <p><a href="https://docs.ubuntu.com/maas/">https://docs.ubuntu.com/maas/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Palestra OpenStack Day SP 2017]]></title>
-    <link href="http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017/"/>
-    <updated>2017-08-01T15:18:04-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017</id>
-    <content type="html"><![CDATA[<p>Segue minha palestra no OpenStack Day SP 2017. Como a apresentação ficou corrida por conta do tempo e o ultimo slide de hands on não foi apresentado por problemas da internet local, fico a disposição para qualquer dúvida. Podem comentar, enviar e-mail que terei enorme prazer em ajudar. Abs</p>
-
-<iframe width="595" height="315" src="https://www.youtube.com/embed/VCs1kcFUZEY" frameborder="0" allowfullscreen></iframe>
-
-
-
-
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/GEYv88ZwA2k8QE" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-
-
-<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/scoker123/orquestrando-openstack-com-juju" title="Orquestrando OpenStack com Juju" target="_blank">Orquestrando OpenStack com Juju</a> </strong> de <strong><a target="_blank" href="https://www.slideshare.net/scoker123">TIVIT LATAM</a></strong> </div></p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,364 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Gerenciando Bare Metal com Metal As a Service (MaaS) - brunocarvalho.net</title>
+	<meta name="author" content="Bruno Carvalho">
+ 
+	
+	<meta name="description" content="Gerenciando Bare Metal Com Metal as a Service (MaaS) Que tal gerenciar seus Bare Metal com automação e eficiência? Te apresento o Metal as a Service &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="brunocarvalho.net" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-79512610-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("brunowcs@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav">
+<section class="aboutme">
+  <p>
+   <h2>	Bruno Carvalho </h2>
+  </p>
+  
+  <p>
+	<i> tecnologia, cotidiano e mais algumas coisas... </i>
+  </p>
+</section>
+
+<ul class="main">
+   <b><li><a href="/">Blog</a></li>
+    <li><a href="/about">Sobre</a></li>
+    <li><a href="/blog/archives">Archives</a></li></b>
+</ul>
+
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:brunowcs@gmail.com" title="Email">Email</a>
+		
+		
+		
+			<a class="google" href="https://plus.google.com/+brunocarvalho86" rel="author" title="Google+">Google+</a>
+		
+		
+		
+		
+		
+		
+			<a class="linkedin" href="http://www.linkedin.com/in/xbrunocarvalho" title="LinkedIn">LinkedIn</a>
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+</div>
+</nav>	
+
+<div>
+<script language="Javascript" type="text/javascript">
+  function my_search_google()
+  {
+    var query = document.getElementById("my-google-search").value;
+    window.open("http://google.com/search?q=" + query
+	+ "%20site:" + "http://brunocarvalho.net");
+  }
+</script>
+<p> Buscar </p>
+<form onsubmit="my_search_google()" >
+  <input type="text" id="my-google-search">
+</form>
+
+<!-- <p><img class="center" src="images/rhcsa.png" title="Certificados"></p><br> -->
+
+</div>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Gerenciando Bare Metal Com Metal as a Service (MaaS)</h1>
+	<div class="entry-content" itemprop="articleBody"><p><img src="/images/maas/maaslogo.png" alt="" /></p>
+
+<p>Que tal gerenciar seus Bare Metal com automação e eficiência? Te apresento o Metal as a Service (MaaS) uma ferramenta fantástica desenvolvida em Python pela Canonical que trás vários benefícios para gerenciar seus racks de Bare Metal e neste artigo irei falar um pouco das suas funções, instalação e configuração.</p>
+
+<p>Segue abaixo algumas features do MaaS stable(2.2):</p>
+
+<ul>
+<li>Suporte para Bare Metal (ARM,Intel), KVM, VMWARE</li>
+<li>Provisiona com Ubuntu, RHEL, CENTOS, SLES, OpenSUSE, Windows</li>
+<li>Divide recursos por zonas Bare Metal/VM</li>
+<li>IPAM coleção de Subnets IPV4/IPV6, VLAN tagging, DNS, proxy, NTP</li>
+<li>REST API intregraçao com ferramentas de Devops Juju, Chef, Ansible, Puppet</li>
+<li>Descobre automaticamente ativos de redes, VLAN, Subnets etc..</li>
+<li>Enlist automático por PXE</li>
+<li>Interface GUI e CLI para Ligar/Desligar, comissionar, implantar, teste de hardware, modo de manutenção e recuperação de S.O</li>
+<li>Composição Dinâmica de Hardware por meio de POD Suporta Intel Rack Scale Design (RSD) e Virsh(KVM)</li>
+<li>Configuração de Rede IP,VLAN,BOND,BRIDGE layout de disco Bcache, RAID, LVM</li>
+</ul>
+
+
+<p>  O MaaS foi desenvolvido para ambientes em escala Bare Metal,  mais também é possível gerenciar VM com Virsh(KVM). Suporta as  principais BMCs e controladores de chassi do mercado como IBM, Lenovo, Disco, Huawei, Dell, HP e Open Compute Project, está sendo utilizado por grandes plays do mercado como Microsoft, Nec, Verizon, At&amp;t, NTT atualmente sendo considerado uma das melhores ferramentas open source para gerenciamento de Bare Metal.</p>
+
+<h1>Como funciona</h1>
+
+<p>O MaaS possui uma arquitetura em camadas com um banco de dados postgresql usado na &lsquo;Region Controller (regiond)&rsquo; que lida com as solicitações. Já o Distributed Rack Controllers (rackd) fornecem serviços para cada rack.</p>
+
+<p>Region controller(regiond):</p>
+
+<ul>
+<li> REST API server (TCP port 5240)</li>
+<li> PostgreSQL database</li>
+<li> DNS</li>
+<li> caching HTTP proxy</li>
+<li> Web GUI</li>
+</ul>
+
+
+<p>Rack Controller (rackd) fornece DHCP, IPMI, PXE, TFTP e outros serviços locais. Os rackd armazenam itens  como imagens de instalação do S.O no nível do rack para melhor desempenho, mas não mantenham nenhum estado além das credenciais para falar com o Region Controller.</p>
+
+<p>Rack controller(rackd):</p>
+
+<ul>
+<li> DHCP</li>
+<li> TFTP</li>
+<li> HTTP (para images)</li>
+<li> iSCSI</li>
+<li> Power Management</li>
+</ul>
+
+
+<p>Tanto o regiond como o rackd podem ser escalados e configurados para alta disponibilidade.</p>
+
+<p><img src="/images/maas/archmaas.png" alt="" /></p>
+
+<h1>Instalando o MaaS</h1>
+
+<p>Como podemos ver na arquitetura acima, em cada rack de servidor Bare Metal poderiamos ter um daemon chamado rackd que falaria via API com o regiond, isso e uma boa pratica para arquitetura de rede Layer 3 spine e leaf, mas neste exemplo vamos instalar tanto o regiond como o rackd em um unico servidor.</p>
+
+<p>Adicionando repositorio e instalando o MaaS</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># apt-add-repository -yu ppa:maas/stable</span>
+</span><span class='line'><span class="c"># apt install maas</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Após instalação precisamos criar um usurário administrativo.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># maas createadmin </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Depois da criação vamos acessar o painel via browser</p>
+
+<p><strong> Acesse a URL:<a href="http://$API_HOST:5240/MAAS">http://$API_HOST:5240/MAAS</a> </strong></p>
+
+<p>Entre com login e senha criado no passo anterior</p>
+
+<p><img src="/images/maas/maaslogin.png" alt="" /></p>
+
+<p>No primeiro login será apresentado uma tela de configuração, altere o nome da sua região se achar necessário e neste primeiro momento deixe como padrão os outros valores</p>
+
+<p>Obs: para o MaaS conseguir Ligar e Desligar os servidores via IMPI será necessário um interface que chegue na rede da  IDRAC e/ou ILO</p>
+
+<p><img src="/images/maas/maasfist.png" alt="" /></p>
+
+<p>Agora vamos verificar quais serviços estão ativos, no painel click em “Nodes” selecione a aba “Controller” selecione o servidor da sua controller depois click na aba “Services”.
+<img src="/images/maas/maasservices.png" alt="" /></p>
+
+<p>Veja se sua img está sincronizada Click na Aba “Images”</p>
+
+<p><img src="/images/maas/maasimage.png" alt="" /></p>
+
+<ul>
+<li>Ativando DHCP</li>
+</ul>
+
+
+<p>Vá para a aba &ldquo;Subnets&rdquo; e selecione a untagged VLAN/subnet  para a qual você deseja habilitar o DHCP, e no botão &ldquo;Take action&rdquo; selecione &ldquo;Provide DHCP&rdquo;.</p>
+
+<ul>
+<li>Defina o controlador de rack que gerenciará o DHCP.</li>
+<li>Selecione a subrede para criar o intervalo dinâmico DHCP.</li>
+<li>Preencha os detalhes para o intervalo dinâmico.</li>
+</ul>
+
+
+<p><img src="/images/maas/maasnetwork.png" alt="" /></p>
+
+<p>Após ativar o DHCP, podemos inciar os bare mental na rede configurada que automaticamente ela realizará o boot via PXE e iniciará o processo de enlist, assim aparecendo no menu “Node” do painel MaaS, abaixo veja como funciona o ciclo de vida do seu Bare Metal/VM dentro do MaaS.</p>
+
+<h1>Entenda o Lifecycle do MaaS</h1>
+
+<p>Cada máquina (&ldquo;nó&rdquo;) gerenciada pelo MAAS passa por um ciclo de vida desde o alistamento até o comissionamento quando o nó será inventariado e iremos poder configurar elementos específicos do hardware. No ciclo também é possível alocamos um servidor para um usuário, realizar o deployer, e finalmente liberar de volta para um pool ou deletar por completo.</p>
+
+<p><img src="/images/maas/maaslifecycle.png" alt="" /></p>
+
+<p>Referências:</p>
+
+<p><a href="https://maas.io/">https://maas.io/</a></p>
+
+<p><a href="https://docs.ubuntu.com/maas/">https://docs.ubuntu.com/maas/</a></p>
+</div>
+
+
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite">
+
+<script type="text/javascript">
+      var disqus_shortname = 'brunowcs';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas/';
+        var disqus_url = 'http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Todo <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">conteúdo</span> do <a xmlns:cc="http://creativecommons.org/ns#" href="brunocarvalho.net" property="cc:attributionName" rel="cc:attributionURL">brunocarvalho.net</a> está licenciado com a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons - Atribuição-CompartilhaIgual 4.0 Internacional</a>.
+
+<br> CC - 2017
+<!--  - 
+  Bruno Carvalho -
+ -->
+ Powered by Octopress/greyshade
+
+</footer>
+		</div>
+	</div>
+	
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>
