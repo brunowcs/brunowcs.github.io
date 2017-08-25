@@ -4,7 +4,7 @@
   <title><![CDATA[Category: canonical | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/canonical/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-08-25T10:47:33-03:00</updated>
+  <updated>2017-08-25T10:49:39-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -44,6 +44,8 @@
 
 <p>O MaaS possui uma arquitetura em camadas com um banco de dados postgresql usado na &lsquo;Region Controller (regiond)&rsquo; que lida com as solicitações. Já o Distributed Rack Controllers (rackd) fornecem serviços para cada rack.</p>
 
+<p><img src="/images/maas/archmaas.png" alt="" /></p>
+
 <p>Region controller(regiond):</p>
 
 <ul>
@@ -69,8 +71,6 @@
 
 
 <p>Tanto o regiond como o rackd podem ser escalados e configurados para alta disponibilidade.</p>
-
-<p><img src="/images/maas/archmaas.png" alt="" /></p>
 
 <h1>Instalando o MaaS</h1>
 
