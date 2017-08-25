@@ -80,8 +80,6 @@ Entre com login e senha criado no passo anterior
 
 No primeiro login será apresentado uma tela de configuração, altere o nome da sua região se achar necessário e neste primeiro momento deixe como padrão os outros valores
 
-Obs: para o MaaS conseguir Ligar e Desligar os servidores via IPMI será necessário um interface que chegue na rede da  IDRAC e/ou ILO
-
 ![](/images/maas/maasfist.png)
 
 Agora vamos verificar quais serviços estão ativos, no painel click em “Nodes” selecione a aba “Controller” selecione o servidor da sua controller depois click na aba “Services”.
@@ -103,6 +101,8 @@ Vá para a aba "Subnets" e selecione a untagged VLAN/subnet  para a qual você d
 ![](/images/maas/maasnetwork.png)
 
 Após ativar o DHCP, podemos inciar os bare mental na rede configurada que automaticamente ela realizará o boot via PXE e iniciará o processo de enlist, assim aparecendo no menu “Node” do painel MaaS, abaixo veja como funciona o ciclo de vida do seu Bare Metal/VM dentro do MaaS.
+
+Obs: para o MaaS conseguir Ligar e Desligar os servidores via IPMI será necessário um interface que chegue na rede da  IDRAC e/ou ILO
 
 #Entenda o Lifecycle do MaaS
 
