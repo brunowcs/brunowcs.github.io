@@ -29,6 +29,8 @@ Segue abaixo algumas features do MaaS stable(2.2):
 
 O MaaS possui uma arquitetura em camadas com um banco de dados postgresql usado na 'Region Controller (regiond)' que lida com as solicitações. Já o Distributed Rack Controllers (rackd) fornecem serviços para cada rack. 
 
+![](/images/maas/archmaas.png)
+
 Region controller(regiond):
 
    - REST API server (TCP port 5240) 
@@ -50,7 +52,6 @@ Rack controller(rackd):
 
 Tanto o regiond como o rackd podem ser escalados e configurados para alta disponibilidade.
 
-![](/images/maas/archmaas.png)
 
 #Instalando o MaaS
 
