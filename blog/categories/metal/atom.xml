@@ -4,7 +4,7 @@
   <title><![CDATA[Category: metal | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/metal/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-08-24T19:05:54-03:00</updated>
+  <updated>2017-08-25T10:47:33-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -38,7 +38,7 @@
 </ul>
 
 
-<p>  O MaaS foi desenvolvido para ambientes em escala Bare Metal,  mais também é possível gerenciar VM com Virsh(KVM). Suporta as  principais BMCs e controladores de chassi do mercado como IBM, Lenovo, Disco, Huawei, Dell, HP e Open Compute Project, está sendo utilizado por grandes plays do mercado como Microsoft, Nec, Verizon, At&amp;t, NTT atualmente sendo considerado uma das melhores ferramentas open source para gerenciamento de Bare Metal.</p>
+<p>  O MaaS foi desenvolvido para ambientes em escala Bare Metal,  mais também é possível gerenciar VM com Virsh(KVM). Suporta as  principais BMCs e controladores de chassi do mercado como Dell, IBM, HP, Lenovo, Huawei e Open Compute Project, está sendo utilizado por grandes plays do mercado como Microsoft, Nec, Verizon, At&amp;t, NTT atualmente sendo considerado uma das melhores ferramentas open source para gerenciamento de Bare Metal.</p>
 
 <h1>Como funciona</h1>
 
