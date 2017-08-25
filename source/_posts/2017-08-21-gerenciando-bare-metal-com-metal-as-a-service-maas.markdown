@@ -23,7 +23,7 @@ Segue abaixo algumas features do MaaS stable(2.2):
   - Composição Dinâmica de Hardware por meio de POD Suporta Intel Rack Scale Design (RSD) e Virsh(KVM)
   - Configuração de Rede IP,VLAN,BOND,BRIDGE layout de disco Bcache, RAID, LVM
 
-  O MaaS foi desenvolvido para ambientes em escala Bare Metal,  mais também é possível gerenciar VM com Virsh(KVM). Suporta as  principais BMCs e controladores de chassi do mercado como IBM, Lenovo, Disco, Huawei, Dell, HP e Open Compute Project, está sendo utilizado por grandes plays do mercado como Microsoft, Nec, Verizon, At&t, NTT atualmente sendo considerado uma das melhores ferramentas open source para gerenciamento de Bare Metal.
+  O MaaS foi desenvolvido para ambientes em escala Bare Metal,  mais também é possível gerenciar VM com Virsh(KVM). Suporta as  principais BMCs e controladores de chassi do mercado como Dell, IBM, HP, Lenovo, Huawei e Open Compute Project, está sendo utilizado por grandes plays do mercado como Microsoft, Nec, Verizon, At&t, NTT atualmente sendo considerado uma das melhores ferramentas open source para gerenciamento de Bare Metal.
 
 #Como funciona
 
