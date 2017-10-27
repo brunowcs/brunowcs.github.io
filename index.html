@@ -9,7 +9,7 @@
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="21/08/2017 bare, canonical, maas, metal, ubuntu Comments Gerenciando Bare Metal Com Metal as a Service (MaaS) Que tal gerenciar seus Bare Metal com &hellip;">
+	<meta name="description" content="27/10/2017 ceph, cephdaysp, evento, luminous Comments Um Pouco Sobre O Ceph Day SP 2017 Na última Quarta-feira(25/10) rolou o primeiro Ceph Day SP e &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -136,6 +136,99 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2017-10-27T00:00:00-02:00" data-updated="true" itemprop="datePublished">27/10/2017</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ceph/'>ceph</a>, <a class='category' href='/blog/categories/cephdaysp/'>cephdaysp</a>, <a class='category' href='/blog/categories/evento/'>evento</a>, <a class='category' href='/blog/categories/luminous/'>luminous</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2017/10/27/um-pouco-sobre-o-ceph-day-sp-2017/#disqus_thread">Comments</a></span>
+	
+			
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2017/10/27/um-pouco-sobre-o-ceph-day-sp-2017/" itemprop="url">Um Pouco Sobre O Ceph Day SP 2017</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="/images/ceph/cephday0.png" alt="" /></p>
+
+<p>Na última Quarta-feira(25/10) rolou o primeiro Ceph Day SP e o primeiro na América Latina organizado e realizado pelo nosso Manager Comunity Leonado Vaz e nosso amigo da Savant Marcos Sungalia, além de grandes patrocinadores como RedHat, Canonical, Suse entre outros&hellip;</p>
+
+<p>Para quem não teve a oportunidade de estar presente perdeu um grande dia. Discutimos sobre a nova versão do Ceph, custos x performance, implementações, cases e principalmente o futuro do SDS</p>
+
+<p><img src="/images/ceph/cephday1.png" alt="" /></p>
+
+<p>A chegada da nova versão Luminuos LTS que já é uma realidade, virou um divisor de aguas no mundo do Software Define Storage(SDS) com várias melhorias como o novo backend BlueStorage que leva o Ceph a um nível de performance 2x mais rápido eliminado a camada do filesystem, além de grandes melhorias em toda sua estrutura.</p>
+
+<p>Precisando de baixa latency e alta performance? O Ceph te entrega, tivemos uma palestra da Intel, uma das grandes colaboradoras do código, falando sobre Ceph com All-Flash.</p>
+
+<p><a href="https://software.intel.com/en-us/articles/using-intel-optane-and-intel-3d-nand-technology-with-ceph-to-build-high-performance-cloud">SSDs to Build High-Performance Cloud Storage Solutions</a></p>
+
+<p>Para os amantes do Zabbix como eu, o novo serviço de gerenciamento do Ceph(ceph-mgr) foi ampliado com vários módulos python, um deles exporta o status geral do cluster para o Zabbix habilitando o modulo no Ceph e configurando o template no zabbix.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ceph zabbix config-set zabbix_host zabbix-server.local
+</span><span class='line'><span class="nv">$ </span>ceph zabbix config-set identifier ceph.local
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para os amantes da interface GUI. Agora será possível ter um dashboard no Ceph de forma simples.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ceph mgr module <span class="nb">enable </span>dashboard
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Acesse <a href="http://you_active_mgr_host:7000/">http://you_active_mgr_host:7000/</a></p>
+
+<p><img src="/images/ceph/cephday2.png" alt="" />
+<img src="/images/ceph/cephday3.png" alt="" /></p>
+
+<p>Outra grande novidade, agora será possível fazer Erasure Coding tanto em RBD quanto em CephFS, que antes só era possível com object. Na mudança para o BlueStorage será possível suporta compressão de dados, trazendo mais economia no armazenamento.</p>
+
+<p>E tem muito mais vindo por ai! Eu particularmente estou ansioso para o tão esperado QoS que está por vir na próxima versão ou dedup que será excelente para galera de backup. Aguardem que isso e só o começo da evolução que o Ceph vem trazendo para o mundo do Software Define Storage.</p>
+
+<p>Referências:</p>
+
+<p><a href="http://ceph.com/releases/v12-2-0-luminous-released/">http://ceph.com/releases/v12-2-0-luminous-released/</a></p>
+
+<p><a href="http://ceph.com/community/new-luminous-dashboard/">http://ceph.com/community/new-luminous-dashboard/</a></p>
+
+<p><a href="http://ceph.com/community/new-luminous-zabbix/">http://ceph.com/community/new-luminous-zabbix/</a></p>
+
+		
+		
+	</div>
+
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -1555,291 +1648,6 @@ irb(main):004:0&gt; i.save!
 </code></pre>
 
 <p>Adpatando os comandos acima pode ser alterar varios atributos do provisionamento pelo foreman-rake.</p>
-
-		
-		
-	</div>
-
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2016-08-19T00:00:00-03:00" data-updated="true" itemprop="datePublished">19/08/2016</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/centos/'>centos</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/rhel/'>rhel</a>, <a class='category' href='/blog/categories/satellite/'>satellite</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2/#disqus_thread">Comments</a></span>
-	
-			
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2016/08/19/iniciando-jornada-com-satellite-6-dot-2/" itemprop="url">Iniciando Jornada Com Satellite 6.2</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Recentemente a Red hat lançou o Satellite 6.2 GA, um produto que ganhou grandes melhorias e novas funcionalidades.</p>
-
-<p><img src="/images/satellite/img1.jpg" alt="img1" /></p>
-
-<p>O Satellite se tornou um produto essencial para gerenciamento de ciclo de vida de sistemas da Red Hat em ambientes físicos, virtuais, nuvens privadas e públicas. A ferramenta apresenta implementação remota e estende a capacidade de gestão de pacotes, configurações, máquinas virtuais, containers, segurança entre grandes outras funcionalidades.</p>
-
-<p>Uma das funcionalidades mais interessante dessa nova versão e o Remote Execute e Job Scheduling utilizando ssh. Agora será possível agenda execuções remotas em todos hosts. O OpenSCAP utilizado para auditoria de segurança, agora já vem instalado junto com o Satellite 6.2, antes precisava ser instalado manualmente. Melhorias no console web ficou notório, também percebi que a interface web está mais rápida.</p>
-
-<p>Então amigos administradores de RHEL/CentOS, se você utiliza o Red Hat Satellite 5 e está pensando em implementar o Satellite 6, pode iniciar sua jornada, o  Satellite 6.2 GA está finalmente atingindo o nível de maturidade necessária para gerir ambientes de pequeno e grande porte.</p>
-
-<h1>Migração</h1>
-
-<p>Atualmente estou utilizando a versão 6.1 e abaixo vou listar os passos e dificuldades encontradas no meu ambiente para migração do 6.2 GA.</p>
-
-<blockquote><p>Não será possível realizar migração de 6.2 Beta para 6.2 GA, antes de iniciar a migração para 6.2 verifique se seu ambiente está atualizado e com a versão 6.1.9. Não se esqueça de realizar o backup do ambiente atual.</p></blockquote>
-
-<p>Verificando se existe alguma atualização recente.
-Desabilite todos repositórios, deixe apenas os seguintes habilitado:</p>
-
-<pre><code># subscription-manager repos --disable=*
-# subscription-manager repos --enable=rhel-7-server-rpms
-# subscription-manager repos --enable=rhel-7-server-satellite-6.1-rpms
-# yum update
-</code></pre>
-
-<blockquote><p>Caso atualize o kernel será necessário reiniciar o sistema</p></blockquote>
-
-<p>Após o update do S.O e dos novos pacotes, o satellite já estará com a versão 6.1.9, execute o seguinte comando para finalizar:</p>
-
-<pre><code># katello-installer --upgrade
-
-Upgrading...
-Upgrade Step: stop_services...
-Upgrade Step: start_mongo...
-Upgrade Step: migrate_pulp...
-Upgrade Step: start_httpd...
-Upgrade Step: migrate_candlepin...
-Upgrade Step: migrate_foreman...
-Upgrade Step: Running installer...
-Installing Done   [100%] 
-
-[......................................................]
-  The full log is at /var/log/katello-installer/katello-installer.log
-Upgrade Step: restart_services...
-Upgrade Step: db_seed...
-Upgrade Step: errata_import (this may take a while) ...
-Upgrade Step: update_gpg_urls (this may take a while) ...
-Upgrade Step: update_repository_metadata (this may take a while) ...
-Katello upgrade completed!
-</code></pre>
-
-<p>Vamos realizar um check antes de realizar a migração para o 6.2.</p>
-
-<pre><code># foreman-rake katello:upgrade_check
-
-This script makes no modifications and can be re-run multiple times for the most up to date results.
-Checking upgradeability...
-
-Checking for running tasks...
-[FAIL] - There are 35 active tasks.
-
-Checking the current version...
-[PASS] - Current version of the Katello Ruby RPM is 2.2.0.92 and needs to greater than or equal to 2.2.0.90
-
-Checking content hosts...
-Calculating Host changes on upgrade.  This may take a few minutes.
-
-
-Summary:
-Content hosts to be preserved: 169
-Content hosts to be deleted: 3
-Details on Content Hosts planned for deletion saved to /tmp/pre-upgrade-1471033031.csv
-You may want to manually resolve some of the conflicts and duplicate Content Hosts.
-Upon upgrade those found for deletion will be removed permanently.
-</code></pre>
-
-<p>Como podemos ver minha migração apresentará falha <strong>&ldquo; [FAIL] - There are 35 active tasks.&rdquo;</strong> Resolvendo active tasks provável lock, podemos ir manualmente na Web gui Monitor->Tasks e filtrar pelas tasks que estão em lock, assim executando manualmente os skip, também podemos identificar pelo hammer.</p>
-
-<p>Apresenta um resumo das tasks em pausa</p>
-
-<pre><code># hammer task resume --search "state=paused"
-</code></pre>
-
-<p>Apresenta todas tasks em pausa</p>
-
-<pre><code># hammer task list --search "state=paused"
-</code></pre>
-
-<p>Removendo tasks em lock pelo foreman-rake</p>
-
-<pre><code># service foreman-tasks stop  
-# foreman-rake console
-
-irb(main):001:0&gt; ForemanTasks::Task.where(:state =&gt; :planned).where(:label =&gt; "Actions::Katello::Repository::Sync").destroy_all
-irb(main):002:0&gt; ForemanTasks::Task.where(:state =&gt; :planned).where(:label =&gt; "Actions::Katello::System::GenerateApplicability").destroy_all
-irb(main):003:0&gt; ForemanTasks::Task.where(:state =&gt; :paused).where(:label =&gt; "Actions::Katello::Repository::Sync").destroy_all
-irb(main):004:0&gt; ForemanTasks::Task.where(:state =&gt; :paused).where(:label =&gt; "Actions::Katello::System::GenerateApplicability").destroy_all
-irb(main):005:0&gt; ForemanTasks::Task.where(:label =&gt; "Actions::Candlepin::ListenOnCandlepinEvents").destroy_all
-
-Caso nescessário remova a task pelo id
-irb(main):001:0&gt; ForemanTasks::Task.find("799bc5fb-2d4c-4d0d-9d7d-4e42e9a8ace8").destroy
-
-Saindo do Foreman rake
-irb(main):002:0&gt; exit
-# service foreman-tasks start 
-</code></pre>
-
-<p>Reindexando o banco de dados para evitar futuras inconsistências</p>
-
-<pre><code># foreman-rake katello:reindex
-# katello-service restart
-</code></pre>
-
-<p>Executando novamente o upgrade_check podemos notar que as  pendência de tasks foram solucionadas.</p>
-
-<pre><code># foreman-rake katello:upgrade_check
-
-This script makes no modifications and can be re-run multiple times for the most up to date results.
-Checking upgradeability...
-
-Checking for running tasks...
-[PASS] - There are 0 active tasks.
-
-Checking the current version...
-[PASS] - Current version of the Katello Ruby RPM is 2.2.0.92 and needs to greater than or equal to 2.2.0.90
-
-Checking content hosts...
-Calculating Host changes on upgrade.  This may take a few minutes.
-
-
-Summary:
-Content hosts to be preserved: 169
-Content hosts to be deleted: 3
-Details on Content Hosts planned for deletion saved to /tmp/pre-upgrade-1471269446.csv
-You may want to manually resolve some of the conflicts and duplicate Content Hosts.
-Upon upgrade those found for deletion will be removed permanently.
-</code></pre>
-
-<h1>Iniciando processo de upgrade 6.2</h1>
-
-<p>Desabilitar repositório Satellite 6.1</p>
-
-<pre><code># subscription-manager repos --disable rhel-7-server-satellite-6.1-rpms
-</code></pre>
-
-<p>Habilitando repositórios necessário</p>
-
-<pre><code># subscription-manager repos --enable rhel-7-server-satellite-6.2-rpms
-
-# subscription-manager repos --enable=rhel-server-rhscl-7-rpms
-</code></pre>
-
-<p>Parando serviço</p>
-
-<pre><code># katello-service stop
-</code></pre>
-
-<p>Limpando cache yum</p>
-
-<pre><code># yum clean all
-</code></pre>
-
-<p>Upgrade de todos pacotes do sistema</p>
-
-<pre><code># yum update
-</code></pre>
-
-<p>Upgrade do ambiente satellite</p>
-
-<pre><code># satellite-installer --scenario satellite --upgrade
-</code></pre>
-
-<p>Nessa etapa acima encontrei um erro de migração que estava relacionado a ambiente puppet orfão, caso ocorra um erro parecido, tente remove o ambiente puppet informado na msg e execute o comando novamente.</p>
-
-<blockquote><p>foreman-rake katello:upgrades:3.0:update_puppet_repository_distributors
-Updating Puppet Repository Distributors
-Updating Content View Puppet Environment Distributors
-rake aborted!
-ForemanTasks::TaskError: Task 541787f6-ad56-449a-be6f-1b2001fc3538: Katello::Errors::PulpError: PLP0034: The distributor Library-ccv_rhel72_puppet-jboss indicated a failed response when publishing repository <strong>Library-ccv_rhel72_puppet-jboss</strong>.</p></blockquote>
-
-<p>Iniciando serviço</p>
-
-<pre><code># katello-service start
-</code></pre>
-
-<p>Verificando serviço</p>
-
-<pre><code># hammer ping
-candlepin:
-Estado:          ok
-Server Response: Duration: 19ms
-candlepin_auth:
-Estado:          ok
-Server Response: Duration: 23ms
-pulp:
-Estado:          ok
-Server Response: Duration: 66ms
-foreman_tasks:
-Estado:          ok
-Server Response: Duration: 882ms
-</code></pre>
-
-<p>Verique também na interface web se todos os serviços estão ok, na aba Administer->About</p>
-
-<p>Caso ao logar na interface Web, apresente um erro de &ldquo;undefined method `label' for nil:NilClass&rdquo; atualize o pacote tfm-rubygem-katello e reinicie o serviço. (<a href="https://bugzilla.redhat.com/show_bug.cgi?id=1361793">https://bugzilla.redhat.com/show_bug.cgi?id=1361793</a>)</p>
-
-<p><img src="/images/satellite/img2.jpg" alt="img2" /></p>
-
-<pre><code># rpm -Uvh tfm-rubygem-katello-3.0.0.73-1.el7sat.noarch.rpm
-# katello-service restart
-</code></pre>
-
-<p><img src="/images/satellite/img3.jpg" alt="img3" /></p>
-
-<h1>Upgrade Client Satellite 6.2</h1>
-
-<p>Desabilite repositório antigo</p>
-
-<pre><code># subscription-manager repos --disable rhel-7-server-satellite-tools-6.1-rpms
-</code></pre>
-
-<p>Habilite novo repositório</p>
-
-<pre><code># subscription-manager repos --enable=rhel-7-server-satellite-tools-6.2-rpms
-</code></pre>
-
-<p>Realize upgrade do katello-agent</p>
-
-<pre><code># yum upgrade katello-agent
-</code></pre>
-
-<h1>Referencias:</h1>
-
-<ul>
-<li><p><a href="https://access.redhat.com/blogs/1169563/posts/2464761">https://access.redhat.com/blogs/1169563/posts/2464761</a></p></li>
-<li><p><a href="https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/installation-guide">https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/installation-guide</a></p></li>
-</ul>
-
 
 		
 		

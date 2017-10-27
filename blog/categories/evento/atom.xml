@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: evento | brunocarvalho.net]]></title>
+  <link href="http://brunocarvalho.net/blog/categories/evento/atom.xml" rel="self"/>
+  <link href="http://brunocarvalho.net/"/>
+  <updated>2017-10-27T12:51:11-02:00</updated>
+  <id>http://brunocarvalho.net/</id>
+  <author>
+    <name><![CDATA[Bruno Carvalho]]></name>
+    <email><![CDATA[brunowcs@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Um pouco sobre o Ceph Day SP 2017]]></title>
+    <link href="http://brunocarvalho.net/blog/2017/10/27/um-pouco-sobre-o-ceph-day-sp-2017/"/>
+    <updated>2017-10-27T12:09:02-02:00</updated>
+    <id>http://brunocarvalho.net/blog/2017/10/27/um-pouco-sobre-o-ceph-day-sp-2017</id>
+    <content type="html"><![CDATA[<p><img src="/images/ceph/cephday0.png" alt="" /></p>
+
+<p>Na última Quarta-feira(25/10) rolou o primeiro Ceph Day SP e o primeiro na América Latina organizado e realizado pelo nosso Manager Comunity Leonado Vaz e nosso amigo da Savant Marcos Sungalia, além de grandes patrocinadores como RedHat, Canonical, Suse entre outros&hellip;</p>
+
+<p>Para quem não teve a oportunidade de estar presente perdeu um grande dia. Discutimos sobre a nova versão do Ceph, custos x performance, implementações, cases e principalmente o futuro do SDS</p>
+
+<p><img src="/images/ceph/cephday1.png" alt="" /></p>
+
+<p>A chegada da nova versão Luminuos LTS que já é uma realidade, virou um divisor de aguas no mundo do Software Define Storage(SDS) com várias melhorias como o novo backend BlueStorage que leva o Ceph a um nível de performance 2x mais rápido eliminado a camada do filesystem, além de grandes melhorias em toda sua estrutura.</p>
+
+<p>Precisando de baixa latency e alta performance? O Ceph te entrega, tivemos uma palestra da Intel, uma das grandes colaboradoras do código, falando sobre Ceph com All-Flash.</p>
+
+<p><a href="https://software.intel.com/en-us/articles/using-intel-optane-and-intel-3d-nand-technology-with-ceph-to-build-high-performance-cloud">SSDs to Build High-Performance Cloud Storage Solutions</a></p>
+
+<p>Para os amantes do Zabbix como eu, o novo serviço de gerenciamento do Ceph(ceph-mgr) foi ampliado com vários módulos python, um deles exporta o status geral do cluster para o Zabbix habilitando o modulo no Ceph e configurando o template no zabbix.</p>
+
+<pre><code class="bash">$ ceph zabbix config-set zabbix_host zabbix-server.local
+$ ceph zabbix config-set identifier ceph.local
+</code></pre>
+
+<p>Para os amantes da interface GUI. Agora será possível ter um dashboard no Ceph de forma simples.</p>
+
+<pre><code class="bash">$ ceph mgr module enable dashboard
+</code></pre>
+
+<p>Acesse <a href="http://you_active_mgr_host:7000/">http://you_active_mgr_host:7000/</a></p>
+
+<p><img src="/images/ceph/cephday2.png" alt="" />
+<img src="/images/ceph/cephday3.png" alt="" /></p>
+
+<p>Outra grande novidade, agora será possível fazer Erasure Coding tanto em RBD quanto em CephFS, que antes só era possível com object. Na mudança para o BlueStorage será possível suporta compressão de dados, trazendo mais economia no armazenamento.</p>
+
+<p>E tem muito mais vindo por ai! Eu particularmente estou ansioso para o tão esperado QoS que está por vir na próxima versão ou dedup que será excelente para galera de backup. Aguardem que isso e só o começo da evolução que o Ceph vem trazendo para o mundo do Software Define Storage.</p>
+
+<p>Referências:</p>
+
+<p><a href="http://ceph.com/releases/v12-2-0-luminous-released/">http://ceph.com/releases/v12-2-0-luminous-released/</a></p>
+
+<p><a href="http://ceph.com/community/new-luminous-dashboard/">http://ceph.com/community/new-luminous-dashboard/</a></p>
+
+<p><a href="http://ceph.com/community/new-luminous-zabbix/">http://ceph.com/community/new-luminous-zabbix/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

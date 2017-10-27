@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://brunocarvalho.net/blog/2017/10/27/um-pouco-sobre-o-ceph-day-sp-2017/</loc>
+<lastmod>2017-10-27T12:09:02-02:00</lastmod>
+</url>
+<url>
 <loc>http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas/</loc>
 <lastmod>2017-08-21T18:56:10-03:00</lastmod>
 </url>
@@ -156,6 +160,18 @@
 </url>
 <url>
 <loc>http://brunocarvalho.net/blog/categories/metal/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/ceph/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/cephdaysp/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/evento/</loc>
+</url>
+<url>
+<loc>http://brunocarvalho.net/blog/categories/luminous/</loc>
 </url>
 <url>
 <loc>http://brunocarvalho.net/google60f3e9080d9a5555.html</loc>
