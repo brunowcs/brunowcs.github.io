@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cephdaysp | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/cephdaysp/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2017-10-27T12:51:11-02:00</updated>
+  <updated>2017-10-27T19:46:54-02:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -20,15 +20,15 @@
     <id>http://brunocarvalho.net/blog/2017/10/27/um-pouco-sobre-o-ceph-day-sp-2017</id>
     <content type="html"><![CDATA[<p><img src="/images/ceph/cephday0.png" alt="" /></p>
 
-<p>Na última Quarta-feira(25/10) rolou o primeiro Ceph Day SP e o primeiro na América Latina organizado e realizado pelo nosso Manager Comunity Leonado Vaz e nosso amigo da Savant Marcos Sungalia, além de grandes patrocinadores como RedHat, Canonical, Suse entre outros&hellip;</p>
+<p>Na última Quarta-feira(25/10) rolou o primeiro Ceph Day SP e o primeiro na América Latina organizado e realizado pelo nosso Manager Comunity Leonado Vaz e nosso amigo da Savant Marcos Sungaila, além de grandes patrocinadores como RedHat, Canonical, Suse entre outros&hellip;</p>
 
 <p>Para quem não teve a oportunidade de estar presente perdeu um grande dia. Discutimos sobre a nova versão do Ceph, custos x performance, implementações, cases e principalmente o futuro do SDS</p>
 
 <p><img src="/images/ceph/cephday1.png" alt="" /></p>
 
-<p>A chegada da nova versão Luminuos LTS que já é uma realidade, virou um divisor de aguas no mundo do Software Define Storage(SDS) com várias melhorias como o novo backend BlueStorage que leva o Ceph a um nível de performance 2x mais rápido eliminado a camada do filesystem, além de grandes melhorias em toda sua estrutura.</p>
+<p>A chegada da nova versão Luminous LTS que já é uma realidade, virou um divisor de águas no mundo do Software Define Storage(SDS) com várias melhorias como o novo backend BlueStorage que leva o Ceph a um nível de performance 2x mais rápido eliminando a camada do filesystem, além de grandes melhorias em toda sua estrutura.</p>
 
-<p>Precisando de baixa latency e alta performance? O Ceph te entrega, tivemos uma palestra da Intel, uma das grandes colaboradoras do código, falando sobre Ceph com All-Flash.</p>
+<p>Precisando de baixa latência e alta performance? O Ceph te entrega, tivemos uma palestra da Intel, uma das grandes colaboradoras do código, falando sobre Ceph com All-Flash.</p>
 
 <p><a href="https://software.intel.com/en-us/articles/using-intel-optane-and-intel-3d-nand-technology-with-ceph-to-build-high-performance-cloud">SSDs to Build High-Performance Cloud Storage Solutions</a></p>
 
@@ -48,9 +48,9 @@ $ ceph zabbix config-set identifier ceph.local
 <p><img src="/images/ceph/cephday2.png" alt="" />
 <img src="/images/ceph/cephday3.png" alt="" /></p>
 
-<p>Outra grande novidade, agora será possível fazer Erasure Coding tanto em RBD quanto em CephFS, que antes só era possível com object. Na mudança para o BlueStorage será possível suporta compressão de dados, trazendo mais economia no armazenamento.</p>
+<p>Outra grande novidade, agora já é possível fazer Erasure Coding tanto em RBD quanto em CephFS, que antes só era possível com object. Na mudança para o BlueStorage será possível suporta compressão de dados, trazendo mais economia no armazenamento.</p>
 
-<p>E tem muito mais vindo por ai! Eu particularmente estou ansioso para o tão esperado QoS que está por vir na próxima versão ou dedup que será excelente para galera de backup. Aguardem que isso e só o começo da evolução que o Ceph vem trazendo para o mundo do Software Define Storage.</p>
+<p>E tem muito mais vindo por ai! Eu particularmente estou ansioso para o tão esperado QoS que está por vir na próxima versão ou dedup que será excelente para galera de backup. Aguardem que isso será só o começo da evolução que o Ceph vem trazendo para o mundo do Software Define Storage.</p>
 
 <p>Referências:</p>
 
