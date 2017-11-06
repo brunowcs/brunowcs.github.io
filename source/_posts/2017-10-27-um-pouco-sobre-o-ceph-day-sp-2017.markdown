@@ -14,7 +14,7 @@ Para quem não teve a oportunidade de estar presente perdeu um grande dia. Discu
 
 ![](/images/ceph/cephday1.png)
 
-A chegada da nova versão Luminous LTS que já é uma realidade, virou um divisor de aguas no mundo do Software Define Storage(SDS) com várias melhorias como o novo backend BlueStorage que leva o Ceph a um nível de performance 2x mais rápido eliminando a camada do filesystem, além de grandes melhorias em toda sua estrutura. 
+A chegada da nova versão Luminous LTS que já é uma realidade, virou um divisor de águas no mundo do Software Define Storage(SDS) com várias melhorias como o novo backend BlueStorage que leva o Ceph a um nível de performance 2x mais rápido eliminando a camada do filesystem, além de grandes melhorias em toda sua estrutura. 
 
 Precisando de baixa latência e alta performance? O Ceph te entrega, tivemos uma palestra da Intel, uma das grandes colaboradoras do código, falando sobre Ceph com All-Flash.
 
@@ -38,7 +38,7 @@ Acesse http://you_active_mgr_host:7000/
 ![](/images/ceph/cephday2.png)
 ![](/images/ceph/cephday3.png)
 
-Outra grande novidade, agora será possível fazer Erasure Coding tanto em RBD quanto em CephFS, que antes só era possível com object. Na mudança para o BlueStorage será possível suporta compressão de dados, trazendo mais economia no armazenamento. 
+Outra grande novidade, agora já é possível fazer Erasure Coding tanto em RBD quanto em CephFS, que antes só era possível com object. Na mudança para o BlueStorage será possível suporta compressão de dados, trazendo mais economia no armazenamento. 
 
 E tem muito mais vindo por ai! Eu particularmente estou ansioso para o tão esperado QoS que está por vir na próxima versão ou dedup que será excelente para galera de backup. Aguardem que isso será só o começo da evolução que o Ceph vem trazendo para o mundo do Software Define Storage.
 
