@@ -18,5 +18,6 @@ No Webinar “Explorando Ceph” que será realizado pela TIVIT na próxima quar
 
 **GRAVAÇÃO:** 
 
-<iframe width="660" height="415" src="https://www.youtube.com/embed/DayGJbPtB04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="100%" height="350px" src="https://www.youtube.com/embed/DayGJbPtB04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
