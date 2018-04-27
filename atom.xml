@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-04-03T14:32:57-03:00</updated>
+  <updated>2018-04-27T15:01:08-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -27,6 +27,13 @@
 <p>Atualmente as empresas precisam ter serviços disponíveis 24 horas, a Cloud Computing abraça todas as aplicações criadas para abastecer o mundo conectado, tanto para o mercado corporativo quando para atender o consumidor final. Para que isso gere menos custo e valor para empresas precisamos de um mundo com soluções hiperconvergentes, e sem um storage eficiente e escalável baseado em Software Defined isso se tornaria inviável para muitas empresas e startups.</p>
 
 <p>No Webinar “Explorando Ceph” que será realizado pela TIVIT na próxima quarta-feira dia 4, falarei um pouco mais sobre o storage que está revolucionando o mercado de Software Defined, será totalmente gratuito e online. Inscreva-se: <a href="http://go.tivit.com/webinar-explorando-ceph">Aqui</a></p>
+
+<p><strong>GRAVAÇÃO:</strong></p>
+
+<iframe width="660" height="415" src="https://www.youtube.com/embed/DayGJbPtB04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+
 ]]></content>
   </entry>
   
