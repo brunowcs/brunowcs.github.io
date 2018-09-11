@@ -5,11 +5,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Categories - brunocarvalho.net</title>
+	<title>Ceph Scrubbing - brunocarvalho.net</title>
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="Cotidiano [ 2 ] Linux [ 8 ] Centos [ 4 ] Rhel [ 4 ] Zabbix [ 1 ] Weblogic [ 1 ] Lvm [ 1 ] Vmware [ 1 ] Satellite [ 2 ] Realidade [ 1 ] Rsync [ 1 ] &hellip;">
+	<meta name="description" content="Ceph Scrubbing Recentemente encontrei um bug relacionado a recuperação de PGs dentro do Jewel. O Ceph não estava conseguindo resolver a &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="brunocarvalho.net" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://brunocarvalho.net/blog/categories/">
+	<link rel="canonical" href="http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -134,90 +134,106 @@
 				
 			
 			<div class="mid-col-container">
-				<div id="content" class="inner"><article class="page">
-    
-    <h1 class="title">Categories</h1>
-    
-    <div class="entry-content"><ul>
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Ceph Scrubbing</h1>
+	<div class="entry-content" itemprop="articleBody"><p><span style="display:block;text-align:center"><img src="/images/ceph/ceph.png" alt="" /> </span></p>
 
-    <li><a href="/blog/categories/cotidiano/">Cotidiano</a> [ 2 ]</li>
+<p>Recentemente encontrei um bug relacionado a recuperação de PGs dentro do Jewel. O Ceph não estava conseguindo resolver a inconsistência de uma PG, mesmo executando o “ceph repair” e forçando a passagem do Scrub. Pelo que notei nos últimos lançamentos do CEPH tem alguns Bug fix sobre o assunto.</p>
 
-    <li><a href="/blog/categories/linux/">Linux</a> [ 8 ]</li>
+<p>Esse será o primeiro de alguns posts que irei falar de como resolver manualmente uma pg inconsistente. Primeiramente vamos entender o Scrubbing no Ceph e caso tenha alguma duvida sobre o SDS Ceph não deixa de assitir meu Webinar que postei aqui no Blog <a href="http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/">Explorando o Ceph</a></p>
 
-    <li><a href="/blog/categories/centos/">Centos</a> [ 4 ]</li>
+<p>Podemos comparar o Scrubbing do Ceph com o fsck para o armazenamento de objetos dentro do Cluster.
+Ao executar “ceph -s” na ultimas linhas vemos as “placement groups(PGs)” que estão “active+clean”
+Para cada placement groups(PGs) o Ceph gera um catálogo de todos os objetos e compara cada objeto principal e suas réplicas para garantir que nenhum objeto esteja ausente ou seja incompatível.
+Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent” isso nos mostrar que alguma replicar dentro do cluster está inconsistente.</p>
 
-    <li><a href="/blog/categories/rhel/">Rhel</a> [ 4 ]</li>
+<p>A passagem do Scrubbing é penosa para o cluster e muitas vezes ele só passará quando o sistema estiver com uma carga menor ou se as configurações forem alteradas via inject nas “OSDs”.</p>
 
-    <li><a href="/blog/categories/zabbix/">Zabbix</a> [ 1 ]</li>
+<p><strong>Verificando configurações no Ceph:</strong></p>
 
-    <li><a href="/blog/categories/weblogic/">Weblogic</a> [ 1 ]</li>
+<p>Apresenta apenas as configurações default do ceph</p>
 
-    <li><a href="/blog/categories/lvm/">Lvm</a> [ 1 ]</li>
+<pre><code># ceph --show-config 
+</code></pre>
 
-    <li><a href="/blog/categories/vmware/">Vmware</a> [ 1 ]</li>
+<p>Apresenta a configuração permanente do ceph.conf</p>
 
-    <li><a href="/blog/categories/satellite/">Satellite</a> [ 2 ]</li>
+<pre><code># ceph -n osd.X --show-config
+</code></pre>
 
-    <li><a href="/blog/categories/realidade/">Realidade</a> [ 1 ]</li>
+<p>Apresentar a configuração atual</p>
 
-    <li><a href="/blog/categories/rsync/">Rsync</a> [ 1 ]</li>
+<pre><code># ceph --admin-daemon /var/run/ceph/ceph-osd.21.asok config show 
+</code></pre>
 
-    <li><a href="/blog/categories/ovirt/">Ovirt</a> [ 1 ]</li>
+<p>Alterando Configuração a quente</p>
 
-    <li><a href="/blog/categories/nfs/">Nfs</a> [ 1 ]</li>
+<pre><code># ceph tell osd.X injectargs '--osd_scrub_load_threshold 0.5'
+</code></pre>
 
-    <li><a href="/blog/categories/virtualização/">Virtualização</a> [ 1 ]</li>
+<p>O Scrub é muito importante para manter a integridade dos dados, mas poderá reduzir o desempenho do seu cluster se não for realizado ajustes nas configurações.</p>
 
-    <li><a href="/blog/categories/nuvem/">Nuvem</a> [ 1 ]</li>
+<p>Existe dois tipos de Scrub, um e o “Light scrubbing” verifica o tamanho e os atributos do objeto e passa todos os dias e não sobrecarrega tanto seu cluster. O “deep-scrubbing”  e uma limpeza mais profunda  lê os dados e usa somas de verificação para garantir a integridade, ele que passa no decorrer da semana e gera uma carga maior no cluster. Como o “Ceph -s“ conseguimos verificar em quantas “PGs” está executando scrubbing no momento.</p>
 
-    <li><a href="/blog/categories/cloud/">Cloud</a> [ 1 ]</li>
+<blockquote><p>26 active+clean+scrubbing+deep
+7 active+clean+scrubbing</p></blockquote>
 
-    <li><a href="/blog/categories/ebook/">Ebook</a> [ 1 ]</li>
+<p>Executando o comando abaixo, você consegue ver quanto tempo passou o último scrub/deep-scrub na pg</p>
 
-    <li><a href="/blog/categories/xen/">Xen</a> [ 1 ]</li>
+<pre><code># Ceph osd PG_ID query 
+..................
+            "last_deep_scrub_stamp": "2018-08-23 15:48:42.107928",
+..................   
+</code></pre>
 
-    <li><a href="/blog/categories/xenserver/">Xenserver</a> [ 1 ]</li>
+<p>Algumas configurações que devemos nos atentar:</p>
 
-    <li><a href="/blog/categories/kvm/">Kvm</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/juju,/">Juju,</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/lxd,/">Lxd,</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/linux,/">Linux,</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/canonical,/">Canonical,</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/ubuntu/">Ubuntu</a> [ 3 ]</li>
-
-    <li><a href="/blog/categories/openstack/">Openstack</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/juju/">Juju</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/canonical/">Canonical</a> [ 2 ]</li>
-
-    <li><a href="/blog/categories/maas/">Maas</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/bare/">Bare</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/metal/">Metal</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/ceph/">Ceph</a> [ 3 ]</li>
-
-    <li><a href="/blog/categories/cephdaysp/">Cephdaysp</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/evento/">Evento</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/luminous/">Luminous</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/webinar/">Webinar</a> [ 1 ]</li>
-
-    <li><a href="/blog/categories/sds/">Sds</a> [ 1 ]</li>
-
+<ul>
+<li>osd_scrub_min_interval</li>
+<li>osd_scrub_max_interval</li>
+<li>osd_scrub_load_threshold</li>
+<li>osd_max_scrubs</li>
+<li>osd_deep_scrub_interval</li>
+<li>osd_scrub_interval_randomize_ratio</li>
+<li>osd_scrub_during_recovery</li>
 </ul>
 
+
+<p>Os Scrubs começam após osd_scrub_min_interval desde o último scrub ter passado, isso só ocorre se a CPU estiver abaixo do osd_scrub_load_threshold ou após osd_scrub_max_interval mesmo se o sistema estiver sobrecarregado.</p>
+
+<p>Podemos também configurar um intervalo na madrugada para o scrub passar osd_scrub_begin_hour/osd_scrub_end_hour, com lançamento do Mimic temos mais duas opções de intervalos osd_scrub_begin_week_day/osd_scrub_end_week_day</p>
+
+<p>Quando executamos um ceph pg repair, ou um ceph pg deep-scrub ele não irá executar imediatamente e sim enviará um pedido a pg e o osd primario “instructing pg ID on osd.X to repair” porem precisa satisfazer as regras configuradas.</p>
+
+<blockquote><p>Nota: “Ceph will not scrub when the system load (as defined by getloadavg() / number of onlinecpus) is higher than this number. Default is 0.5.”</p></blockquote>
+
+<p>A passagem deep-scrub não necessariamente depende do load_threshold</p>
+
+<blockquote><p>Nota: “The interval for “deep” scrubbing (fully reading all data). The osd scrub load threshold does not affect this setting.”</p></blockquote>
+
+<p>Atenção as frags noscrub e nodeep-scrub definida no cluster e nas pools, caso esteja setada o scrub não será executado.</p>
 </div>
+
+
+
 </article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
 
 
 <section id="comment">
@@ -229,8 +245,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://brunocarvalho.net/blog/categories/index.html';
-        var disqus_url = 'http://brunocarvalho.net/blog/categories/index.html';
+        var disqus_identifier = 'http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/';
+        var disqus_url = 'http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/';
         var disqus_script = 'embed.js';
       
     (function () {
@@ -244,7 +260,6 @@
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
-
 </div>
 			</div>
 			<footer id="footer" class="inner"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Todo <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">conteúdo</span> do <a xmlns:cc="http://creativecommons.org/ns#" href="brunocarvalho.net" property="cc:attributionName" rel="cc:attributionURL">brunocarvalho.net</a> está licenciado com a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons - Atribuição-CompartilhaIgual 4.0 Internacional</a>.
