@@ -84,13 +84,11 @@ Atenção as frags noscrub e nodeep-scrub definida no cluster e nas pools, caso 
 
 Creio que com essas informações já conseguimos manipular melhor os Scrubbing no cluster, que e essencial para a consistência das  “Placement groups(PGs)” e da performance do cluster. Nos próximos posts vamos entrar mais a fundo na manipulação manual do objeto e na sua recuperação.
 
- Caso tenha alguma dúvida sobre o funcionamento do Ceph não deixa de assitir meu Webinar que postei aqui no Blog [Explorando o Ceph](http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/) 
- 
- Como tiveram várias dúvidas sobre o Webinar, lançarei uma série de artigos mais básico com informações essencias para você ir “Explorando o Ceph”.
+ Caso tenha alguma dúvida sobre o funcionamento do Ceph não deixa de assitir meu Webinar que postei aqui no Blog [Explorando o Ceph](http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/) Como tiveram várias dúvidas sobre o Webinar, lançarei uma série de artigos mais básicos com informações essencias para você ir “Explorando o Ceph”.
 
 Nos próximo posts irei apresentar: 
 
 [ - Resolvendo PGs inconsistent no CEPH manualmente ](http://localhost:4000/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/)
 
 
-Referencia: http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/
+Referência: http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/
