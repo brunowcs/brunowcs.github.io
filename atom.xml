@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-12T17:22:26-03:00</updated>
+  <updated>2018-09-12T17:44:36-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -71,7 +71,7 @@ root@serv-117:/home/bruno.carvalho# ceph osd find 135
 }
 </code></pre>
 
-<p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria não esqueça de descer com primary-affinity.</p>
+<p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria não esqueça de descer com primary-affinity.()</p>
 
 <pre><code># grep -Hn 'ERR' /var/log/ceph/ceph-osd.26.log (apresentar uma tripa de erro, o importante será o nome do objeto )
 ..... log [ERR] : 5.163 .... 
@@ -220,7 +220,7 @@ remove #5:c691b427:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head#
 
 <p>Após o termino do deep-scrub provavelmente sua pg já estará OK.</p>
 
-<p>Nos próximo post irei apresentar:</p>
+<p>Nos próximos posts irei apresentar:</p>
 
 <ul>
 <li><strong>Monitoramento avançado no Ceph</strong> - Falarei sobre Telegraf/Influx/Grafana um dashboard pronto com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster)</li>
