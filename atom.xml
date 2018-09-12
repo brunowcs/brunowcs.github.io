@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-12T17:44:36-03:00</updated>
+  <updated>2018-09-12T17:44:42-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -324,7 +324,7 @@ Ao executar “ceph -s” nas ultimas linhas veremos as “placement groups(PGs)
 
 <p>Nos próximo posts irei apresentar:</p>
 
-<p><a href="http://brunocarvalho.net/"> - Resolvendo PGs inconsistent no CEPH manualmente </a></p>
+<p><a href="http://localhost:4000/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/"> - Resolvendo PGs inconsistent no CEPH manualmente </a></p>
 
 <p>Referencia: <a href="http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/">http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/</a></p>
 ]]></content>
