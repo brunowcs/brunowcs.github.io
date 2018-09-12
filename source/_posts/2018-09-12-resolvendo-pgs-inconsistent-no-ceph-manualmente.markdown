@@ -61,7 +61,7 @@ Antes de iniciar recomendo a leitura do meu post ["Ceph Scrubbing"](http://bruno
 	}
 
 
-2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria não esqueça de descer com primary-affinity. 
+2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria não esqueça de descer com primary-affinity.()
 
     # grep -Hn 'ERR' /var/log/ceph/ceph-osd.26.log (apresentar uma tripa de erro, o importante será o nome do objeto )
 	..... log [ERR] : 5.163 .... 
@@ -191,7 +191,7 @@ Também podemos verificar logo no final do comando query o deep-scrub sendo exec
 
 Após o termino do deep-scrub provavelmente sua pg já estará OK.
 
-Nos próximo post irei apresentar: 
+Nos próximos posts irei apresentar: 
 
 - **Monitoramento avançado no Ceph** - Falarei sobre Telegraf/Influx/Grafana um dashboard pronto com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster)
 - **Melhores práticas com Ceph** - Desde o Hardware, S.O e configurações do ceph.conf para você obter melhor performance do seu cluster.
