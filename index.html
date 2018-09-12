@@ -180,7 +180,7 @@
 
 <p>Recentemente eu tiver um problema de badblock em um dos discos que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente.</p>
 
-<p>As soluções abaixo que me ajudaram a resolver meu problema que se estendeu por alguns dias. Caso tenha suporte recomendo abrir um chamado ou faça por sua conta e risco.</p>
+<p>As soluções abaixo me ajudaram a resolver meu problema que se estendeu por alguns dias. Caso tenha suporte recomendo abrir um chamado ou faça por sua conta e risco.</p>
 
 <p>A solução 1 resolver a maioria dos casos e no meu caso não houver impacto nem downtime.</p>
 
@@ -229,21 +229,31 @@ root@serv-117:/home/bruno.carvalho# ceph osd find 135
 }
 </code></pre>
 
-<p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria vamos descer o peso dele com o primary-affinity</p>
+<p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria não esqueça de descer com primary-affinity,</p>
 
-<pre><code># ceph osd primary-affinity 26 0
-# grep -Hn 'ERR' /var/log/ceph/ceph-osd.26.log
-ou
-# rados list-inconsistent-obj 5.163--format=json-pretty
+<pre><code># grep -Hn 'ERR' /var/log/ceph/ceph-osd.26.log (apresentar uma tripa de erro, o importante será o nome do objeto )
+..... log [ERR] : 5.163 .... 
+udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
+.....
 </code></pre>
 
-<p>3 - Logue no servidor das 3 OSDs, busque o arquivo e verifique o md5 do objeto seu tamanho e identifique o que está diferente entre os 3, no caso será o que você irar remover para mandar o cluster se recuperar.</p>
+<p>No Monitor podemos buscar com o comando abaixo (apresenta um json grande, porem o importante é o nome do objeto, algo parecido com nome do comando acima.)</p>
+
+<pre><code># rados list-inconsistent-obj 5.163--format=json-pretty
+</code></pre>
+
+<p>Se nescessário jogue a OSD primário para outra OSD.</p>
+
+<pre><code># ceph osd primary-affinity 26 0
+</code></pre>
+
+<p>3 - Logue nos servidores das 3 OSDs, busque o arquivo e verifique o md5 do objeto, seu tamanho e identifique o que está diferente entre os 3, no caso o objeto diferente será o que você irar remover para mandar o cluster se recuperar.</p>
 
 <pre><code># find /var/lib/ceph/osd/ceph-26/current/5.163_head/ -name '*00000000000059d2*' -ls
 ...
 /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
 # md5sum /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4\
-*d12a1f042f2a98a79943c990d3a5b2c8*  /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
+d12a1f042f2a98a79943c990d3a5b2c8  /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
 </code></pre>
 
 <p>4 - Set noout no cluster</p>
@@ -289,9 +299,11 @@ SG_IO: bad/missing sense data, sb[]:  70 00 05 00 00 00 00 0a 00 00 00 00 20 00 
 <pre><code># ceph pg repair 5.163
 </code></pre>
 
-<blockquote><p>Agora veja os logs das OSDs primaria.</p></blockquote>
+<blockquote><p>Agora veja o log da OSD primaria.</p></blockquote>
 
-<pre><code>2018-08-23 18:33:30.568207 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 shard 26 missing 5:9f1e0491:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head
+<pre><code># tail -f /var/log/ceph/ceph-osd.26.log
+
+2018-08-23 18:33:30.568207 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 shard 26 missing 5:9f1e0491:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head
 2018-08-23 18:33:30.568212 7fc1ee195700  0 log_channel(cluster) do_log log to syslog
 2018-08-23 18:33:36.274075 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 repair 1 missing, 0 inconsistent objects
 2018-08-23 18:33:36.274079 7fc1ee195700  0 log_channel(cluster) do_log log to syslog    
@@ -365,6 +377,8 @@ remove #5:c691b427:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head#
 </code></pre>
 
 <p>Após o termino do deep-scrub provavelmente sua pg já estará OK.</p>
+
+<p>Referencia: <a href="http://lists.ceph.com/pipermail/ceph-users-ceph.com/">http://lists.ceph.com/pipermail/ceph-users-ceph.com/</a></p>
 
 		
 		
