@@ -9,7 +9,7 @@
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="11/09/2018 ceph, linux, sds Comments Ceph Scrubbing Olá turmadaaa, um pouco sumido, mas estou de volta com grandes novidades. A pouco mais de 2 anos &hellip;">
+	<meta name="description" content="12/09/2018 ceph, linux Comments Resolvendo PGs Inconsistent No CEPH Manualmente Essas são algumas das soluções que me ajudaram a resolver meu &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -160,6 +160,210 @@
 
 
 
+<time datetime="2018-09-12T00:00:00-03:00" data-updated="true" itemprop="datePublished">12/09/2018</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ceph/'>ceph</a>, <a class='category' href='/blog/categories/linux/'>linux</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/#disqus_thread">Comments</a></span>
+	
+			
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/" itemprop="url">Resolvendo PGs Inconsistent No CEPH Manualmente</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph.png" alt="" /> </span></p>
+
+<p>Essas são algumas das soluções que me ajudaram a resolver meu problema que se estendeu por alguns dias, caso tenha suporte recomendo abrir um chamado ou faça por sua conta e risco.</p>
+
+<p>Recentemente eu tiver um problema de badblock em um dos disco que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente.</p>
+
+<p>A solução 1 resolver a maioria dos casos e no meu caso não houver impacto nem downtime.</p>
+
+<p>Problema ocorreu no Ubuntu 16.4 com Jewel utilizando FileStore replica de 3.</p>
+
+<p>Antes de iniciar recomendo a leitura do meu post <a href="http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/">&ldquo;Ceph Scrubbing&rdquo;</a> será fundamental você entender esse cara antes de começar.</p>
+
+<p>1 - Buscando pgs inconsistent</p>
+
+<pre><code># ceph health detail  | grep inconsistent
+HEALTH_ERR 
+pg 5.163 is active+remapped+inconsistent+wait_backfill, acting [45,26,135]
+</code></pre>
+
+<p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria vamos descer o peso dele com o primary-affinity</p>
+
+<pre><code># ceph osd primary-affinity 26 0
+# grep -Hn 'ERR' /var/log/ceph/ceph-osd.26.log
+ou
+# rados list-inconsistent-obj 5.163--format=json-pretty
+</code></pre>
+
+<p>3 - Logue no servidor das 3 OSDs, busque o arquivo e verifique o md5 do objeto seu tamanho e tente identificar o que está diferente entre os 3, no caso será o que você irar remover para mandar o cluster se recuperar.</p>
+
+<pre><code># find /var/lib/ceph/osd/ceph-26/current/5.163_head/ -name '*00000000000059d2*' -ls
+...
+/var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
+# md5sum /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4\
+*d12a1f042f2a98a79943c990d3a5b2c8*  /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
+</code></pre>
+
+<p>4 - Set noout no cluster</p>
+
+<pre><code># ceph osd set noout
+</code></pre>
+
+<p>5 - Pare a OSD</p>
+
+<pre><code># systemctl stop ceph-osd@26
+</code></pre>
+
+<p>6 - Execute o flush do journal</p>
+
+<pre><code># ceph-osd -i 26 --flush-journal
+SG_IO: bad/missing sense data, sb[]:  70 00 05 00 00 00 00 0a 00 00 00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+SG_IO: bad/missing sense data, sb[]:  70 00 05 00 00 00 00 0a 00 00 00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2018-08-23 18:31:57.691076 7f69269888c0 -1 flushed journal /var/lib/ceph/osd/ceph-26/journal for object store /var/lib/ceph/osd/ceph-26
+</code></pre>
+
+<p>7 - Remova o Objecto com problema</p>
+
+<pre><code># rm  -rf /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
+</code></pre>
+
+<p>8 - Corrigindo permissão da OSD</p>
+
+<pre><code># chown ceph:ceph -R /var/lib/ceph/osd/ceph-26/current/omap/
+</code></pre>
+
+<p>9 - Subindo OSD</p>
+
+<pre><code># systemctl start ceph-osd@26
+</code></pre>
+
+<p>10 - Tira o noout no cluster e aguarde o cluster ficar com apenas a pg inconsistent</p>
+
+<pre><code># ceph osd unset noout
+</code></pre>
+
+<p>11 - Vamos agora executar um repair para corrigir o problema.</p>
+
+<pre><code># ceph pg repair 5.163
+
+Veja os logs das OSD.
+
+2018-08-23 18:33:30.568207 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 shard 26 missing 5:9f1e0491:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head
+2018-08-23 18:33:30.568212 7fc1ee195700  0 log_channel(cluster) do_log log to syslog
+2018-08-23 18:33:36.274075 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 repair 1 missing, 0 inconsistent objects
+2018-08-23 18:33:36.274079 7fc1ee195700  0 log_channel(cluster) do_log log to syslog    
+2018-08-23 18:33:36.274142 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 repair 1 errors, 1 fixed
+2018-08-23 18:33:36.274144 7fc1ee195700  0 log_channel(cluster) do_log log to syslog
+</code></pre>
+
+<p>No log acima podemos ver &ldquo;log [ERR] : 5.163 repair 1 errors, 1 fixed&rdquo; isso mostra que ele encontrou o objecto que faltava e corrigiu criando novamente a replica.</p>
+
+<h2>Solução 2</h2>
+
+<p> Identificar e remover o objeto problemático nas OSDs excluindo com ceph-object-tools executando com deep-scrub</p>
+
+<p>Com o objeto problemático já identificado, execute os procedimentos: 4, 5 e 6 após sigar os procedimentos abaixo</p>
+
+<p>1 - Com a OSD down localize o objeto</p>
+
+<pre><code># ceph-objectstore-tool --data-path /var/lib/ceph/osd/ceph-26 --journal /var/lib/ceph/osd/ceph-26/journal --pgid 5.163 --op list | grep rbd_data.3b2ab5c0fdd3f.00000000000059d2
+["5.163",{"oid":"rbd_data.3b2ab5c0fdd3f.00000000000059d2","key":"","snapid":-2,"hash":3828189539,"max":0,"pool":5,"namespace":"","max":0}]
+</code></pre>
+
+<p>2 - Removendo Objeto.</p>
+
+<pre><code># ceph-objectstore-tool --data-path /var/lib/ceph/osd/ceph-26 --journal /var/lib/ceph/osd/ceph-26/journal --pgid 5.163 '{"oid":"rbd_data.3b2ab5c0fdd3f.00000000000059d","key":"","snapid":-2,"hash":3828189539,"max":0,"pool":5,"namespace":"","max":0}' remove
+remove #5:c691b427:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head#
+</code></pre>
+
+<p>3 - Corrigir permissão</p>
+
+<pre><code># chown -R ceph:ceph /var/lib/ceph/osd/ceph-135/current/omap/
+</code></pre>
+
+<p>4 - Iniciar OSD</p>
+
+<pre><code># systemctl start ceph-osd@26
+</code></pre>
+
+<p>5 - Execute o deep-scrub na pg (Veja artigo do &ldquo;Ceph Scrubbing&rdquo;, caso não conseguir executar)</p>
+
+<pre><code># ceph pg deep-scrub 5.163
+</code></pre>
+
+<p>O deep-scrub no ceph é um processo que passa em todas OSDs para verificar inconsitencia dos dados e corrigir eventuais problemas,  podemos comparar ao fsck.
+Dependendo das configurações do seu Cluster o deep-scrub não executará imediatamente, verifique no log da OSD primaria ou execute o seguinte comando abaixo e veja
+a data da ultima vez que ele passou.</p>
+
+<p>Se o deep-scrub não for executado, verifique as configurações de osd_scrub_max_interval, também é importante verificar o osd_scrub_load_threshold,
+pois se sua CPU estiver e um certo limite o deep-scrub não rodará.</p>
+
+<p>Leia mais sobre: <a href="http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/">&ldquo;Ceph Scrubbing&rdquo;</a></p>
+
+<p>6 - Query pg</p>
+
+<pre><code>#  ceph pg 5.163 query 
+..................
+        "last_deep_scrub_stamp": "2018-08-23 15:48:42.107928",
+..................   
+</code></pre>
+
+<p>Também podemos verificar logo no final do comando query o deep-scrub sendo executado na PG.</p>
+
+<pre><code>"scrub": {
+            "scrubber.epoch_start": "57000",
+            "scrubber.active": 1,
+            "scrubber.state": "WAIT_REPLICAS",
+            "scrubber.start": "5:578cfc17:::rbd_data.57e3dd6b7d297f.000000000000b063:0",
+            "scrubber.end": "5:578cff8c:::rbd_data.552a0c53cb890c.00000000000046aa:0",
+            "scrubber.subset_last_update": "58460'37642760",
+            "scrubber.deep": true,
+            "scrubber.seed": 4294967295,
+            "scrubber.waiting_on": 1,
+            "scrubber.waiting_on_whom": [
+                "48"
+</code></pre>
+
+<p>Após o termino do deep-scrub provavelmente sua pg já estará OK.</p>
+
+		
+		
+	</div>
+
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <time datetime="2018-09-11T00:00:00-03:00" data-updated="true" itemprop="datePublished">11/09/2018</time></div>
 		<div class="tags">
 
@@ -260,6 +464,10 @@ Ao executar “ceph -s” nas ultimas linhas veremos as “placement groups(PGs)
 <p> Caso tenha alguma dúvida sobre o funcionamento do Ceph não deixa de assitir meu Webinar que postei aqui no Blog <a href="http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/">Explorando o Ceph</a></p>
 
 <p> Como tiveram várias dúvidas sobre o Webinar, lançarei uma série de artigos mais básico com informações essencias para você ir “Explorando o Ceph”.</p>
+
+<p>Nos próximo posts irei apresentar:</p>
+
+<p><a href="http://brunocarvalho.net/"> - Resolvendo PGs inconsistent no CEPH manualmente </a></p>
 
 <p>Referencia: <a href="http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/">http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/</a></p>
 
@@ -1634,76 +1842,6 @@ exitMessage = Failed to acquire lock: No space left on device
 <p><strong>Referência:</strong></p>
 
 <p><a href="http://www.ovirt.org/documentation/">http://www.ovirt.org/documentation/</a></p>
-
-		
-		
-	</div>
-
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2016-11-17T00:00:00-02:00" data-updated="true" itemprop="datePublished">17/11/2016</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/rsync/'>rsync</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/#disqus_thread">Comments</a></span>
-	
-			
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/" itemprop="url">Continuando Transferência Com RSYNC No Caso De Interrupção</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img src="/images/rsync.jpg" alt="rysnc" /></p>
-
-<p>Olá turmadaaa, precisei realizar uma transferência de uma VM do XenServer com 300G que estava em um ponto de montagem NFS para um outro local remoto e para evitar problemas de interrupção, utilizei o comando abaixo que me permiti continuar a transferência em casos de problemas, como perda de conexão etc&hellip;</p>
-
-<pre><code># rsync -vrlPtz --append /mnt/web.xva /storage/export/
-    sending incremental file list
-    web.xva     4641783808   1%   6.89MB/s    9:57:11
-</code></pre>
-
-<p>O Comando acima basicamente irá comprimir, continuar e salvar parcialmente apresentando a saída em detalhes. Pode ser utilizado com apenas um arquivo ou com diretórios.</p>
-
-<p>Caso queira usar com ssh:</p>
-
-<pre><code># rsync -vrlPtz --append -e 'ssh -p 2222' login@host:/tmp/web.xva /tmp/web.xva
-</code></pre>
-
-<p>Dica SSH Com Tunnel: ssh -L 2222:hostlocal:2222 root@hostremoto</p>
-
-<hr />
-
-<p><strong>Referência:</strong></p>
-
-<p><a href="https://download.samba.org/pub/rsync/rsync.html">https://download.samba.org/pub/rsync/rsync.html</a></p>
 
 		
 		

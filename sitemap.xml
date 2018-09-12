@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://brunocarvalho.net/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/</loc>
+<lastmod>2018-09-12T15:23:02-03:00</lastmod>
+</url>
+<url>
 <loc>http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/</loc>
 <lastmod>2018-09-11T19:03:07-03:00</lastmod>
 </url>

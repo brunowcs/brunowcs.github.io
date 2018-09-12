@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sds | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/sds/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-12T15:05:57-03:00</updated>
+  <updated>2018-09-12T16:03:29-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -102,6 +102,10 @@ Ao executar “ceph -s” nas ultimas linhas veremos as “placement groups(PGs)
 <p> Caso tenha alguma dúvida sobre o funcionamento do Ceph não deixa de assitir meu Webinar que postei aqui no Blog <a href="http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/">Explorando o Ceph</a></p>
 
 <p> Como tiveram várias dúvidas sobre o Webinar, lançarei uma série de artigos mais básico com informações essencias para você ir “Explorando o Ceph”.</p>
+
+<p>Nos próximo posts irei apresentar:</p>
+
+<p><a href="http://brunocarvalho.net/"> - Resolvendo PGs inconsistent no CEPH manualmente </a></p>
 
 <p>Referencia: <a href="http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/">http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/</a></p>
 ]]></content>

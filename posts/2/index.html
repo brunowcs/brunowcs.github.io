@@ -9,8 +9,7 @@
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="04/10/2016 cotidiano, realidade Comments Empregos Morrem E Empregos Nascem No Brasil funciona assim: Itaú Digital = Desemprego
-Uber = Desemprego &hellip;">
+	<meta name="description" content="17/11/2016 linux, rsync Comments Continuando Transferência Com RSYNC No Caso De Interrupção Olá turmadaaa, precisei realizar uma transferência de &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -137,6 +136,76 @@ Uber = Desemprego &hellip;">
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2016-11-17T00:00:00-02:00" data-updated="true" itemprop="datePublished">17/11/2016</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/rsync/'>rsync</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/#disqus_thread">Comments</a></span>
+	
+			
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/" itemprop="url">Continuando Transferência Com RSYNC No Caso De Interrupção</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="/images/rsync.jpg" alt="rysnc" /></p>
+
+<p>Olá turmadaaa, precisei realizar uma transferência de uma VM do XenServer com 300G que estava em um ponto de montagem NFS para um outro local remoto e para evitar problemas de interrupção, utilizei o comando abaixo que me permiti continuar a transferência em casos de problemas, como perda de conexão etc&hellip;</p>
+
+<pre><code># rsync -vrlPtz --append /mnt/web.xva /storage/export/
+    sending incremental file list
+    web.xva     4641783808   1%   6.89MB/s    9:57:11
+</code></pre>
+
+<p>O Comando acima basicamente irá comprimir, continuar e salvar parcialmente apresentando a saída em detalhes. Pode ser utilizado com apenas um arquivo ou com diretórios.</p>
+
+<p>Caso queira usar com ssh:</p>
+
+<pre><code># rsync -vrlPtz --append -e 'ssh -p 2222' login@host:/tmp/web.xva /tmp/web.xva
+</code></pre>
+
+<p>Dica SSH Com Tunnel: ssh -L 2222:hostlocal:2222 root@hostremoto</p>
+
+<hr />
+
+<p><strong>Referência:</strong></p>
+
+<p><a href="https://download.samba.org/pub/rsync/rsync.html">https://download.samba.org/pub/rsync/rsync.html</a></p>
+
+		
+		
+	</div>
+
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">

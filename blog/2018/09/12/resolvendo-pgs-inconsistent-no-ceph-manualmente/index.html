@@ -1,0 +1,397 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Resolvendo PGs inconsistent no CEPH manualmente - brunocarvalho.net</title>
+	<meta name="author" content="Bruno Carvalho">
+ 
+	
+	<meta name="description" content="Resolvendo PGs Inconsistent No CEPH Manualmente Essas são algumas das soluções que me ajudaram a resolver meu problema que se estendeu por alguns &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="brunocarvalho.net" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://brunocarvalho.net/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-79512610-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("brunowcs@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav">
+<section class="aboutme">
+  <p>
+   <h2>	Bruno Carvalho </h2>
+  </p>
+  
+  <p>
+	<i> tecnologia, cotidiano e mais algumas coisas... </i>
+  </p>
+</section>
+
+<ul class="main">
+   <b><li><a href="/">Blog</a></li>
+    <li><a href="/about">Sobre</a></li>
+    <li><a href="/blog/archives">Archives</a></li></b>
+</ul>
+
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:brunowcs@gmail.com" title="Email">Email</a>
+		
+		
+		
+			<a class="google" href="https://plus.google.com/+brunocarvalho86" rel="author" title="Google+">Google+</a>
+		
+		
+		
+		
+		
+		
+			<a class="linkedin" href="http://www.linkedin.com/in/xbrunocarvalho" title="LinkedIn">LinkedIn</a>
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+</div>
+</nav>	
+
+<div>
+<script language="Javascript" type="text/javascript">
+  function my_search_google()
+  {
+    var query = document.getElementById("my-google-search").value;
+    window.open("http://google.com/search?q=" + query
+	+ "%20site:" + "http://brunocarvalho.net");
+  }
+</script>
+<p> Buscar </p>
+<form onsubmit="my_search_google()" >
+  <input type="text" id="my-google-search">
+</form>
+
+<!-- <p><img class="center" src="images/rhcsa.png" title="Certificados"></p><br> -->
+
+</div>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Resolvendo PGs Inconsistent No CEPH Manualmente</h1>
+	<div class="entry-content" itemprop="articleBody"><p><span style="display:block;text-align:center"><img src="/images/ceph/ceph.png" alt="" /> </span></p>
+
+<p>Essas são algumas das soluções que me ajudaram a resolver meu problema que se estendeu por alguns dias, caso tenha suporte recomendo abrir um chamado ou faça por sua conta e risco.</p>
+
+<p>Recentemente eu tiver um problema de badblock em um dos disco que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente.</p>
+
+<p>A solução 1 resolver a maioria dos casos e no meu caso não houver impacto nem downtime.</p>
+
+<p>Problema ocorreu no Ubuntu 16.4 com Jewel utilizando FileStore replica de 3.</p>
+
+<p>Antes de iniciar recomendo a leitura do meu post <a href="http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/">&ldquo;Ceph Scrubbing&rdquo;</a> será fundamental você entender esse cara antes de começar.</p>
+
+<p>1 - Buscando pgs inconsistent</p>
+
+<pre><code># ceph health detail  | grep inconsistent
+HEALTH_ERR 
+pg 5.163 is active+remapped+inconsistent+wait_backfill, acting [45,26,135]
+</code></pre>
+
+<p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria vamos descer o peso dele com o primary-affinity</p>
+
+<pre><code># ceph osd primary-affinity 26 0
+# grep -Hn 'ERR' /var/log/ceph/ceph-osd.26.log
+ou
+# rados list-inconsistent-obj 5.163--format=json-pretty
+</code></pre>
+
+<p>3 - Logue no servidor das 3 OSDs, busque o arquivo e verifique o md5 do objeto seu tamanho e tente identificar o que está diferente entre os 3, no caso será o que você irar remover para mandar o cluster se recuperar.</p>
+
+<pre><code># find /var/lib/ceph/osd/ceph-26/current/5.163_head/ -name '*00000000000059d2*' -ls
+...
+/var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
+# md5sum /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4\
+*d12a1f042f2a98a79943c990d3a5b2c8*  /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
+</code></pre>
+
+<p>4 - Set noout no cluster</p>
+
+<pre><code># ceph osd set noout
+</code></pre>
+
+<p>5 - Pare a OSD</p>
+
+<pre><code># systemctl stop ceph-osd@26
+</code></pre>
+
+<p>6 - Execute o flush do journal</p>
+
+<pre><code># ceph-osd -i 26 --flush-journal
+SG_IO: bad/missing sense data, sb[]:  70 00 05 00 00 00 00 0a 00 00 00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+SG_IO: bad/missing sense data, sb[]:  70 00 05 00 00 00 00 0a 00 00 00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2018-08-23 18:31:57.691076 7f69269888c0 -1 flushed journal /var/lib/ceph/osd/ceph-26/journal for object store /var/lib/ceph/osd/ceph-26
+</code></pre>
+
+<p>7 - Remova o Objecto com problema</p>
+
+<pre><code># rm  -rf /var/lib/ceph/osd/ceph-26/current/5.163_head/rbd\\udata.3b2ab5c0fdd3f.00000000000059d2__head_892078F9__4
+</code></pre>
+
+<p>8 - Corrigindo permissão da OSD</p>
+
+<pre><code># chown ceph:ceph -R /var/lib/ceph/osd/ceph-26/current/omap/
+</code></pre>
+
+<p>9 - Subindo OSD</p>
+
+<pre><code># systemctl start ceph-osd@26
+</code></pre>
+
+<p>10 - Tira o noout no cluster e aguarde o cluster ficar com apenas a pg inconsistent</p>
+
+<pre><code># ceph osd unset noout
+</code></pre>
+
+<p>11 - Vamos agora executar um repair para corrigir o problema.</p>
+
+<pre><code># ceph pg repair 5.163
+
+Veja os logs das OSD.
+
+2018-08-23 18:33:30.568207 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 shard 26 missing 5:9f1e0491:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head
+2018-08-23 18:33:30.568212 7fc1ee195700  0 log_channel(cluster) do_log log to syslog
+2018-08-23 18:33:36.274075 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 repair 1 missing, 0 inconsistent objects
+2018-08-23 18:33:36.274079 7fc1ee195700  0 log_channel(cluster) do_log log to syslog    
+2018-08-23 18:33:36.274142 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 repair 1 errors, 1 fixed
+2018-08-23 18:33:36.274144 7fc1ee195700  0 log_channel(cluster) do_log log to syslog
+</code></pre>
+
+<p>No log acima podemos ver &ldquo;log [ERR] : 5.163 repair 1 errors, 1 fixed&rdquo; isso mostra que ele encontrou o objecto que faltava e corrigiu criando novamente a replica.</p>
+
+<h2>Solução 2</h2>
+
+<p> Identificar e remover o objeto problemático nas OSDs excluindo com ceph-object-tools executando com deep-scrub</p>
+
+<p>Com o objeto problemático já identificado, execute os procedimentos: 4, 5 e 6 após sigar os procedimentos abaixo</p>
+
+<p>1 - Com a OSD down localize o objeto</p>
+
+<pre><code># ceph-objectstore-tool --data-path /var/lib/ceph/osd/ceph-26 --journal /var/lib/ceph/osd/ceph-26/journal --pgid 5.163 --op list | grep rbd_data.3b2ab5c0fdd3f.00000000000059d2
+["5.163",{"oid":"rbd_data.3b2ab5c0fdd3f.00000000000059d2","key":"","snapid":-2,"hash":3828189539,"max":0,"pool":5,"namespace":"","max":0}]
+</code></pre>
+
+<p>2 - Removendo Objeto.</p>
+
+<pre><code># ceph-objectstore-tool --data-path /var/lib/ceph/osd/ceph-26 --journal /var/lib/ceph/osd/ceph-26/journal --pgid 5.163 '{"oid":"rbd_data.3b2ab5c0fdd3f.00000000000059d","key":"","snapid":-2,"hash":3828189539,"max":0,"pool":5,"namespace":"","max":0}' remove
+remove #5:c691b427:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head#
+</code></pre>
+
+<p>3 - Corrigir permissão</p>
+
+<pre><code># chown -R ceph:ceph /var/lib/ceph/osd/ceph-135/current/omap/
+</code></pre>
+
+<p>4 - Iniciar OSD</p>
+
+<pre><code># systemctl start ceph-osd@26
+</code></pre>
+
+<p>5 - Execute o deep-scrub na pg (Veja artigo do &ldquo;Ceph Scrubbing&rdquo;, caso não conseguir executar)</p>
+
+<pre><code># ceph pg deep-scrub 5.163
+</code></pre>
+
+<p>O deep-scrub no ceph é um processo que passa em todas OSDs para verificar inconsitencia dos dados e corrigir eventuais problemas,  podemos comparar ao fsck.
+Dependendo das configurações do seu Cluster o deep-scrub não executará imediatamente, verifique no log da OSD primaria ou execute o seguinte comando abaixo e veja
+a data da ultima vez que ele passou.</p>
+
+<p>Se o deep-scrub não for executado, verifique as configurações de osd_scrub_max_interval, também é importante verificar o osd_scrub_load_threshold,
+pois se sua CPU estiver e um certo limite o deep-scrub não rodará.</p>
+
+<p>Leia mais sobre: <a href="http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/">&ldquo;Ceph Scrubbing&rdquo;</a></p>
+
+<p>6 - Query pg</p>
+
+<pre><code>#  ceph pg 5.163 query 
+..................
+        "last_deep_scrub_stamp": "2018-08-23 15:48:42.107928",
+..................   
+</code></pre>
+
+<p>Também podemos verificar logo no final do comando query o deep-scrub sendo executado na PG.</p>
+
+<pre><code>"scrub": {
+            "scrubber.epoch_start": "57000",
+            "scrubber.active": 1,
+            "scrubber.state": "WAIT_REPLICAS",
+            "scrubber.start": "5:578cfc17:::rbd_data.57e3dd6b7d297f.000000000000b063:0",
+            "scrubber.end": "5:578cff8c:::rbd_data.552a0c53cb890c.00000000000046aa:0",
+            "scrubber.subset_last_update": "58460'37642760",
+            "scrubber.deep": true,
+            "scrubber.seed": 4294967295,
+            "scrubber.waiting_on": 1,
+            "scrubber.waiting_on_whom": [
+                "48"
+</code></pre>
+
+<p>Após o termino do deep-scrub provavelmente sua pg já estará OK.</p>
+</div>
+
+
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite">
+
+<script type="text/javascript">
+      var disqus_shortname = 'brunowcs';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://brunocarvalho.net/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/';
+        var disqus_url = 'http://brunocarvalho.net/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Todo <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">conteúdo</span> do <a xmlns:cc="http://creativecommons.org/ns#" href="brunocarvalho.net" property="cc:attributionName" rel="cc:attributionURL">brunocarvalho.net</a> está licenciado com a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons - Atribuição-CompartilhaIgual 4.0 Internacional</a>.
+
+<br> CC - 2018
+<!--  - 
+  Bruno Carvalho -
+ -->
+ Powered by Octopress/greyshade
+
+</footer>
+		</div>
+	</div>
+	
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>
