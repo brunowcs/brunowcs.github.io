@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sds | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/sds/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-11T20:58:03-03:00</updated>
+  <updated>2018-09-12T12:23:11-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -20,7 +20,7 @@
     <id>http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing</id>
     <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph.png" alt="" /> </span></p>
 
-<p>Recentemente encontrei um bug relacionado a recuperação de PGs dentro do Jewel. O Ceph não estava conseguindo resolver a inconsistência de uma PG, mesmo executando o “ceph repair” e forçando a passagem do Scrub. Pelo que notei nos últimos lançamentos do CEPH tem alguns Bug fix sobre o assunto.</p>
+<p>Recentemente encontrei um bug relacionado a recuperação de “Placement groups(PGs)” dentro do Jewel. O Ceph não estava conseguindo resolver a inconsistência de uma PG, mesmo executando o “ceph repair” e forçando a passagem do Scrubbing. Pelo que notei nos últimos lançamentos do CEPH tem alguns Bug fix sobre o assunto.</p>
 
 <p>Esse será o primeiro de alguns posts que irei falar de como resolver manualmente uma pg inconsistente. Primeiramente vamos entender o Scrubbing no Ceph e caso tenha alguma duvida sobre o SDS Ceph não deixa de assitir meu Webinar que postei aqui no Blog <a href="http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/">Explorando o Ceph</a></p>
 
@@ -35,22 +35,22 @@ Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent�
 
 <p>Apresenta apenas as configurações default do ceph</p>
 
-<pre><code># ceph --show-config 
+<pre><code># ceph --show-config | grep osd_scrub_load_threshold
 </code></pre>
 
 <p>Apresenta a configuração permanente do ceph.conf</p>
 
-<pre><code># ceph -n osd.X --show-config
+<pre><code># ceph -n osd.X --show-config | grep osd_scrub_load_threshold
 </code></pre>
 
 <p>Apresentar a configuração atual</p>
 
-<pre><code># ceph --admin-daemon /var/run/ceph/ceph-osd.21.asok config show 
+<pre><code># ceph --admin-daemon /var/run/ceph/ceph-osd.21.asok config show | grep osd_scrub_load_threshold
 </code></pre>
 
 <p>Alterando Configuração a quente</p>
 
-<pre><code># ceph tell osd.X injectargs '--osd_scrub_load_threshold 0.5'
+<pre><code># ceph tell osd.X injectargs '--osd_scrub_load_threshold 0.5' 
 </code></pre>
 
 <p>O Scrub é muito importante para manter a integridade dos dados, mas poderá reduzir o desempenho do seu cluster se não for realizado ajustes nas configurações.</p>
@@ -94,6 +94,8 @@ Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent�
 <blockquote><p>Nota: “The interval for “deep” scrubbing (fully reading all data). The osd scrub load threshold does not affect this setting.”</p></blockquote>
 
 <p>Atenção as frags noscrub e nodeep-scrub definida no cluster e nas pools, caso esteja setada o scrub não será executado.</p>
+
+<p>Referencia: <a href="http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/">http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/</a></p>
 ]]></content>
   </entry>
   
