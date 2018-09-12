@@ -8,9 +8,11 @@ categories: linux ceph sds
 
 <span style="display:block;text-align:center">![](/images/ceph/ceph.png) </span>
 
+Olá turmadaaa, um pouco sumido, mas estou de volta com grandes novidades. A pouco mais de 2 anos realizei a implantação de 4 Cluster Ceph com Juju e MaaS na america latina que hoje tem quase 8 Petabyte raw, e quanto mais o cluster crescer, mais ajustes e problemas diferentes aparecem.
+
 Recentemente encontrei um bug relacionado a recuperação de “Placement groups(PGs)” dentro do Jewel. O Ceph não estava conseguindo resolver a inconsistência de uma PG, mesmo executando o “ceph repair” e forçando a passagem do Scrubbing. Pelo que notei nos últimos lançamentos do CEPH tem alguns Bug fix sobre o assunto. 
 
-Esse será o primeiro de alguns posts que irei falar de como resolver manualmente uma pg inconsistente. Primeiramente vamos entender o Scrubbing no Ceph e caso tenha alguma duvida sobre o SDS Ceph não deixa de assitir meu Webinar que postei aqui no Blog [Explorando o Ceph](http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/)
+Esse será o primeiro de alguns posts que irei falar de como resolver manualmente uma pg inconsistente. Primeiramente vamos entender o Scrubbing no Ceph e caso tenha alguma duvida sobre o SDS Ceph não deixa de assitir meu Webinar que postei aqui no Blog [Explorando o Ceph](http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/) Como tiver várias dúvidas sobre Webinar e muitas coisas geraram duvidas, lançarei uma série de artigos com mais detalhes “Explorando o Ceph”.
 
 Podemos comparar o Scrubbing do Ceph com o fsck para o armazenamento de objetos dentro do Cluster.
 Ao executar “ceph -s” na ultimas linhas vemos as “placement groups(PGs)” que estão “active+clean” 
