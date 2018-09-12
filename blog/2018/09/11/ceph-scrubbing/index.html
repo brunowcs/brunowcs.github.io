@@ -145,12 +145,11 @@
 <p>Bem este será o primeiro de alguns posts mais avançado que irei falar de como resolver manualmente uma pg inconsistente, mas neste momento vamos entender melhor o Scrubbing no Ceph</p>
 
 <p>Podemos comparar o Scrubbing do Ceph com o fsck para o armazenamento de objetos dentro do Cluster.
-Ao executar “ceph -s” nas ultimas linhas vemos as “placement groups(PGs)” que estão como “active+clean”.</p>
+Ao executar “ceph -s” nas ultimas linhas veremos as “placement groups(PGs)” que estão como “active+clean”, que significa que estão oks.</p>
 
-<p>Para cada placement groups(PGs) o Ceph gera um catálogo de todos os objetos e compara cada objeto primários e suas réplicas para garantir que nenhum objeto esteja ausente ou seja incompatível.
-Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent” isso nos mostrar que alguma replicar dentro do cluster está inconsistente.</p>
+<p>Para cada placement groups(PGs) o Ceph gera um catálogo de todos os objetos e compara cada objeto primário e suas réplicas garantindo assim que nenhum objeto esteja ausente ou seja incompatível. Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent” isso nos mostrar que alguma replicar dentro do cluster está inconsistente. Como o Ceph realizado seu auto reconvery esse problema é resolvido automaticamente na passagem do scrub, porem recentemente percebi que isso não é uma verdade absoluta se você não tiver um ambiente bem configurado.</p>
 
-<p>A passagem do Scrubbing é penosa para o cluster e muitas vezes só passará quando o sistema estiver com uma carga menor ou se as configurações forem alteradas via inject nas “OSDs”. Veja as 3 formas que podemos verificar as configurações no cluster e como podemos alterar a quente.</p>
+<p>A passagem do Scrubbing é penosa para o cluster e muitas vezes só passará quando o sistema estiver com uma carga menor ou se as configurações forem alteradas via inject nas “OSDs”. Veja as 3 formas que podemos verificar as configurações no cluster e como podemos alterar a quente e força uma passagem imediata do scrub.</p>
 
 <p><strong>Verificando configurações no Ceph:</strong></p>
 
@@ -174,9 +173,9 @@ Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent�
 <pre><code># ceph tell osd.X injectargs '--osd_scrub_load_threshold 0.5' 
 </code></pre>
 
-<p>O Scrubbing é muito importante para manter a integridade dos dados, mas poderá reduzir o desempenho do seu cluster, como &ldquo;requests are blocked&rdquo; se não for realizado ajustes nas configurações.</p>
+<p>O Scrubbing é muito importante para manter a integridade dos dados, mas poderá reduzir o desempenho do seu cluster, como &ldquo;requests are blocked&rdquo; se não for realizado ajustes nas configurações baseado na carga do seu cluster.</p>
 
-<p>Existe dois tipos de Scrubbing, um e o “Light scrubbing”, ele verifica o tamanho e os atributos do objeto e por default passa todos os dias e não sobrecarrega tanto seu cluster. O “deep-scrubbing”  e uma limpeza mais profunda, lê os dados e usa somas de verificação para garantir a integridade, esse Scrubbing passa no decorrer da semana e gera uma carga maior no cluster. Como o “ceph -s“ conseguimos verificar em quantas “PGs” está sendo executado scrubbing no momento.</p>
+<p>Existe dois tipos de Scrubbing, um e o “Light scrubbing”, ele verifica o tamanho e os atributos do objeto e por default passa todos os dias e não sobrecarrega tanto o cluster. O “deep-scrubbing”  e uma limpeza mais profunda, lê os dados e usa somas de verificação para garantir a integridade, esse Scrubbing passa no decorrer da semana e gera uma carga maior no cluster. Como o “ceph -s“ conseguimos verificar em quantas “PGs” está sendo executado scrubbing no momento.</p>
 
 <blockquote><p>26 active+clean+scrubbing+deep
 7 active+clean+scrubbing</p></blockquote>
@@ -189,7 +188,7 @@ Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent�
 ..................   
 </code></pre>
 
-<p>Algumas configurações que devemos nos atentar:</p>
+<p>Algumas configurações que devemos nos atentar para ajustar:</p>
 
 <ul>
 <li>osd_scrub_min_interval</li>
@@ -206,7 +205,7 @@ Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent�
 
 <p>Podemos também configurar um intervalo na madrugada para o Scrubbing passar osd_scrub_begin_hour/osd_scrub_end_hour. Com lançamento do Mimic, temos mais duas opções de intervalos osd_scrub_begin_week_day/osd_scrub_end_week_day</p>
 
-<p>Quando executamos um ceph pg repair, ou um ceph pg deep-scrub ele não irá executar imediatamente e sim enviará um pedido a pg “instructing pg ID on osd.X to repair” porem precisa satisfazer as regras configuradas veja a nota abaixo.</p>
+<p>Quando executamos um ceph pg repair, ou um ceph pg deep-scrub ele não irá executar imediatamente e sim enviará um pedido a pg “instructing pg ID on osd.X to repair” porem precisa satisfazer as regras configuradas, veja a nota da documentação oficial abaixo.</p>
 
 <blockquote><p>Nota: “Ceph will not scrub when the system load (as defined by getloadavg() / number of onlinecpus) is higher than this number. Default is 0.5.”</p></blockquote>
 
@@ -216,9 +215,11 @@ Muitas vezes vamos achar a seguinte informação “1 active+clean+inconsistent�
 
 <p>Atenção as frags noscrub e nodeep-scrub definida no cluster e nas pools, caso esteja setada o scrub não será executado.</p>
 
-<p>Creio que com essas informações já conseguimos manipular melhor os Scrubbing no cluster, que e essencial para a consistência das  “Placement groups(PGs)” e da performance do cluster. Nos proximos posts vamos entrar mais a fundo na manipulação manual do objeto e na sua recuperação.</p>
+<p>Creio que com essas informações já conseguimos manipular melhor os Scrubbing no cluster, que e essencial para a consistência das  “Placement groups(PGs)” e da performance do cluster. Nos próximos posts vamos entrar mais a fundo na manipulação manual do objeto e na sua recuperação.</p>
 
-<p> Caso tenha alguma dúvida sobre o funcionamento do Ceph não deixa de assitir meu Webinar que postei aqui no Blog <a href="http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/">Explorando o Ceph</a> Como tiveram várias dúvidas sobre Webinar, lançarei uma série de artigos com mais detalhes “Explorando o Ceph”.</p>
+<p> Caso tenha alguma dúvida sobre o funcionamento do Ceph não deixa de assitir meu Webinar que postei aqui no Blog <a href="http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/">Explorando o Ceph</a></p>
+
+<p> Como tiveram várias dúvidas sobre o Webinar, lançarei uma série de artigos mais básico com informações essencias para você ir “Explorando o Ceph”.</p>
 
 <p>Referencia: <a href="http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/">http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/</a></p>
 </div>
