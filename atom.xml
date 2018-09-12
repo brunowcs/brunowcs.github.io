@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-12T12:23:11-03:00</updated>
+  <updated>2018-09-12T12:43:46-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -20,9 +20,11 @@
     <id>http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing</id>
     <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="http://brunocarvalho.net/images/ceph/ceph.png" alt="" /> </span></p>
 
+<p>Olá turmadaaa, um pouco sumido, mas estou de volta com grandes novidades. A pouco mais de 2 anos realizei a implantação de 4 Cluster Ceph com Juju e MaaS na america latina que hoje tem quase 8 Petabyte raw, e quanto mais o cluster crescer, mais ajustes e problemas diferentes aparecem.</p>
+
 <p>Recentemente encontrei um bug relacionado a recuperação de “Placement groups(PGs)” dentro do Jewel. O Ceph não estava conseguindo resolver a inconsistência de uma PG, mesmo executando o “ceph repair” e forçando a passagem do Scrubbing. Pelo que notei nos últimos lançamentos do CEPH tem alguns Bug fix sobre o assunto.</p>
 
-<p>Esse será o primeiro de alguns posts que irei falar de como resolver manualmente uma pg inconsistente. Primeiramente vamos entender o Scrubbing no Ceph e caso tenha alguma duvida sobre o SDS Ceph não deixa de assitir meu Webinar que postei aqui no Blog <a href="http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/">Explorando o Ceph</a></p>
+<p>Esse será o primeiro de alguns posts que irei falar de como resolver manualmente uma pg inconsistente. Primeiramente vamos entender o Scrubbing no Ceph e caso tenha alguma duvida sobre o SDS Ceph não deixa de assitir meu Webinar que postei aqui no Blog <a href="http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/">Explorando o Ceph</a> Como tiver várias dúvidas sobre Webinar e muitas coisas geraram duvidas, lançarei uma série de artigos com mais detalhes “Explorando o Ceph”.</p>
 
 <p>Podemos comparar o Scrubbing do Ceph com o fsck para o armazenamento de objetos dentro do Cluster.
 Ao executar “ceph -s” na ultimas linhas vemos as “placement groups(PGs)” que estão “active+clean”
