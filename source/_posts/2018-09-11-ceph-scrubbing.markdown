@@ -8,7 +8,7 @@ categories: linux ceph sds
 
 <span style="display:block;text-align:center">![](/images/ceph/ceph.png) </span>
 
-Recentemente encontrei um bug relacionado a recuperação de PGs dentro do Jewel. O Ceph não estava conseguindo resolver a inconsistência de uma PG, mesmo executando o “ceph repair” e forçando a passagem do Scrub. Pelo que notei nos últimos lançamentos do CEPH tem alguns Bug fix sobre o assunto. 
+Recentemente encontrei um bug relacionado a recuperação de “Placement groups(PGs)” dentro do Jewel. O Ceph não estava conseguindo resolver a inconsistência de uma PG, mesmo executando o “ceph repair” e forçando a passagem do Scrubbing. Pelo que notei nos últimos lançamentos do CEPH tem alguns Bug fix sobre o assunto. 
 
 Esse será o primeiro de alguns posts que irei falar de como resolver manualmente uma pg inconsistente. Primeiramente vamos entender o Scrubbing no Ceph e caso tenha alguma duvida sobre o SDS Ceph não deixa de assitir meu Webinar que postei aqui no Blog [Explorando o Ceph](http://brunocarvalho.net/blog/2018/04/03/webinar-explorando-o-ceph/)
 
@@ -23,20 +23,21 @@ A passagem do Scrubbing é penosa para o cluster e muitas vezes ele só passará
 
 Apresenta apenas as configurações default do ceph
 
-    # ceph --show-config 
+    # ceph --show-config | grep osd_scrub_load_threshold
 
 Apresenta a configuração permanente do ceph.conf    
         
-    # ceph -n osd.X --show-config
+    # ceph -n osd.X --show-config | grep osd_scrub_load_threshold
+
 
 Apresentar a configuração atual
         
-    # ceph --admin-daemon /var/run/ceph/ceph-osd.21.asok config show 
+    # ceph --admin-daemon /var/run/ceph/ceph-osd.21.asok config show | grep osd_scrub_load_threshold
 
 
 Alterando Configuração a quente
 
-    # ceph tell osd.X injectargs '--osd_scrub_load_threshold 0.5'
+    # ceph tell osd.X injectargs '--osd_scrub_load_threshold 0.5' 
 
 
 O Scrub é muito importante para manter a integridade dos dados, mas poderá reduzir o desempenho do seu cluster se não for realizado ajustes nas configurações.
@@ -78,3 +79,5 @@ A passagem deep-scrub não necessariamente depende do load_threshold
 >Nota: “The interval for “deep” scrubbing (fully reading all data). The osd scrub load threshold does not affect this setting.”
 
 Atenção as frags noscrub e nodeep-scrub definida no cluster e nas pools, caso esteja setada o scrub não será executado.
+
+Referencia: http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/
