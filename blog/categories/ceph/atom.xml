@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ceph | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/ceph/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-12T16:03:29-03:00</updated>
+  <updated>2018-09-12T16:04:20-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -22,7 +22,7 @@
 
 <p>Essas são algumas das soluções que me ajudaram a resolver meu problema que se estendeu por alguns dias, caso tenha suporte recomendo abrir um chamado ou faça por sua conta e risco.</p>
 
-<p>Recentemente eu tiver um problema de badblock em um dos disco que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente.</p>
+<p>Recentemente eu tiver um problema de badblock em um dos discos que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente.</p>
 
 <p>A solução 1 resolver a maioria dos casos e no meu caso não houver impacto nem downtime.</p>
 
@@ -30,11 +30,45 @@
 
 <p>Antes de iniciar recomendo a leitura do meu post <a href="http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/">&ldquo;Ceph Scrubbing&rdquo;</a> será fundamental você entender esse cara antes de começar.</p>
 
-<p>1 - Buscando pgs inconsistent</p>
+<p>1 - Buscando pgs inconsistente no nosso caso &ldquo;5.163&rdquo;</p>
 
 <pre><code># ceph health detail  | grep inconsistent
 HEALTH_ERR 
-pg 5.163 is active+remapped+inconsistent+wait_backfill, acting [45,26,135]
+pg 5.163 is active+remapped+inconsistent+wait_backfill, acting [26,45,135]
+</code></pre>
+
+<blockquote><p>Podemos ver que apresentou também em quais OSDs estão essas pgs [26,45,135] execute o comando abaixo para descobrir em quais servidores estão as OSDs</p></blockquote>
+
+<pre><code>root@serv-117:/home/bruno.carvalho# ceph osd find 26
+{   
+    "osd": 16,
+    "ip": "10.0.0.14:6842\/21992",
+    "crush_location": {
+        "host": "stor-121",
+        "rack": "sata",
+        "root": "default"
+    }
+}
+root@serv-117:/home/bruno.carvalho# ceph osd find 45
+{
+    "osd": 91,
+    "ip": "10.0.0.15:6814\/8362",
+    "crush_location": {
+        "host": "stor-122",
+        "rack": "sata",
+        "root": "default"
+    }
+}
+root@serv-117:/home/bruno.carvalho# ceph osd find 135
+{
+    "osd": 30,
+    "ip": "10.0.0.17:6812\/10485",
+    "crush_location": {
+        "host": "stor-124",
+        "rack": "sata",
+        "root": "default"
+    }
+}
 </code></pre>
 
 <p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria vamos descer o peso dele com o primary-affinity</p>
@@ -45,7 +79,7 @@ ou
 # rados list-inconsistent-obj 5.163--format=json-pretty
 </code></pre>
 
-<p>3 - Logue no servidor das 3 OSDs, busque o arquivo e verifique o md5 do objeto seu tamanho e tente identificar o que está diferente entre os 3, no caso será o que você irar remover para mandar o cluster se recuperar.</p>
+<p>3 - Logue no servidor das 3 OSDs, busque o arquivo e verifique o md5 do objeto seu tamanho e identifique o que está diferente entre os 3, no caso será o que você irar remover para mandar o cluster se recuperar.</p>
 
 <pre><code># find /var/lib/ceph/osd/ceph-26/current/5.163_head/ -name '*00000000000059d2*' -ls
 ...
@@ -95,10 +129,11 @@ SG_IO: bad/missing sense data, sb[]:  70 00 05 00 00 00 00 0a 00 00 00 00 20 00 
 <p>11 - Vamos agora executar um repair para corrigir o problema.</p>
 
 <pre><code># ceph pg repair 5.163
+</code></pre>
 
-Veja os logs das OSD.
+<blockquote><p>Agora veja os logs das OSDs primaria.</p></blockquote>
 
-2018-08-23 18:33:30.568207 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 shard 26 missing 5:9f1e0491:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head
+<pre><code>2018-08-23 18:33:30.568207 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 shard 26 missing 5:9f1e0491:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head
 2018-08-23 18:33:30.568212 7fc1ee195700  0 log_channel(cluster) do_log log to syslog
 2018-08-23 18:33:36.274075 7fc1ee195700 -1 log_channel(cluster) log [ERR] : 5.163 repair 1 missing, 0 inconsistent objects
 2018-08-23 18:33:36.274079 7fc1ee195700  0 log_channel(cluster) do_log log to syslog    
@@ -141,12 +176,9 @@ remove #5:c691b427:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head#
 <pre><code># ceph pg deep-scrub 5.163
 </code></pre>
 
-<p>O deep-scrub no ceph é um processo que passa em todas OSDs para verificar inconsitencia dos dados e corrigir eventuais problemas,  podemos comparar ao fsck.
-Dependendo das configurações do seu Cluster o deep-scrub não executará imediatamente, verifique no log da OSD primaria ou execute o seguinte comando abaixo e veja
-a data da ultima vez que ele passou.</p>
+<p>O deep-scrub no CEPH é um processo que passa em todas OSDs para verificar inconsitencia dos dados e corrigir eventuais problemas,  podemos comparar ao fsck. Dependendo das configurações do seu Cluster o deep-scrub não executará imediatamente, verifique no log da OSD primaria ou execute o seguinte comando query pg e veja data da ultima vez que ele passou.</p>
 
-<p>Se o deep-scrub não for executado, verifique as configurações de osd_scrub_max_interval, também é importante verificar o osd_scrub_load_threshold,
-pois se sua CPU estiver e um certo limite o deep-scrub não rodará.</p>
+<p>Se o deep-scrub não for executado, verifique as configurações de osd_scrub_max_interval, também é importante verificar o osd_scrub_load_threshold, pois se sua CPU estiver e um certo limite o deep-scrub não rodará.</p>
 
 <p>Leia mais sobre: <a href="http://brunocarvalho.net/blog/2018/09/11/ceph-scrubbing/">&ldquo;Ceph Scrubbing&rdquo;</a></p>
 
