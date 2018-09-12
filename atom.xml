@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-12T17:02:11-03:00</updated>
+  <updated>2018-09-12T17:08:20-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -20,7 +20,7 @@
     <id>http://brunocarvalho.net/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente</id>
     <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="http://brunocarvalho.net/images/ceph/ceph.png" alt="" /> </span></p>
 
-<p>Recentemente eu tiver um problema de badblock em um dos discos que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente.</p>
+<p>Recentemente eu tiver um problema de badblock em um dos discos que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente, mesmo tirando o disco defeituoso do cluster e parando a OSD associada.</p>
 
 <p>As soluções abaixo me ajudaram a resolver meu problema que se estendeu por alguns dias. Caso tenha suporte recomendo abrir um chamado ou faça por sua conta e risco.</p>
 
@@ -71,7 +71,7 @@ root@serv-117:/home/bruno.carvalho# ceph osd find 135
 }
 </code></pre>
 
-<p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria não esqueça de descer com primary-affinity,</p>
+<p>2 - Logue no servidor da OSD primaria e busque o objeto problemático, se objeto problemático estiver na primaria não esqueça de descer com primary-affinity.</p>
 
 <pre><code># grep -Hn 'ERR' /var/log/ceph/ceph-osd.26.log (apresentar uma tripa de erro, o importante será o nome do objeto )
 ..... log [ERR] : 5.163 .... 
@@ -157,7 +157,7 @@ SG_IO: bad/missing sense data, sb[]:  70 00 05 00 00 00 00 0a 00 00 00 00 20 00 
 
 <h2>Solução 2</h2>
 
-<p> Identificar e remover o objeto problemático nas OSDs excluindo com ceph-object-tools executando com deep-scrub</p>
+<p> Identificar e remover o objeto problemático na OSD excluindo com ceph-object-tools executando com deep-scrub</p>
 
 <p>Com o objeto problemático já identificado, execute os procedimentos: 4, 5 e 6 após sigar os procedimentos abaixo</p>
 
@@ -183,7 +183,7 @@ remove #5:c691b427:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head#
 <pre><code># systemctl start ceph-osd@26
 </code></pre>
 
-<p>5 - Execute o deep-scrub na pg (Veja artigo do &ldquo;Ceph Scrubbing&rdquo;, caso não conseguir executar)</p>
+<p>5 - Execute o deep-scrub na pg (Veja artigo do &ldquo;Ceph Scrubbing&rdquo;, para execução com espaço de tempo menor)</p>
 
 <pre><code># ceph pg deep-scrub 5.163
 </code></pre>
