@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: canonical, | brunocarvalho.net]]></title>
+  <title><![CDATA[Category: canonical | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/canonical/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-12T18:13:17-03:00</updated>
+  <updated>2018-09-12T18:16:56-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -14,127 +14,150 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Orquestração com Juju da Canonical]]></title>
-    <link href="http://brunocarvalho.net/blog/2017/06/26/orquestracao-com-juju-da-canonical/"/>
-    <updated>2017-06-26T18:14:34-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2017/06/26/orquestracao-com-juju-da-canonical</id>
-    <content type="html"><![CDATA[<p><img src="/images/juju/juju1.png" alt="" /></p>
+    <title type="html"><![CDATA[Gerenciando Bare Metal com Metal As a Service (MaaS)]]></title>
+    <link href="http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas/"/>
+    <updated>2017-08-21T18:56:10-03:00</updated>
+    <id>http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas</id>
+    <content type="html"><![CDATA[<p><img src="/images/maas/maaslogo.png" alt="" /></p>
 
-<h3>O que é o Juju?</h3>
+<p>Que tal gerenciar seus Bare Metal com automação e eficiência? Te apresento o Metal as a Service (MaaS) uma ferramenta fantástica desenvolvida em Python pela Canonical que trás vários benefícios para gerenciar seus racks de Bare Metal e neste artigo irei falar um pouco das suas funções, instalação e configuração.</p>
 
-<p>Juju é uma ferramenta open source de modelagem de aplicações desenvolvida em Go pela Canonical a mesma empresa que desenvolve o Linux Ubuntu.</p>
+<p>Segue abaixo algumas features do MaaS stable(2.2):</p>
 
-<p>Com Juju é possível  implementar, configurar, gerenciar, manter e dimensionar aplicações em nuvens públicas e privadas de uma forma rápida e eficiente bem como servidores físicos,  OpenStack e contêineres. O Juju pode ser usado tanto em linha de comando ou através de uma interface GUI</p>
+<ul>
+<li>Suporte para Bare Metal (ARM,Intel), KVM, VMWARE</li>
+<li>Provisiona com Ubuntu, RHEL, CENTOS, SLES, OpenSUSE, Windows</li>
+<li>Divide recursos por zonas Bare Metal/VM</li>
+<li>IPAM coleção de Subnets IPV4/IPV6, VLAN tagging, DNS, proxy, NTP</li>
+<li>REST API intregraçao com ferramentas de Devops Juju, Chef, Ansible, Puppet</li>
+<li>Descobre automaticamente ativos de redes, VLAN, Subnets etc..</li>
+<li>Enlist automático por PXE</li>
+<li>Interface GUI e CLI para Ligar/Desligar, comissionar, implantar, teste de hardware, modo de manutenção e recuperação de S.O</li>
+<li>Composição Dinâmica de Hardware por meio de POD Suporta Intel Rack Scale Design (RSD) e Virsh(KVM)</li>
+<li>Configuração de Rede IP,VLAN,BOND,BRIDGE layout de disco Bcache, RAID, LVM</li>
+</ul>
 
-<h3>Como é feito a “Mágica”:</h3>
 
-<p>A partir dos charmes é possível realizar a criação de toda uma infraestrutura no nivel de configuração da maquina virtual, instalação e configuração das aplicações, interligações de dependências, tanto na AWS, Google, Azure, OpenStack entre outras nuvem suportadas ou diretamente no Bare-Metal.</p>
+<p>  O MaaS foi desenvolvido para ambientes em escala Bare Metal,  mais também é possível gerenciar VM com Virsh(KVM). Suporta as  principais BMCs e controladores de chassi do mercado como Dell, IBM, HP, Lenovo, Huawei e Open Compute Project, está sendo utilizado por grandes plays do mercado como Microsoft, Nec, Verizon, At&amp;t, NTT atualmente sendo considerado uma das melhores ferramentas open source para gerenciamento de Bare Metal.</p>
 
-<h3>Mas que desgraça é esse Charme?</h3>
+<h1>Como funciona</h1>
 
-<p>O charme define tudo o que você conhece de forma colaborativa sobre a implantação da aplicação. Tudo o que você precisa fazer é usar qualquer charme disponível (ou escrever o seu próprio), e a aplicação correspondente será implantada em segundos, em qualquer nuvem, servidor físico ou máquina virtual.</p>
+<p>O MaaS possui uma arquitetura em camadas com um banco de dados postgresql usado na &lsquo;Region Controller (regiond)&rsquo; que lida com as solicitações. Já o Distributed Rack Controllers (rackd) fornecem serviços para cada rack.</p>
 
-<p>O Charme nada mais é do que um receita de instalação e configuração com gerenciamento de dependencias e interligações nescessárias para sua aplicação funcionar em uma nuvem ou em um bare-metal.</p>
+<p><img src="/images/maas/archmaas.png" alt="" /></p>
 
-<h3>Juju então é igual ao Chef, Puppet, Ansible e cia?</h3>
+<p>Region controller(regiond):</p>
 
-<p>Não! O Juju orquestra e escala aplicações em nuvens, ele está uma camada acima dos gereciadores de configurações, mas podemos usar todos juntos perfeitamente.</p>
+<ul>
+<li> REST API server (TCP port 5240)</li>
+<li> PostgreSQL database</li>
+<li> DNS</li>
+<li> caching HTTP proxy</li>
+<li> Web GUI</li>
+</ul>
 
-<p>O puppet, Chef e Ansible são ótimas ferramentas para escrever arquivos de configuração. Por trabalhar uma camada acima, o Juju concentra-se nas operações de longo prazo necessárias para manter esse software em execução ao longo do tempo, independentemente da máquina na qual ele está sendo executado. O charme do Juju para um aplicativo inclui (entre outras coisas) toda a lógica para escrever arquivos de configuração para as aplicações, essa lógica em si pode ser escrita em qualquer linguagem ou ferramenta que o desenvolvedor do charme preferi.</p>
 
-<p>É comum que as pessoas comecem a criar um charme juntando Puppet ou Chef ou outros scripts que eles atualmente usam para automatizar a configuração do ambiente. Se o charme vai estar escrevendo e atualizando a configuração para o aplicativo, e já existem ferramentas para abstrair esse arquivo de configuração na sua linguagem preferida (Puppet,Ansible, etc&hellip;), então use isso no charme!</p>
+<p>Rack Controller (rackd) fornece DHCP, IPMI, PXE, TFTP e outros serviços locais. Os rackd armazenam itens  como imagens de instalação do S.O no nível do rack para melhor desempenho, mas não mantenham nenhum estado além das credenciais para falar com o Region Controller.</p>
 
-<p>Como podemos ver o Juju consegue reunir várias ferramentas de  automação, deixando você livre para criar seus charme com suas receitas e ferramentas favoritas, ainda melhor, dois charmes diferentes de diferentes equipes que usam ferramentas diferentes trabalharão felizes juntos para implantar uma solução.</p>
+<p>Rack controller(rackd):</p>
 
-<p><img src="/images/juju/juju2.png" alt="" /></p>
+<ul>
+<li> DHCP</li>
+<li> TFTP</li>
+<li> HTTP (para images)</li>
+<li> iSCSI</li>
+<li> Power Management</li>
+</ul>
 
-<h3>Veja como é fácil instalar o Juju no Ubuntu Xenial</h3>
 
-<p>Para fins de teste vamos instalar o juju com o LXD, que no caso poderia ser uma nuvem ou um bare-metal</p>
+<p>Tanto o regiond como o rackd podem ser escalados e configurados para alta disponibilidade.</p>
 
-<pre><code>$ sudo apt install lxd zfsutils-linux
+<h1>Instalando o MaaS</h1>
+
+<p>Como podemos ver na arquitetura acima, em cada rack de servidor Bare Metal poderiamos ter um daemon chamado rackd que falaria via API com o regiond, isso e uma boa pratica para arquitetura de rede Layer 3 spine e leaf, mas neste exemplo vamos instalar tanto o regiond como o rackd em um unico servidor.</p>
+
+<p>Adicionando repositorio e instalando o MaaS</p>
+
+<pre><code class="bash"># apt-add-repository -yu ppa:maas/stable
+# apt install maas
 </code></pre>
 
-<p>Para usar o LXD, seu usuário deve ser um membro do grupo lxd, verifique com o comando abaixo provavelmente já vai estar.</p>
+<p>Após instalação precisamos criar um usurário administrativo.</p>
 
-<pre><code>$ groups
+<pre><code class="bash"># maas createadmin 
 </code></pre>
 
-<p>Ao executar o comando abaixo, aceite todas respostas padrão nas configurações iniciais do LXD, ou mude caso achar melhor.</p>
+<p>Depois da criação vamos acessar o painel via browser</p>
 
-<pre><code>$ sudo lxd init 
-</code></pre>
+<p><strong> Acesse a URL:<a href="http://$API_HOST:5240/MAAS">http://$API_HOST:5240/MAAS</a> </strong></p>
 
-<p>LXD agora está basicamente configurado para funcionar com Juju.</p>
+<p>Entre com login e senha criado no passo anterior</p>
 
-<h3>Instalando JUJU:</h3>
+<p><img src="/images/maas/maaslogin.png" alt="" /></p>
 
-<pre><code>$ sudo add-apt-repository --update ppa:juju/stable
-$ sudo apt install juju
-</code></pre>
+<p>No primeiro login será apresentado uma tela de configuração, altere o nome da sua região se achar necessário e neste primeiro momento deixe como padrão os outros valores</p>
 
-<p>Tanto para LXD, Bare-Metal ou nuvem será necessário a criação de um controle para gerenciar.</p>
+<p><img src="/images/maas/maasfist.png" alt="" /></p>
 
-<pre><code># juju bootstrap localhost lxd-test 
-</code></pre>
+<p>Agora vamos verificar quais serviços estão ativos, no painel click em “Nodes” selecione a aba “Controller” selecione o servidor da sua controller depois click na aba “Services”.
+<img src="/images/maas/maasservices.png" alt="" /></p>
 
-<p>Isso pode demorar alguns minutos, pois o LXD deve baixar uma imagem do linux.</p>
+<p>Veja se sua img está sincronizada Click na Aba “Images”</p>
 
-<p>Uma vez concluído o processo, veja se o controlador lxd-test foi criado com o comando abaixo:</p>
+<p><img src="/images/maas/maasimage.png" alt="" /></p>
 
-<pre><code># juju controllers 
-</code></pre>
+<ul>
+<li>Ativando DHCP</li>
+</ul>
 
-<p>O comando a seguir mostra o controlador, modelo e o usuário atualmente ativo:</p>
 
-<pre><code>#  juju whoami 
-</code></pre>
+<p>Vá para a aba &ldquo;Subnets&rdquo; e selecione a untagged VLAN/subnet  para a qual você deseja habilitar o DHCP, e no botão &ldquo;Take action&rdquo; selecione &ldquo;Provide DHCP&rdquo;.</p>
 
-<p>Implantando um aplicativo com Juju.</p>
+<ul>
+<li>Defina o controlador de rack que gerenciará o DHCP.</li>
+<li>Selecione a subrede para criar o intervalo dinâmico DHCP.</li>
+<li>Preencha os detalhes para o intervalo dinâmico.</li>
+</ul>
 
-<p>O comando abaixo vai até o Juju store pega um charme pronto chamado mediawiki-single e manda instalar no ambiente LXD que configuramos no inicio.</p>
 
-<pre><code># juju deploy cs:bundle/mediawiki-single 
-</code></pre>
+<p><img src="/images/maas/maasnetwork.png" alt="" /></p>
 
-<p>Após este comando, podemos verificando sua implementação:</p>
+<p>Após ativar o DHCP, podemos inciar os bare mental na rede configurada que automaticamente ela realizará o boot via PXE e iniciará o processo de enlist, assim aparecendo no menu “Node” do painel MaaS, abaixo veja como funciona o ciclo de vida do seu Bare Metal/VM dentro do MaaS.</p>
 
-<pre><code># juju status
-</code></pre>
+<p>Obs: para o MaaS conseguir Ligar e Desligar os servidores via IPMI será necessário um interface que chegue na rede da  IDRAC e/ou ILO</p>
 
-<p>Comando de acesso ao ambiente criado</p>
+<h1>Entenda o Lifecycle do MaaS</h1>
 
-<pre><code># juju ssh id_machine
-</code></pre>
+<p>Cada máquina (&ldquo;nó&rdquo;) gerenciada pelo MAAS passa por um ciclo de vida desde o alistamento até o comissionamento quando o nó será inventariado e iremos poder configurar elementos específicos do hardware. No ciclo também é possível alocamos um servidor para um usuário, realizar o deployer, e finalmente liberar de volta para um pool ou deletar por completo.</p>
 
-<p>Acesso GUI, o comando abaixo exibirá a URL de acesso a interface web do Juju.</p>
+<p><img src="/images/maas/maaslifecycle.png" alt="" /></p>
 
-<pre><code># juju gui
-</code></pre>
+<p><strong> Qualquer dúvida comentem aííí, até a proxima!!!! </strong></p>
 
-<p>Pegando a senha da controladora criada para logar no Juju Gui.</p>
+<p>Referências:</p>
 
-<pre><code># juju show-controller --show-password
-</code></pre>
+<p><a href="https://maas.io/">https://maas.io/</a></p>
 
-<p>Mais comandos do Juju.</p>
+<p><a href="https://docs.ubuntu.com/maas/">https://docs.ubuntu.com/maas/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Palestra OpenStack Day SP 2017]]></title>
+    <link href="http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017/"/>
+    <updated>2017-08-01T15:18:04-03:00</updated>
+    <id>http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017</id>
+    <content type="html"><![CDATA[<p>Segue minha palestra no OpenStack Day SP 2017. Como a apresentação ficou corrida por conta do tempo e o ultimo slide de hands on não foi apresentado por problemas da internet local, fico a disposição para qualquer dúvida. Podem comentar, enviar e-mail que terei enorme prazer em ajudar. Abs</p>
 
-<pre><code># juju help commands
-</code></pre>
+<iframe width="595" height="315" src="https://www.youtube.com/embed/VCs1kcFUZEY" frameborder="0" allowfullscreen></iframe>
 
-<p>Caso não queira realizar a instalação, a canonical disponibilizou um demo da sua interface GUI: <a href="https://demo.jujucharms.com/">https://demo.jujucharms.com/</a></p>
 
-<p>Nos próximos posts irei apresentar:</p>
 
-<p><a href="http://brunocarvalho.net/blog/2017/08/01/palestra-openstack-day-sp-2017/"> - Juju com Cloud OpenStack </a></p>
 
-<p><a href="http://brunocarvalho.net/blog/2017/08/21/gerenciando-bare-metal-com-metal-as-a-service-maas/">- MaaS para integração do Juju com Bare-Metal </a></p>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/GEYv88ZwA2k8QE" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
-<p>-Deployando Ceph com Juju.</p>
 
-<h3>Referências</h3>
-
-<p><a href="https://jujucharms.com/docs/stable/">https://jujucharms.com/docs/stable/</a></p>
+<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/scoker123/orquestrando-openstack-com-juju" title="Orquestrando OpenStack com Juju" target="_blank">Orquestrando OpenStack com Juju</a> </strong> de <strong><a target="_blank" href="https://www.slideshare.net/scoker123">TIVIT LATAM</a></strong> </div></p>
 ]]></content>
   </entry>
   
