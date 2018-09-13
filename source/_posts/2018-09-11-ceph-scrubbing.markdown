@@ -88,7 +88,7 @@ Creio que com essas informações já conseguimos manipular melhor os Scrubbing 
 
 Nos próximo posts irei apresentar: 
 
-[ - Resolvendo PGs inconsistent no CEPH manualmente ](http://localhost:4000/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/)
+[ - Resolvendo PGs inconsistent no CEPH manualmente ](http://brunocarvalho.net/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/)
 
 
 Referência: http://docs.ceph.com/docs/master/rados/configuration/osd-config-ref/
