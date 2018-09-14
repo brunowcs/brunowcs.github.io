@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ceph | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/ceph/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-12T18:16:56-03:00</updated>
+  <updated>2018-09-14T12:09:21-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -18,7 +18,7 @@
     <link href="http://brunocarvalho.net/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente/"/>
     <updated>2018-09-12T15:23:02-03:00</updated>
     <id>http://brunocarvalho.net/blog/2018/09/12/resolvendo-pgs-inconsistent-no-ceph-manualmente</id>
-    <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph.png" alt="" /> </span></p>
+    <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-manu.png" alt="" /> </span></p>
 
 <p>Recentemente eu tiver um problema de badblock em um dos discos que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente, mesmo tirando o disco defeituoso do cluster e parando a OSD associada.</p>
 
@@ -228,7 +228,7 @@ remove #5:c691b427:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head#
 </ul>
 
 
-<p>Referencia: <a href="http://lists.ceph.com/pipermail/ceph-users-ceph.com/">http://lists.ceph.com/pipermail/ceph-users-ceph.com/</a></p>
+<p>Referência: <a href="http://lists.ceph.com/pipermail/ceph-users-ceph.com/">http://lists.ceph.com/pipermail/ceph-users-ceph.com/</a></p>
 ]]></content>
   </entry>
   
