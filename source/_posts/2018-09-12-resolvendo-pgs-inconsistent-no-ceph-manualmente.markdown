@@ -8,7 +8,7 @@ categories: ceph linux
 
 <span style="display:block;text-align:center">![](/images/ceph/ceph-manu.png) </span>
 
-Recentemente eu tiver um problema de badblock em um dos discos que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente, mesmo tirando o disco defeituoso do cluster e parando a OSD associada.
+Recentemente eu tive um problema de badblock em um dos discos que gerou uma inconsistent na PG e o cluster não conseguiu se resolver automaticamente, mesmo tirando o disco defeituoso do cluster e parando a OSD associada.
 
 As soluções abaixo me ajudaram a resolver meu problema que se estendeu por alguns dias. Caso tenha suporte recomendo abrir um chamado ou faça por sua conta e risco. 
 
@@ -194,7 +194,7 @@ Após o termino do deep-scrub provavelmente sua pg já estará OK.
 
 Nos próximos posts irei apresentar: 
 
-- **Monitoramento avançado no Ceph** - Falarei sobre Telegraf/Influx/Grafana um dashboard pronto com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster)
+- **Métricas de Latência no Ceph** - Falarei sobre Telegraf/Influx/Grafana um dashboard pronto com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster)
 - **Melhores práticas com Ceph** - Desde o Hardware, S.O e configurações do ceph.conf para você obter melhor performance do seu cluster.
 
 Referência: http://lists.ceph.com/pipermail/ceph-users-ceph.com/
