@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-18T19:41:03-03:00</updated>
+  <updated>2018-09-18T19:45:15-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -32,10 +32,13 @@ commit_latency(ms) apply_latency(ms)
 ............... ......................
 </code></pre>
 
-<p>Irei comentar esse dois mais importantes:</p>
+<p>Comentarei os dois mais importantes:</p>
 
-<p>apply_latency - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal
-commit_latency - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco</p>
+<ul>
+<li><strong>apply_latency</strong> - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal</li>
+<li><strong>commit_latency</strong> - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco</li>
+</ul>
+
 
 <p>As métricas acima são as que nos dão uma media de como anda a latência do nosso cluster, o dashboard abaixo irá apresentar no grafana essas informações entre outras.</p>
 

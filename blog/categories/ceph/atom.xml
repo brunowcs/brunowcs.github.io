@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ceph | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/ceph/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-18T19:43:08-03:00</updated>
+  <updated>2018-09-18T19:47:26-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -35,8 +35,8 @@ commit_latency(ms) apply_latency(ms)
 <p>Comentarei os dois mais importantes:</p>
 
 <ul>
-<li>apply_latency - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal</li>
-<li>commit_latency - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco</li>
+<li><strong>apply_latency</strong> - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal</li>
+<li><strong>commit_latency</strong> - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco</li>
 </ul>
 
 
