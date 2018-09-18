@@ -6,6 +6,8 @@ comments: true
 categories: ceph metricas influxdb grafana telegraf
 ---
 
+<span style="display:block;text-align:center">![](/images/ceph/ceph-metrica-logo.png) </span>
+
 Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada pronto com metricas de latência para este plugin.
 
 >Não irei aborda instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.
