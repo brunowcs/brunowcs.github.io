@@ -1,16 +1,16 @@
 ---
 layout: post
-title: "Metricas de Latancia no CEPH"
+title: "Métricas de Latência no CEPH"
 date: 2018-09-18 16:42:11 -0300
 comments: true
 categories: ceph metricas influxdb grafana telegraf
 ---
 
-<span style="display:block;text-align:center">![](/images/ceph/ceph-metrica-logo.png) </span>
+<span style="display:block;text-align:center">![](/images/ceph/ceph-metrica-logo.png)</span>
 
-Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada pronto com metricas de latência para este plugin.
+Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada pronto com métricas de latência para este plugin, então resolvir criar e compartilhando com a comunidade.
 
->Não irei aborda instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.
+>Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.
 
 Com o comando abaixo é possível verificar a latência do commit e apply do Ceph
 
@@ -19,9 +19,14 @@ Com o comando abaixo é possível verificar a latência do commit e apply do Cep
     commit_latency(ms) apply_latency(ms)
     ............... ......................
 
+Irei comentar esse dois mais importantes: 
+
+apply_latency - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal
+commit_latency - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco
+
 As métricas acima são as que nos dão uma media de como anda a latência do nosso cluster, o dashboard abaixo irá apresentar no grafana essas informações entre outras.
 
-Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras tem que ativar no ceph.conf ou via OSDs com inject. Verifique se seu cluster está com os perfs true.
+Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras temos que ativar no ceph.conf ou via OSDs com inject. Verifique se seu cluster está com os perfs true.
 
     # ceph --admin-daemon /var/run/ceph/ceph-osd.26.asok  config show | grep perf
     "debug_perfcounter": "0\/0",
@@ -29,9 +34,6 @@ Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras
     "mutex_perf_counter": "true",
     "throttler_perf_counter": "true",
 
-
-<span style="display:block;text-align:center">![](/images/ceph/ceph-latencia.png) </span>
-<span style="display:block;text-align:center">![](/images/ceph/ceph-grafico.png) </span>
 
 Crie o arquivo abaixo e não esqueça de adicionar as tags para facilitar a seleção no grafana entre SATA e SSD ou escolha uma tag de sua preferência. 
 
@@ -90,7 +92,7 @@ Esse comando contorna o problema "admin socket permission" que foi corrigido nas
 >common: common/admin_socket: add config for admin socket permission bits (pr#11684, runsisi)
 >https://github.com/ceph/ceph/pull/11684
 
-Se a OSD foi reiniciada a permissão se perder, se estiver abaixo da 12.0.3 recomendo adicionar a permissão no systemd após o startup da OSD. Se já estiver na versão superior basta adicionar no ceph.conf a config abaixo
+Se a OSD for reiniciada a permissão se perder, se estiver abaixo da 12.0.3, recomendo adicionar a permissão no systemd após o startup da OSD. Se já estiver na versão superior basta adicionar no ceph.conf a config abaixo
 
     admin_socket_mode 0775
 
@@ -108,10 +110,16 @@ Teste se o telegraf está coletando as metricas do seu servidor de OSD com a per
 
     # sudo -u telegraf ceph --admin-daemon /var/run/ceph/ceph-osd.14.asok perf dump
 
-Se tudo estiver tudo ok, baste importa o dashboard para seu grafana. :)
+Se estiver tudo ok, basta importa o dashboard para seu grafana. :)
+
+
+Dashboard Telegraf Ceph - Latency: https://grafana.com/dashboards/7995
 
 Plugin Utilizado: https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph
-Dashboard Telegraf Ceph - Latency: https://grafana.com/dashboards/7995
+
+
+<span style="display:block;text-align:center">![](/images/ceph/ceph-latencia.png) </span>
+<span style="display:block;text-align:center">![](/images/ceph/ceph-grafico.png) </span>
 
 Referências: 
 
