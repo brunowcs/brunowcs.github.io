@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-18T19:47:39-03:00</updated>
+  <updated>2018-09-18T19:52:19-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Métricas de Latência no CEPH]]></title>
-    <link href="http://brunocarvalho.net/blog/2018/09/18/mea(c)etricas-de-latencia-no-ceph/"/>
+    <link href="http://brunocarvalho.net/blog/2018/09/18/metricas-de-latencia-no-ceph/"/>
     <updated>2018-09-18T16:42:11-03:00</updated>
-    <id>http://brunocarvalho.net/blog/2018/09/18/mea(c)etricas-de-latencia-no-ceph</id>
+    <id>http://brunocarvalho.net/blog/2018/09/18/metricas-de-latencia-no-ceph</id>
     <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="http://brunocarvalho.net/images/ceph/ceph-metrica-logo.png" alt="" /></span></p>
 
 <p>Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada pronto com métricas de latência para este plugin, então resolvir criar e compartilhando com a comunidade.</p>
