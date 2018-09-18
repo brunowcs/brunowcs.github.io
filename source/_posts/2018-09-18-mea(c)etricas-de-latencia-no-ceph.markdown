@@ -19,10 +19,10 @@ Com o comando abaixo é possível verificar a latência do commit e apply do Cep
     commit_latency(ms) apply_latency(ms)
     ............... ......................
 
-Irei comentar esse dois mais importantes: 
+Comentarei os dois mais importantes: 
 
-apply_latency - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal
-commit_latency - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco
+- apply_latency - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal
+- commit_latency - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco
 
 As métricas acima são as que nos dão uma media de como anda a latência do nosso cluster, o dashboard abaixo irá apresentar no grafana essas informações entre outras.
 
