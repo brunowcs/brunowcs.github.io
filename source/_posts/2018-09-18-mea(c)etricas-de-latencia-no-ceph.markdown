@@ -38,7 +38,7 @@ Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras
 Crie o arquivo abaixo e não esqueça de adicionar as tags para facilitar a seleção no grafana entre SATA e SSD ou escolha uma tag de sua preferência. 
 
 ```bash
-cat /etc/telegraf/telegraf.d/ceph.conf
+# cat /etc/telegraf/telegraf.d/ceph.conf
 [[inputs.ceph]]
   ## This is the recommended interval to poll.  Too frequent and you will lose
   ## data points due to timeouts during rebalancing and recovery
