@@ -119,8 +119,8 @@ Dashboard Telegraf Ceph - Latency: https://grafana.com/dashboards/7995
 Plugin Utilizado: https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph
 
 
-<span style="display:block;text-align:center">![](/images/ceph/ceph-latencia.png) </span>
-<span style="display:block;text-align:center">![](/images/ceph/ceph-grafico.png) </span>
+<span style="display:block;text-align:center">![](/images/ceph/ceph-latencia.PNG) </span>
+<span style="display:block;text-align:center">![](/images/ceph/ceph-grafico.PNG) </span>
 
 Referências de métricas: 
 
