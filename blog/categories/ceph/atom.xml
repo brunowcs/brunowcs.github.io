@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ceph | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/ceph/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-18T19:55:05-03:00</updated>
+  <updated>2018-09-18T20:14:52-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -136,8 +136,8 @@ commit_latency(ms) apply_latency(ms)
 
 <p>Plugin Utilizado: <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph">https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph</a></p>
 
-<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-latencia.png" alt="" /> </span>
-<span style="display:block;text-align:center"><img src="/images/ceph/ceph-grafico.png" alt="" /> </span></p>
+<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-latencia.PNG" alt="" /> </span>
+<span style="display:block;text-align:center"><img src="/images/ceph/ceph-grafico.PNG" alt="" /> </span></p>
 
 <p>Referências de métricas:</p>
 

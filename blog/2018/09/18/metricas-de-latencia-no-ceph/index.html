@@ -142,7 +142,7 @@
 
 <blockquote><p>Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.</p></blockquote>
 
-<p>Com o comando abaixo é possível verificar a latência do commit e apply do Ceph</p>
+<p>Com o comando abaixo é possível verificar media  latência do commit e apply do Ceph</p>
 
 <pre><code># ceph osd perf
 
@@ -150,11 +150,12 @@ commit_latency(ms) apply_latency(ms)
 ............... ......................
 </code></pre>
 
-<p>Comentarei os dois mais importantes:</p>
+<p>Comentarei os 3 mais importantes:</p>
 
 <ul>
-<li><strong>apply_latency</strong> - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal</li>
-<li><strong>commit_latency</strong> - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco</li>
+<li><strong>Journal_latency</strong> - Tempo que leva para gravar no journal, ou seja, tempo de ack do write para o cliente, porem a leitura só será possível após o commit.</li>
+<li><strong>apply_latency</strong> - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal.</li>
+<li><strong>commit_latency</strong> - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco.</li>
 </ul>
 
 
@@ -294,10 +295,10 @@ commit_latency(ms) apply_latency(ms)
 
 <p>Plugin Utilizado: <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph">https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph</a></p>
 
-<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-latencia.png" alt="" /> </span>
-<span style="display:block;text-align:center"><img src="/images/ceph/ceph-grafico.png" alt="" /> </span></p>
+<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-latencia.PNG" alt="" /> </span>
+<span style="display:block;text-align:center"><img src="/images/ceph/ceph-grafico.PNG" alt="" /> </span></p>
 
-<p>Referências métricas:</p>
+<p>Referências de métricas:</p>
 
 <p><a href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/administration_guide/performance_counters">https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/administration_guide/performance_counters</a></p>
 </div>
