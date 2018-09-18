@@ -64,7 +64,7 @@ Execute o comando abaixo no host encontrado
 <pre><code># cfdisk /dev/sda3 (a utilização do cfdisk não será abordada passo-a-passo)
 </code></pre>
 
-<p><img src="{{%20site.url%20}}/images/cfdisk.JPG" alt="cfdisk" /></p>
+<p><img src="/images/cfdisk.JPG" alt="cfdisk" /></p>
 
 <p>Após a criação da nova partição, execute o comando abaixo</p>
 
