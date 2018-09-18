@@ -4,7 +4,7 @@
   <title><![CDATA[Category: centos | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/centos/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-14T12:09:21-03:00</updated>
+  <updated>2018-09-18T18:52:46-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -351,7 +351,7 @@ Execute o comando abaixo no host encontrado
 <pre><code># cfdisk /dev/sda3 (a utilização do cfdisk não será abordada passo-a-passo)
 </code></pre>
 
-<p><img src="/images/cfdisk.JPG" alt="cfdisk" /></p>
+<p><img src="{{%20site.url%20}}/images/cfdisk.JPG" alt="cfdisk" /></p>
 
 <p>Após a criação da nova partição, execute o comando abaixo</p>
 
@@ -473,7 +473,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 -Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder
 </code></pre>
 
-<p><img src="/images/zabbix/img2.png" alt="img2" /></p>
+<p><img src="{{%20site.url%20}}/images/zabbix/img2.png" alt="img2" /></p>
 
 <blockquote><p><strong><em>Será necessário reiniciar o AdminServer e as JVM do domínio.</em></strong></p></blockquote>
 
