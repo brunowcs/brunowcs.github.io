@@ -4,7 +4,7 @@
   <title><![CDATA[Category: telegraf | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/telegraf/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-18T19:47:26-03:00</updated>
+  <updated>2018-09-18T19:47:39-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -53,7 +53,7 @@ commit_latency(ms) apply_latency(ms)
 
 <p>Crie o arquivo abaixo e não esqueça de adicionar as tags para facilitar a seleção no grafana entre SATA e SSD ou escolha uma tag de sua preferência.</p>
 
-<pre><code class="bash">cat /etc/telegraf/telegraf.d/ceph.conf
+<pre><code class="bash"># cat /etc/telegraf/telegraf.d/ceph.conf
 [[inputs.ceph]]
   ## This is the recommended interval to poll.  Too frequent and you will lose
   ## data points due to timeouts during rebalancing and recovery
