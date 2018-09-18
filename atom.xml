@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-18T19:52:19-03:00</updated>
+  <updated>2018-09-18T19:52:33-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -179,7 +179,7 @@ commit_latency(ms) apply_latency(ms)
 <p><span style="display:block;text-align:center"><img src="http://brunocarvalho.net/images/ceph/ceph-latencia.png" alt="" /> </span>
 <span style="display:block;text-align:center"><img src="http://brunocarvalho.net/images/ceph/ceph-grafico.png" alt="" /> </span></p>
 
-<p>Referências:</p>
+<p>Referências métricas:</p>
 
 <p><a href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/administration_guide/performance_counters">https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/administration_guide/performance_counters</a></p>
 ]]></content>
