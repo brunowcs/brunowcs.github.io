@@ -3,7 +3,7 @@ layout: post
 title: "Métricas de Latência no CEPH"
 date: 2018-09-18 16:42:11 -0300
 comments: true
-categories: ceph metricas influxdb grafana telegraf
+categories: ceph influxdb grafana telegraf
 ---
 
 <span style="display:block;text-align:center">![](/images/ceph/ceph-metrica-logo.png)</span>
