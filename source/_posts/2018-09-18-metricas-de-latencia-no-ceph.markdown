@@ -12,17 +12,18 @@ Neste post compartilharei um dashboard em grafana com métricas de latência cri
 
 >Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.
 
-Com o comando abaixo é possível verificar a latência do commit e apply do Ceph
+Com o comando abaixo é possível verificar media  latência do commit e apply do Ceph
 
     # ceph osd perf
 
     commit_latency(ms) apply_latency(ms)
     ............... ......................
 
-Comentarei os dois mais importantes: 
+Comentarei os 3 mais importantes: 
 
-- **apply_latency** - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal
-- **commit_latency** - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco
+- **Journal_latency** - Tempo que leva para gravar no journal, ou seja, tempo de ack do write para o cliente, porem a leitura só será possível após o commit.
+- **apply_latency** - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal.
+- **commit_latency** - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco.
 
 As métricas acima são as que nos dão uma media de como anda a latência do nosso cluster, o dashboard abaixo irá apresentar no grafana essas informações entre outras.
 
@@ -121,6 +122,7 @@ Plugin Utilizado: https://github.com/influxdata/telegraf/tree/master/plugins/inp
 <span style="display:block;text-align:center">![](/images/ceph/ceph-latencia.png) </span>
 <span style="display:block;text-align:center">![](/images/ceph/ceph-grafico.png) </span>
 
-Referências: 
+Referências de métricas: 
 
 https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/administration_guide/performance_counters
+
