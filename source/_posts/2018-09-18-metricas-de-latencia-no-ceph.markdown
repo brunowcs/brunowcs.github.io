@@ -22,7 +22,7 @@ Com o comando abaixo é possível verificar media  latência do commit e apply d
 
 Comentarei os 4 mais importantes:
 
-A gravação do objeto em um cluster com replica de 3 gastará 6 IOs para se concluido por conta da gravação  journal(O_DIRECT) e do disco efetivamente. Na maioria das vezes veremos mais IOPS de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria. 
+A gravação do objeto em um cluster com replica de 3 gastará 6 IOPS para se concluido por conta da gravação  journal(O_DIRECT) e do buffered_io para o disco efetivamente em cada OSD. Na maioria das vezes veremos mais IOPS de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria. 
 
 - **ops** - Operações por segundo nas OSDs.
 - **Journal_latency** - Tempo que leva para gravar no journal, ou seja, tempo de ack do write para o cliente.(O_DIRECT e O_DSYNC)
