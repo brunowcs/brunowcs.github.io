@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ceph | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/ceph/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-19T14:12:05-03:00</updated>
+  <updated>2018-09-19T14:22:25-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -20,7 +20,7 @@
     <id>http://brunocarvalho.net/blog/2018/09/18/metricas-de-latencia-no-ceph</id>
     <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-metrica-logo.png" alt="" /></span></p>
 
-<p>Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada sobre latência para este plugin e não era à toa, pois só na versão Lumiuous foi possível corrigir &ldquo;admin socket permission&rdquo; então resolvi criar um do zero e compartilhando com a comunidade, explicando como utilizar tanto no jewel quanto no luminous.</p>
+<p>Neste post compartilharei um dashboard em grafana com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster, visto que pesquisando na internet não achei nenhum dash de ceph latência com telegraf, mas não era à toa, pois só na versão Lumiuous foi corrigido &ldquo;admin socket permission&rdquo; então resolvi criar um do zero e compartilhando com a comunidade, explicando os principais pontos para utilizar tanto no jewel quanto no luminous.</p>
 
 <blockquote><p>Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.</p></blockquote>
 
@@ -144,6 +144,13 @@ commit_latency(ms) apply_latency(ms)
 
 <p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-latencia.PNG" alt="" /> </span>
 <span style="display:block;text-align:center"><img src="/images/ceph/ceph-grafico.PNG" alt="" /> </span></p>
+
+<p>No próximos post irei apresentar:</p>
+
+<ul>
+<li><strong>Melhores práticas com Ceph</strong> - Desde o Hardware, S.O e configurações do ceph.conf para você obter melhor performance do seu cluster.</li>
+</ul>
+
 
 <p>Referências de métricas:</p>
 
@@ -358,13 +365,9 @@ remove #5:c691b427:::rbd_data.3b2ab5c0fdd3f.00000000000059d2:head#
 
 <p>Após o termino do deep-scrub provavelmente sua pg já estará OK.</p>
 
-<p>Nos próximos posts irei apresentar:</p>
+<p>No próximo post irei apresentar:</p>
 
-<ul>
-<li><strong>Métricas de Latência no Ceph</strong> - Falarei sobre Telegraf/Influx/Grafana um dashboard pronto com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster)</li>
-<li><strong>Melhores práticas com Ceph</strong> - Desde o Hardware, S.O e configurações do ceph.conf para você obter melhor performance do seu cluster.</li>
-</ul>
-
+<p><a href="http://brunocarvalho.net/blog/2018/09/18/metricas-de-latencia-no-ceph/">- <strong>Métricas de Latência no Ceph</strong></a></p>
 
 <p>Referência: <a href="http://lists.ceph.com/pipermail/ceph-users-ceph.com/">http://lists.ceph.com/pipermail/ceph-users-ceph.com/</a></p>
 ]]></content>
