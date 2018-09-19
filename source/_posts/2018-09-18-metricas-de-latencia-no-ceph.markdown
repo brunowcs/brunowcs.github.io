@@ -8,7 +8,7 @@ categories: ceph influxdb grafana telegraf
 
 <span style="display:block;text-align:center">![](/images/ceph/ceph-metrica-logo.png)</span>
 
-Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada pronto com métricas de latência para este plugin, então resolvir criar e compartilhando com a comunidade.
+Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada sobre latência para este plugin e não era à toa, pois só na versão Lumiuous foi possível corrigir "admin socket permission" então resolvi criar um do zero e compartilhando com a comunidade, explicando como utilizar tanto no jewel quanto no luminous. 
 
 >Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.
 
@@ -19,11 +19,15 @@ Com o comando abaixo é possível verificar media  latência do commit e apply d
     commit_latency(ms) apply_latency(ms)
     ............... ......................
 
-Comentarei os 3 mais importantes: 
+Comentarei os 3 mais importantes:
 
-- **Journal_latency** - Tempo que leva para gravar no journal, ou seja, tempo de ack do write para o cliente, porem a leitura só será possível após o commit.
+A gravação do objeto em um cluster com replica de 3 gastará 6 IOs para se concluido por conta da gravação  journal(O_DIRECT) e do disco efetivamente. Na maioria das vezes veremos mais IOPS de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria. 
+
+- **ops** - Operações por segundo nas OSDs.
+- **Journal_latency** - Tempo que leva para gravar no journal, ou seja, tempo de ack do write para o cliente.(O_DIRECT e O_DSYNC)
 - **apply_latency** - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal.
 - **commit_latency** - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco.
+  
 
 As métricas acima são as que nos dão uma media de como anda a latência do nosso cluster, o dashboard abaixo irá apresentar no grafana essas informações entre outras.
 
@@ -82,9 +86,11 @@ Crie o arquivo abaixo e não esqueça de adicionar as tags para facilitar a sele
 
 ```
 
-> Será nescessario adicionar o usuario telegraf no grupo ceph para que ele possa ler os sockets do /var/run/ceph 
+Será nescessario adicionar o usuario telegraf no grupo ceph para que ele possa ler os sockets do /var/run/ceph 
 
-**ATENÇÃO:** Versões anteriores ao Ceph 12.0.3 Luminous, terá que executar o seguinte comando abaixo
+    # addgroup telegraf ceph
+
+**ATENÇÃO:** Aqui está o pulo do gato, nas versões anteriores ao Ceph 12.0.3 Luminous, terá que executar o seguinte comando abaixo
 
     # chmod  g+w /var/run/ceph/*
 
@@ -111,7 +117,7 @@ Teste se o telegraf está coletando as metricas do seu servidor de OSD com a per
 
     # sudo -u telegraf ceph --admin-daemon /var/run/ceph/ceph-osd.14.asok perf dump
 
-Se estiver tudo ok, basta importa o dashboard para seu grafana. :)
+Se tudo estiver ok, basta importa o dashboard para seu grafana e ser feliz! :)
 
 
 Dashboard Telegraf Ceph - Latency: https://grafana.com/dashboards/7995
