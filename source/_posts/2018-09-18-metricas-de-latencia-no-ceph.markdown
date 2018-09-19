@@ -9,7 +9,7 @@ categories: ceph influxdb grafana telegraf
 <span style="display:block;text-align:center">![](/images/ceph/ceph-metrica-logo.png)</span>
 
 
-Neste post compartilharei um dashboard em grafana com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster, visto que pesquisando na internet não achei nenhum dash de latência com telegraf, mas não era à toa, pois só na versão Lumiuous foi corrigido "admin socket permission" então resolvi criar um dash do zero e compartilhando com a comunidade, explicando como utilizar tanto no jewel quanto no luminous. 
+Neste post compartilharei um dashboard em grafana com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster, visto que pesquisando na internet não achei nenhum dash de ceph latência com telegraf, mas não era à toa, pois só na versão Lumiuous foi corrigido "admin socket permission" então resolvi criar do zero e compartilhar com a comunidade, explicando os principais pontos para utilizar tanto no jewel quanto no luminous. 
 
 >Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.
 
