@@ -4,7 +4,7 @@
   <title><![CDATA[Category: grafana | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/grafana/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-18T20:14:52-03:00</updated>
+  <updated>2018-09-19T12:03:42-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -20,7 +20,7 @@
     <id>http://brunocarvalho.net/blog/2018/09/18/metricas-de-latencia-no-ceph</id>
     <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-metrica-logo.png" alt="" /></span></p>
 
-<p>Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada pronto com métricas de latência para este plugin, então resolvir criar e compartilhando com a comunidade.</p>
+<p>Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada sobre latência para este plugin e não era à toa, pois só na versão Lumiuous foi possível corrigir &ldquo;admin socket permission&rdquo; então resolvi criar um do zero e compartilhando com a comunidade, explicando como utilizar tanto no jewel quanto no luminous.</p>
 
 <blockquote><p>Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.</p></blockquote>
 
@@ -34,8 +34,11 @@ commit_latency(ms) apply_latency(ms)
 
 <p>Comentarei os 3 mais importantes:</p>
 
+<p>A gravação do objeto em um cluster com replica de 3 gastará 6 IOs para se concluido por conta da gravação  journal(O_DIRECT) e do disco efetivamente. Na maioria das vezes veremos mais IOPS de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria.</p>
+
 <ul>
-<li><strong>Journal_latency</strong> - Tempo que leva para gravar no journal, ou seja, tempo de ack do write para o cliente, porem a leitura só será possível após o commit.</li>
+<li><strong>ops</strong> - Operações por segundo nas OSDs.</li>
+<li><strong>Journal_latency</strong> - Tempo que leva para gravar no journal, ou seja, tempo de ack do write para o cliente.(O_DIRECT e O_DSYNC)</li>
 <li><strong>apply_latency</strong> - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal.</li>
 <li><strong>commit_latency</strong> - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco.</li>
 </ul>
@@ -96,9 +99,12 @@ commit_latency(ms) apply_latency(ms)
   #gather_cluster_stats = true
 </code></pre>
 
-<blockquote><p>Será nescessario adicionar o usuario telegraf no grupo ceph para que ele possa ler os sockets do /var/run/ceph</p></blockquote>
+<p>Será nescessario adicionar o usuario telegraf no grupo ceph para que ele possa ler os sockets do /var/run/ceph</p>
 
-<p><strong>ATENÇÃO:</strong> Versões anteriores ao Ceph 12.0.3 Luminous, terá que executar o seguinte comando abaixo</p>
+<pre><code># addgroup telegraf ceph
+</code></pre>
+
+<p><strong>ATENÇÃO:</strong> Aqui está o pulo do gato, nas versões anteriores ao Ceph 12.0.3 Luminous, terá que executar o seguinte comando abaixo</p>
 
 <pre><code># chmod  g+w /var/run/ceph/*
 </code></pre>
@@ -130,7 +136,7 @@ commit_latency(ms) apply_latency(ms)
 # sudo -u telegraf ceph --admin-daemon /var/run/ceph/ceph-osd.14.asok perf dump
 </code></pre>
 
-<p>Se estiver tudo ok, basta importa o dashboard para seu grafana. :)</p>
+<p>Se tudo estiver ok, basta importa o dashboard para seu grafana e ser feliz! :)</p>
 
 <p>Dashboard Telegraf Ceph - Latency: <a href="https://grafana.com/dashboards/7995">https://grafana.com/dashboards/7995</a></p>
 
