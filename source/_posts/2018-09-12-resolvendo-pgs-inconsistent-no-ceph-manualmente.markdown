@@ -192,9 +192,9 @@ Também podemos verificar logo no final do comando query o deep-scrub sendo exec
 Após o termino do deep-scrub provavelmente sua pg já estará OK.
 
 
-Nos próximos posts irei apresentar: 
+No próximo post irei apresentar: 
 
-- **Métricas de Latência no Ceph** - Falarei sobre Telegraf/Influx/Grafana um dashboard pronto com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster)
-- **Melhores práticas com Ceph** - Desde o Hardware, S.O e configurações do ceph.conf para você obter melhor performance do seu cluster.
+[- **Métricas de Latência no Ceph**](http://brunocarvalho.net/blog/2018/09/18/metricas-de-latencia-no-ceph/)
+
 
 Referência: http://lists.ceph.com/pipermail/ceph-users-ceph.com/

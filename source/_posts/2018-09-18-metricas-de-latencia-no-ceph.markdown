@@ -8,7 +8,8 @@ categories: ceph influxdb grafana telegraf
 
 <span style="display:block;text-align:center">![](/images/ceph/ceph-metrica-logo.png)</span>
 
-Neste post compartilharei um dashboard em grafana com métricas de latência criado para telegraf com influxdb, visto que pesquisando na internet não achei nada sobre latência para este plugin e não era à toa, pois só na versão Lumiuous foi possível corrigir "admin socket permission" então resolvi criar um do zero e compartilhando com a comunidade, explicando como utilizar tanto no jewel quanto no luminous. 
+
+Neste post compartilharei um dashboard em grafana com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster, visto que pesquisando na internet não achei nenhum dash de latência com telegraf, mas não era à toa, pois só na versão Lumiuous foi corrigido "admin socket permission" então resolvi criar um dash do zero e compartilhando com a comunidade, explicando como utilizar tanto no jewel quanto no luminous. 
 
 >Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.
 
@@ -19,7 +20,7 @@ Com o comando abaixo é possível verificar media  latência do commit e apply d
     commit_latency(ms) apply_latency(ms)
     ............... ......................
 
-Comentarei os 3 mais importantes:
+Comentarei os 4 mais importantes:
 
 A gravação do objeto em um cluster com replica de 3 gastará 6 IOs para se concluido por conta da gravação  journal(O_DIRECT) e do disco efetivamente. Na maioria das vezes veremos mais IOPS de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria. 
 
@@ -31,7 +32,7 @@ A gravação do objeto em um cluster com replica de 3 gastará 6 IOs para se con
 
 As métricas acima são as que nos dão uma media de como anda a latência do nosso cluster, o dashboard abaixo irá apresentar no grafana essas informações entre outras.
 
-Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras temos que ativar no ceph.conf ou via OSDs com inject. Verifique se seu cluster está com os perfs true.
+Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras teremos que ativar no ceph.conf ou via OSDs com inject. Verifique se seu cluster está com os perfs true.
 
     # ceph --admin-daemon /var/run/ceph/ceph-osd.26.asok  config show | grep perf
     "debug_perfcounter": "0\/0",
@@ -127,6 +128,10 @@ Plugin Utilizado: https://github.com/influxdata/telegraf/tree/master/plugins/inp
 
 <span style="display:block;text-align:center">![](/images/ceph/ceph-latencia.PNG) </span>
 <span style="display:block;text-align:center">![](/images/ceph/ceph-grafico.PNG) </span>
+
+No próximos post irei apresentar: 
+
+- **Melhores práticas com Ceph** - Desde o Hardware, S.O e configurações do ceph.conf para você obter melhor performance do seu cluster.
 
 Referências de métricas: 
 
