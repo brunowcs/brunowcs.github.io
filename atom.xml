@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-19T14:29:59-03:00</updated>
+  <updated>2018-09-19T16:35:24-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -34,7 +34,7 @@ commit_latency(ms) apply_latency(ms)
 
 <p>Comentarei os 4 mais importantes:</p>
 
-<p>A gravação do objeto em um cluster com replica de 3 gastará 6 IOPS para se concluido por conta da gravação  journal(O_DIRECT) e do buffered_io para o disco efetivamente. Na maioria das vezes veremos mais IOPS de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria.</p>
+<p>A gravação do objeto em um cluster com replica de 3 gastará 6 IOPS para se concluido por conta da gravação  journal(O_DIRECT) e do buffered_io para o disco efetivamente em cada OSD. Na maioria das vezes veremos mais IOPS de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria.</p>
 
 <ul>
 <li><strong>ops</strong> - Operações por segundo nas OSDs.</li>

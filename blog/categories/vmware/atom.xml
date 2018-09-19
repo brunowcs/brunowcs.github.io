@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vmware | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/vmware/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-19T16:35:10-03:00</updated>
+  <updated>2018-09-19T16:35:24-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -64,7 +64,7 @@ Execute o comando abaixo no host encontrado
 <pre><code># cfdisk /dev/sda3 (a utilização do cfdisk não será abordada passo-a-passo)
 </code></pre>
 
-<p><img src="{{%20site.url%20}}/images/cfdisk.JPG" alt="cfdisk" /></p>
+<p><img src="/images/cfdisk.JPG" alt="cfdisk" /></p>
 
 <p>Após a criação da nova partição, execute o comando abaixo</p>
 
