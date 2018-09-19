@@ -4,7 +4,7 @@
   <title><![CDATA[Category: telegraf | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/telegraf/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-19T14:22:25-03:00</updated>
+  <updated>2018-09-19T14:24:23-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -20,7 +20,7 @@
     <id>http://brunocarvalho.net/blog/2018/09/18/metricas-de-latencia-no-ceph</id>
     <content type="html"><![CDATA[<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-metrica-logo.png" alt="" /></span></p>
 
-<p>Neste post compartilharei um dashboard em grafana com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster, visto que pesquisando na internet não achei nenhum dash de ceph latência com telegraf, mas não era à toa, pois só na versão Lumiuous foi corrigido &ldquo;admin socket permission&rdquo; então resolvi criar um do zero e compartilhando com a comunidade, explicando os principais pontos para utilizar tanto no jewel quanto no luminous.</p>
+<p>Neste post compartilharei um dashboard em grafana com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster, visto que pesquisando na internet não achei nenhum dash de ceph latência com telegraf, mas não era à toa, pois só na versão Lumiuous foi corrigido &ldquo;admin socket permission&rdquo; então resolvi criar do zero e compartilhar com a comunidade, explicando os principais pontos para utilizar tanto no jewel quanto no luminous.</p>
 
 <blockquote><p>Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.</p></blockquote>
 
