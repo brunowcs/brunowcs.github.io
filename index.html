@@ -190,7 +190,7 @@ commit_latency(ms) apply_latency(ms)
 ............... ......................
 </code></pre>
 
-<p>Comentarei os 3 mais importantes:</p>
+<p>Comentarei os 4 mais importantes:</p>
 
 <p>A gravação do objeto em um cluster com replica de 3 gastará 6 IOs para se concluido por conta da gravação  journal(O_DIRECT) e do disco efetivamente. Na maioria das vezes veremos mais IOPS de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria.</p>
 
@@ -204,7 +204,7 @@ commit_latency(ms) apply_latency(ms)
 
 <p>As métricas acima são as que nos dão uma media de como anda a latência do nosso cluster, o dashboard abaixo irá apresentar no grafana essas informações entre outras.</p>
 
-<p>Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras temos que ativar no ceph.conf ou via OSDs com inject. Verifique se seu cluster está com os perfs true.</p>
+<p>Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras teremos que ativar no ceph.conf ou via OSDs com inject. Verifique se seu cluster está com os perfs true.</p>
 
 <pre><code># ceph --admin-daemon /var/run/ceph/ceph-osd.26.asok  config show | grep perf
 "debug_perfcounter": "0\/0",
