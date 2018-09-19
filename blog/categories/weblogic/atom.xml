@@ -56,7 +56,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 -Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder
 </code></pre>
 
-<p><img src="{{%20site.url%20}}/images/zabbix/img2.png" alt="img2" /></p>
+<p><img src="/images/zabbix/img2.png" alt="img2" /></p>
 
 <blockquote><p><strong><em>Será necessário reiniciar o AdminServer e as JVM do domínio.</em></strong></p></blockquote>
 
