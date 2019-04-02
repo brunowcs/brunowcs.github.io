@@ -11,7 +11,7 @@
 {
       "environment": "dev",
       "hostname": "BSBRSP5195",
-      "qmnode": ["QM.SPB.03", "QM.SPB.02"]
+      "qmnode": ["QM.SPB.03"]
     },
     {
       "environment": "dev",
