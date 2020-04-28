@@ -4,7 +4,7 @@
   <title><![CDATA[Category: zabbix | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/zabbix/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2020-04-27T23:47:06-03:00</updated>
+  <updated>2020-04-28T00:14:23-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -56,7 +56,7 @@ Então, se tenho um domínio com 10 instancias(JVM), será possível apenas com 
 -Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder
 </code></pre>
 
-<p><img src="/images/zabbix/img2.png" alt="img2" /></p>
+<p><img src="{{%20site.url%20}}/images/zabbix/img2.png" alt="img2" /></p>
 
 <blockquote><p><strong><em>Será necessário reiniciar o AdminServer e as JVM do domínio.</em></strong></p></blockquote>
 
