@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ovirt | brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/blog/categories/ovirt/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-19T16:41:03-03:00</updated>
+  <updated>2020-04-27T23:47:06-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Instalando Ovirt 4.0 Hosted Engine utilizando NFS]]></title>
     <link href="http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs/"/>
-    <updated>2016-11-21T12:07:53-02:00</updated>
+    <updated>2016-11-21T11:07:53-03:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs</id>
     <content type="html"><![CDATA[<p><img src="/images/ovirt/ovirt4.png" alt="" /></p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[brunocarvalho.net]]></title>
   <link href="http://brunocarvalho.net/atom.xml" rel="self"/>
   <link href="http://brunocarvalho.net/"/>
-  <updated>2018-09-19T16:41:03-03:00</updated>
+  <updated>2020-04-27T23:47:06-03:00</updated>
   <id>http://brunocarvalho.net/</id>
   <author>
     <name><![CDATA[Bruno Carvalho]]></name>
@@ -869,7 +869,7 @@ $ sudo apt install juju
   <entry>
     <title type="html"><![CDATA[Migrando VM XenServer para Ovirt/RHEV/KVM]]></title>
     <link href="http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm/"/>
-    <updated>2016-11-25T11:24:55-02:00</updated>
+    <updated>2016-11-25T10:24:55-03:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/25/migrando-vm-xenserver-para-ovirt-slash-kvm</id>
     <content type="html"><![CDATA[<p><img src="http://brunocarvalho.net/images/ovirt/migracao.png" alt="" /></p>
 
@@ -990,7 +990,7 @@ Successful convert
   <entry>
     <title type="html"><![CDATA[Ebook sobre Computação em Nuvem]]></title>
     <link href="http://brunocarvalho.net/blog/2016/11/23/ebook-sobre-computacao-em-nuvem/"/>
-    <updated>2016-11-23T13:42:11-02:00</updated>
+    <updated>2016-11-23T12:42:11-03:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/23/ebook-sobre-computacao-em-nuvem</id>
     <content type="html"><![CDATA[<p>Olá pessoal, estou distribuindo este Ebook gratuito produzido pela Opus sobre Computação em Nuvem que achei muito bacana, espero que ajudem a entender um pouco mais sobre o universo Cloud Computing.</p>
 
@@ -1005,7 +1005,7 @@ Successful convert
   <entry>
     <title type="html"><![CDATA[Instalando Ovirt 4.0 Hosted Engine utilizando NFS]]></title>
     <link href="http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs/"/>
-    <updated>2016-11-21T12:07:53-02:00</updated>
+    <updated>2016-11-21T11:07:53-03:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/21/instalando-ovirt-4-dot-0-hosted-engine-utilizando-nfs</id>
     <content type="html"><![CDATA[<p><img src="http://brunocarvalho.net/images/ovirt/ovirt4.png" alt="" /></p>
 
@@ -1573,7 +1573,7 @@ exitMessage = Failed to acquire lock: No space left on device
   <entry>
     <title type="html"><![CDATA[Continuando transferência com RSYNC no caso de interrupção]]></title>
     <link href="http://brunocarvalho.net/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao/"/>
-    <updated>2016-11-17T13:38:43-02:00</updated>
+    <updated>2016-11-17T12:38:43-03:00</updated>
     <id>http://brunocarvalho.net/blog/2016/11/17/continuando-transferencia-com-rsync-no-caso-de-interrupcao</id>
     <content type="html"><![CDATA[<p><img src="http://brunocarvalho.net/images/rsync.jpg" alt="rysnc" /></p>
 
