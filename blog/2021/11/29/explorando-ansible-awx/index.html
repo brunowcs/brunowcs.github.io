@@ -4,11 +4,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Métricas de Latência no CEPH - brunocarvalho.net</title>
+	<title>Explorando Ansible AWX - brunocarvalho.net</title>
 	<meta name="author" content="Bruno Carvalho">
  
 	
-	<meta name="description" content="Métricas De Latência No CEPH Neste post compartilharei um dashboard em grafana com metricas avançadas de latency/journal/queue/iops/throughput que &hellip;">
+	<meta name="description" content="Explorando Ansible AWX - TcheLinux Live 2021">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="brunocarvalho.net" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://brunocarvalho.net/blog/2018/09/18/metricas-de-latencia-no-ceph/">
+	<link rel="awx" href="http://brunocarvalho.net/blog/2021/11/29/explorando-ansible-awx/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -139,182 +139,6 @@
 	<h1 class="title" itemprop="name">Explorando Ansible AWX</h1>
 	<div class="entry-content" itemprop="articleBody"><p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-metrica-logo.png" alt="" /></span></p>
 
-<p>Neste post compartilharei um dashboard em grafana com metricas avançadas de latency/journal/queue/iops/throughput que te ajudaram a ajustar melhor as configurações do seu cluster, visto que pesquisando na internet não achei nenhum dash de ceph latência com telegraf, mas não era à toa, pois só na versão Lumiuous foi corrigido &ldquo;admin socket permission&rdquo; então resolvi criar do zero e compartilhar com a comunidade, explicando os principais pontos para utilizar tanto no jewel quanto no luminous.</p>
-
-<blockquote><p>Não irei abordar instalação do influxdb, grafana e telegraf pois tem muita coisa na internet, apenas os pontos principais para o dashboard funcionar.</p></blockquote>
-
-<p>Com o comando abaixo é possível verificar media  latência do commit e apply do Ceph</p>
-
-<pre><code># ceph osd perf
-
-commit_latency(ms) apply_latency(ms)
-............... ......................
-</code></pre>
-
-<p>Comentarei os 4 mais importantes:</p>
-
-<p>A gravação do objeto em um cluster com replica de 3 gastará 6 IOs, para se concluido por conta da gravação  journal(O_DIRECT) e do buffered_io para o disco efetivamente nas OSDs. Na maioria das vezes veremos mais IOs de write por conta das suboperações do ceph de replicação, diferente do read que só faz leitura na OSD primaria.</p>
-
-<ul>
-<li><strong>ops</strong> - Operações nas OSDs.</li>
-<li><strong>Journal_latency</strong> - Tempo que leva para gravar no journal, ou seja, tempo de ack do write para o cliente.(O_DIRECT e O_DSYNC)</li>
-<li><strong>apply_latency</strong> - Tempo de latência até a transação termina, ou seja, o tempo de gravação + journal.</li>
-<li><strong>commit_latency</strong> - Tempo que leva para realizar o syncfs() após a expiração do filestore_max_sync_interval, no caso a descida do journal para o disco.</li>
-</ul>
-
-
-<p>As métricas acima são as que nos dão uma media de como anda a latência do nosso cluster, o dashboard abaixo irá apresentar no grafana essas informações entre outras.</p>
-
-<p>Por padrão algumas métricas de subsystem do cluster Ceph já vem ativo, outras teremos que ativar no ceph.conf ou via OSDs com inject. Verifique se seu cluster está com os perfs true.</p>
-
-<pre><code># ceph --admin-daemon /var/run/ceph/ceph-osd.26.asok  config show | grep perf
-"debug_perfcounter": "0\/0",
-"perf": "true",
-"mutex_perf_counter": "true",
-"throttler_perf_counter": "true",
-</code></pre>
-
-<p>Crie o arquivo abaixo e não esqueça de adicionar as tags para facilitar a seleção no grafana entre SATA e SSD ou escolha uma tag de sua preferência.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># cat /etc/telegraf/telegraf.d/ceph.conf</span>
-</span><span class='line'><span class="o">[[</span>inputs.ceph<span class="o">]]</span>
-</span><span class='line'>  <span class="c">## This is the recommended interval to poll.  Too frequent and you will lose</span>
-</span><span class='line'>  <span class="c">## data points due to timeouts during rebalancing and recovery</span>
-</span><span class='line'>  <span class="nv">interval</span> <span class="o">=</span> <span class="s1">&#39;1m&#39;</span>
-</span><span class='line'>  <span class="nv">tags</span> <span class="o">=</span> <span class="s2">&quot;storage,osd,ssd&quot;</span>
-</span><span class='line'>  <span class="c">## All configuration values are optional, defaults are shown below</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">## location of ceph binary</span>
-</span><span class='line'>  <span class="nv">ceph_binary</span> <span class="o">=</span> <span class="s2">&quot;/usr/bin/ceph&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">## directory in which to look for socket files</span>
-</span><span class='line'>  <span class="nv">socket_dir</span> <span class="o">=</span> <span class="s2">&quot;/var/run/ceph&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">## prefix of MON and OSD socket files, used to determine socket type</span>
-</span><span class='line'>  <span class="c">#mon_prefix = &quot;ceph-mon&quot;</span>
-</span><span class='line'>  <span class="nv">osd_prefix</span> <span class="o">=</span> <span class="s2">&quot;ceph-osd&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">## suffix used to identify socket files</span>
-</span><span class='line'>  <span class="nv">socket_suffix</span> <span class="o">=</span> <span class="s2">&quot;asok&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">## Ceph user to authenticate as, ceph will search for the corresponding keyring</span>
-</span><span class='line'>  <span class="c">## e.g. client.admin.keyring in /etc/ceph, or the explicit path defined in the</span>
-</span><span class='line'>  <span class="c">## client section of ceph.conf for example:</span>
-</span><span class='line'>  <span class="c">##</span>
-</span><span class='line'>  <span class="c">##     [client.telegraf]</span>
-</span><span class='line'>  <span class="c">##         keyring = /etc/ceph/client.telegraf.keyring</span>
-</span><span class='line'>  <span class="c">##</span>
-</span><span class='line'>  <span class="c">## Consult the ceph documentation for more detail on keyring generation.</span>
-</span><span class='line'>  <span class="c">#ceph_user = &quot;client.telegraf&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">## Ceph configuration to use to locate the cluster</span>
-</span><span class='line'>  <span class="c">#ceph_config = &quot;/etc/ceph/ceph.conf&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">## Whether to gather statistics via the admin socket</span>
-</span><span class='line'>  <span class="nv">gather_admin_socket_stats</span> <span class="o">=</span> <span class="nb">true</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c">## Whether to gather statistics via ceph commands, requires ceph_user and ceph_config</span>
-</span><span class='line'>  <span class="c">## to be specified</span>
-</span><span class='line'>  <span class="c">#gather_cluster_stats = true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Será nescessario adicionar o usuario telegraf no grupo ceph para que ele possa ler os sockets do /var/run/ceph</p>
-
-<pre><code># addgroup telegraf ceph
-</code></pre>
-
-<p><strong>ATENÇÃO:</strong> Aqui está o pulo do gato, nas versões anteriores ao Ceph 12.0.3 Luminous, terá que executar o seguinte comando abaixo</p>
-
-<pre><code># chmod  g+w /var/run/ceph/*
-</code></pre>
-
-<p>Esse comando contorna o problema &ldquo;admin socket permission&rdquo; que foi corrigido nas versões acima da 12.0.3</p>
-
-<blockquote><p>common: common/admin_socket: add config for admin socket permission bits (pr#11684, runsisi)
-<a href="https://github.com/ceph/ceph/pull/11684">https://github.com/ceph/ceph/pull/11684</a></p></blockquote>
-
-<p>Se a OSD for reiniciada a permissão se perder, se estiver abaixo da 12.0.3, recomendo adicionar a permissão no systemd após o startup da OSD. Se já estiver na versão superior basta adicionar no ceph.conf a config abaixo</p>
-
-<pre><code>admin_socket_mode 0775
-</code></pre>
-
-<p>Reiniciei o telegraf</p>
-
-<pre><code>systemctl restart telegraf 
-</code></pre>
-
-<p>Verifique se não está ocorrendo nenhum error de socket no syslog</p>
-
-<pre><code>telegraf[986875]: 2018-09-18T21:49:03Z E! error reading from socket '/var/run/ceph/ceph-osd.51.asok': error running ceph dump: exit status 22
-</code></pre>
-
-<p>Teste se o telegraf está coletando as metricas do seu servidor de OSD com a permissão do telegraf</p>
-
-<pre><code># sudo -u telegraf telegraf --debug -test -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d  -input-filter ceph
-
-# sudo -u telegraf ceph --admin-daemon /var/run/ceph/ceph-osd.14.asok perf dump
-</code></pre>
-
-<p>Se tudo estiver ok, basta importa o dashboard para seu grafana e ser feliz! :)</p>
-
-<p>Dashboard Telegraf Ceph - Latency: <a href="https://grafana.com/dashboards/7995">https://grafana.com/dashboards/7995</a></p>
-
-<p>Plugin Utilizado: <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph">https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ceph</a></p>
-
-<p><span style="display:block;text-align:center"><img src="/images/ceph/ceph-latencia.PNG" alt="" /> </span>
-<span style="display:block;text-align:center"><img src="/images/ceph/ceph-grafico.PNG" alt="" /> </span></p>
-
-<p>No próximos post irei apresentar:</p>
-
-<ul>
-<li><strong>Melhores práticas com Ceph</strong> - Desde o Hardware, S.O e configurações do ceph.conf para você obter melhor performance do seu cluster.</li>
-</ul>
-
-
-<p>Referências de métricas:</p>
-
-<p><a href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/administration_guide/performance_counters">https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/administration_guide/performance_counters</a></p>
 </div>
 
 
